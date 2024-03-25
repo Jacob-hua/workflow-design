@@ -4,6 +4,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
+import actions from './service/actions'
 
 function render(props: Record<string, any>, appDOM: any) {
   const { container } = props
@@ -21,7 +22,7 @@ function createDOM(flag: boolean) {
       <BrowserRouter
         // 对两种不同的环境分别给出不同的基础路径
         basename={
-          (window as any).__POWERED_BY_QIANKUN__ ? '/formDesigner' : '/'
+          (window as any).__POWERED_BY_QIANKUN__ ? '/home/Form' : '/'
         }
       >
         <App />
@@ -48,6 +49,10 @@ export async function bootstrap(props: Record<string, any>) {
 
 // lifecycle => 挂载
 export async function mount(props: Record<string, any>) {
+  // eslint-disable-next-line no-console
+  // console.log(props,'mount');
+  actions.setActions(props.actions);
+  // actions.setGlobalState({test: 'aaa'})
   render(props, createDOM(true))
 }
 

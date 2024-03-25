@@ -387,7 +387,13 @@ export const ReactionsSetter: React.FC<IReactionsSetterProps> = (props) => {
                     <SchemaField.Markup
                       name="fulfill.state"
                       x-component="FieldPropertySetter"
+                      x-reactions={(field) => {
+                        const attrName = field.query('.name');
+                        // eslint-disable-next-line no-console
+                        console.log(attrName)
+                      }}
                     />
+                    
                   </SchemaField.Void>
                   <SchemaField.Void
                     x-component="FormCollapse.CollapsePanel"

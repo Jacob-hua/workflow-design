@@ -1183,22 +1183,6 @@
     "@formily/reactive" "2.0.18"
     "@formily/shared" "2.0.18"
 
-"@formily/next@^2.0.2":
-  version "2.0.18"
-  resolved "https://registry.yarnpkg.com/@formily/next/-/next-2.0.18.tgz#4ec46fba9f9d1286a408eb56ab78b76daa2fbdf6"
-  integrity sha512-x9deUcAloitWhn7vzuY783pe87q/tjD4TQACugXz3uEmTtL8XEqRuHwCf50DAxFmBday8I/gQN23KZ5TadTvpw==
-  dependencies:
-    "@formily/core" "2.0.18"
-    "@formily/grid" "2.0.18"
-    "@formily/json-schema" "2.0.18"
-    "@formily/react" "2.0.18"
-    "@formily/reactive" "2.0.18"
-    "@formily/reactive-react" "2.0.18"
-    "@formily/shared" "2.0.18"
-    classnames "^2.2.6"
-    react-sortable-hoc "^1.11.0"
-    react-sticky-box "^0.9.3"
-
 "@formily/path@2.0.18", "@formily/path@^2.0.2":
   version "2.0.18"
   resolved "https://registry.yarnpkg.com/@formily/path/-/path-2.0.18.tgz#09e6570a001ca996e86858fddd35e4ea598c728d"
@@ -11316,10 +11300,10 @@ moment@^2.24.0, moment@^2.25.3:
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
   integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
 
-monaco-editor-webpack-plugin@^4.0.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/monaco-editor-webpack-plugin/-/monaco-editor-webpack-plugin-4.2.0.tgz#2be76cde9cca7bd8c3418503625990f86886927b"
-  integrity sha512-/P3sFiEgBl+Y50he4mbknMhbLJVop5gBUZiPS86SuHUDOOnQiQ5rL1jU5lwt1XKAwMEkhwZbUwqaHxTPkb1Utw==
+monaco-editor-webpack-plugin@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/monaco-editor-webpack-plugin/-/monaco-editor-webpack-plugin-6.0.0.tgz#628956ce1851afa2a5f6c88d0ecbb24e9a444898"
+  integrity sha512-vC886Mzpd2AkSM35XLkfQMjH+Ohz6RISVwhAejDUzZDheJAiz6G34lky1vyO8fZ702v7IrcKmsGwL1rRFnwvUA==
   dependencies:
     loader-utils "^2.0.0"
 

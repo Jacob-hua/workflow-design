@@ -49,11 +49,15 @@ export default {
     // new BundleAnalyzerPlugin()
   ],
   devServer: {
-    // host: '127.0.0.1',
-    open: true,
+    host: '0.0.0.0',
+    // open: true,
     port: PORT,
+    public: require("os").networkInterfaces()[Object.keys(require("os").networkInterfaces())[0]][1].address + ":3000",
+    disableHostCheck: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
+    inline: true,
+    historyApiFallback: true
   },
 }

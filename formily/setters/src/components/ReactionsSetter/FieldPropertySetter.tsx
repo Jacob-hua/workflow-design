@@ -111,13 +111,13 @@ export const FieldPropertySetter: React.FC<IFieldPropertySetterProps> = (
           }}
         ></Select>
       </div>
-      <div className={prefix + '-expression-wrapper'}>
+      {/* <div className={prefix + '-expression-wrapper'}>
           <TextWidget token={`${parseExpression(value[selectKeys[0]])}`??''}></TextWidget>
-          <Select>
+          <Select>q
 
           </Select>
-      </div>
-      {/* <div className={prefix + '-coder-wrapper'}>
+      </div> */}
+      <div className={prefix + '-coder-wrapper'}>
         <div className={prefix + '-coder-start'}>
           {`$self.${selectKeys[0]} = (`}
           <span
@@ -164,7 +164,7 @@ export const FieldPropertySetter: React.FC<IFieldPropertySetterProps> = (
           />
         </div>
         <div className={prefix + '-coder-end'}>{`)`}</div>
-      </div> */}
+      </div>
     </div>
   )
 }

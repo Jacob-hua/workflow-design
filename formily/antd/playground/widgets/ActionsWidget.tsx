@@ -1,14 +1,11 @@
 import React, { useEffect } from 'react'
-import { Space, Button, Radio } from 'antd'
+import { Space, Button } from 'antd'
 import { useDesigner, TextWidget } from '@designable/react'
 import { GlobalRegistry } from '@designable/core'
 import { observer } from '@formily/react'
-import { loadInitialSchema, saveSchema, publishSchema } from '../service'
-import { useNavigate } from 'react-router-dom'
-import { transformToSchema } from '@designable/formily-transformer'
+import { loadInitialSchema, saveSchema, cancle } from '../service'
 export const ActionsWidget = observer(() => {
   const designer = useDesigner()
-  const navigate = useNavigate()
   useEffect(() => {
     loadInitialSchema(designer)
   }, [])
@@ -20,41 +17,26 @@ export const ActionsWidget = observer(() => {
   }, [])
   return (
     <Space style={{ marginRight: 10 }}>
-      <Radio.Group
-        value={GlobalRegistry.getDesignerLanguage()}
-        optionType="button"
-        options={[
-          { label: 'English', value: 'en-us' },
-          { label: '简体中文', value: 'zh-cn' },
-        ]}
-        onChange={(e) => {
-          GlobalRegistry.setDesignerLanguage(e.target.value)
-        }}
-      />
       <Button
+        type="primary"
         onClick={() => {
           saveSchema(designer)
-          if ((window as any).__POWERED_BY_QIANKUN__) {
-            navigate('/preview', {
-              state: transformToSchema(designer.getCurrentTree()),
-            })
-          }
+          // if ((window as any).__POWERED_BY_QIANKUN__) {
+          //   navigate('/preview', {
+          //     state: transformToSchema(designer.getCurrentTree()),
+          //   })
+          // }
         }}
       >
         <TextWidget>Save</TextWidget>
       </Button>
       <Button
-        type="primary"
+        type="default"
         onClick={() => {
-          publishSchema(designer)
-          if ((window as any).__POWERED_BY_QIANKUN__) {
-            navigate('/preview', {
-              state: transformToSchema(designer.getCurrentTree()),
-            })
-          }
+          cancle()
         }}
       >
-        <TextWidget>Publish</TextWidget>
+        <TextWidget>取消</TextWidget>
       </Button>
     </Space>
   )
