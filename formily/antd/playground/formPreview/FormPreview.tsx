@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { createForm } from '@formily/core'
 import { FormProvider, createSchemaField } from '@formily/react'
+import { Display } from '../../src/components/DisplayFormily'
 import {
   FormItem,
   DatePicker,
@@ -75,6 +76,7 @@ const SchemaField = createSchemaField({
     Slider,
     Rate,
     TestComp,
+    Display,
   },
 })
 

@@ -49,6 +49,7 @@ export const Field = {
       'x-decorator-props': {
         addonAfter: '后缀标签',
         addonBefore: '前缀标签',
+        httpUrl: '请求地址',
         tooltip: '提示',
         asterisk: '星号',
         gridSpan: '网格跨列',
@@ -156,6 +157,7 @@ export const Field = {
       },
       'x-decorator-props': {
         addonAfter: 'Addon After',
+        httpUrl: 'Http Url',
         addonBefore: 'Addon Before',
         tooltip: 'Tooltip',
         asterisk: 'Asterisk',

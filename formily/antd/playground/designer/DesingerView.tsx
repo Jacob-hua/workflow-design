@@ -28,7 +28,7 @@ import {
   KeyCode,
 } from '@designable/core'
 import {
-  LogoWidget,
+  // LogoWidget,
   ActionsWidget,
   PreviewWidget,
   SchemaEditorWidget,
@@ -61,6 +61,7 @@ import {
   // Space,
   // FormTab,
   FormCollapse,
+  Display,
   // FormLayout,
   // FormGrid,
   // TestComp,
@@ -154,6 +155,7 @@ export const DesingerView = () => {
               title="sources.Displays"
               sources={[
                 Text,
+                Display,
                 // TestComp
               ]}
             />
@@ -202,6 +204,7 @@ export const DesingerView = () => {
                       // Space,
                       // FormTab,
                       FormCollapse,
+                      Display,
                       // FormGrid,
                       // FormLayout,
                       // ObjectContainer,
