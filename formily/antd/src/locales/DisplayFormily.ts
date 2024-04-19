@@ -1,6 +1,6 @@
 export const DisplayFormily = {
   'zh-CN': {
-    title: '表单展示',
+    title: '知识库组件',
     settings: {
       'x-component-props': {
         httpUrl: '请求地址',
