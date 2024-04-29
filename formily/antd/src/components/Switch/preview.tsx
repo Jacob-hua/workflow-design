@@ -25,7 +25,7 @@ Switch.Resource = createResource({
       componentName: 'Field',
       props: {
         type: 'boolean',
-        title: 'Switch',
+        title: '开关',
         'x-decorator': 'FormItem',
         'x-component': 'Switch',
       },

@@ -26,7 +26,7 @@ Radio.Resource = createResource({
       componentName: 'Field',
       props: {
         type: 'string | number',
-        title: 'Radio Group',
+        title: '单选',
         'x-decorator': 'FormItem',
         'x-component': 'Radio.Group',
         enum: [

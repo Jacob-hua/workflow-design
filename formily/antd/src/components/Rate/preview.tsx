@@ -25,7 +25,7 @@ Rate.Resource = createResource({
       componentName: 'Field',
       props: {
         type: 'number',
-        title: 'Rate',
+        title: '评分',
         'x-decorator': 'FormItem',
         'x-component': 'Rate',
       },

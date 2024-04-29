@@ -45,7 +45,7 @@ export const ArrayCards: DnFC<CardProps> = observer((props) => {
       componentName: node.componentName,
       props: {
         type: 'void',
-        title: 'Addition',
+        title: '复制',
         'x-component': 'ArrayCards.Addition',
       },
     })
@@ -264,7 +264,7 @@ ArrayCards.Resource = createResource({
         'x-decorator': 'FormItem',
         'x-component': 'ArrayCards',
         'x-component-props': {
-          title: `Title`,
+          title: `标题`,
         },
       },
     },

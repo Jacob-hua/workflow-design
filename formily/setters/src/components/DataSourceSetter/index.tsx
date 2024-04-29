@@ -61,6 +61,7 @@ export const DataSourceSetter: React.FC<IDataSourceSetterProps> = observer(
           bodyStyle={{ padding: 10 }}
           transitionName=""
           maskTransitionName=""
+          maskClosable={false}
           visible={modalVisible}
           onCancel={closeModal}
           onOk={() => {

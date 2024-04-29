@@ -19,7 +19,7 @@ import {
 } from '@designable/react'
 import {
   SettingsForm,
-  // setNpmCDNRegistry,
+  setNpmCDNRegistry,
 } from '@designable/react-settings-form'
 import {
   createDesigner,
@@ -67,7 +67,7 @@ import {
   // TestComp,
 } from '../../src'
 
-// setNpmCDNRegistry('//unpkg.com')
+setNpmCDNRegistry('//unpkg.com')
 
 GlobalRegistry.registerDesignerLocales({
   'zh-CN': {

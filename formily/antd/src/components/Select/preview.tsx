@@ -25,7 +25,7 @@ Select.Resource = createResource({
     {
       componentName: 'Field',
       props: {
-        title: 'Select',
+        title: '选择',
         'x-decorator': 'FormItem',
         'x-component': 'Select',
       },

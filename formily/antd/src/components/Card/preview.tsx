@@ -42,7 +42,7 @@ Card.Resource = createResource({
         type: 'void',
         'x-component': 'Card',
         'x-component-props': {
-          title: 'Title',
+          title: '标题',
         },
       },
     },

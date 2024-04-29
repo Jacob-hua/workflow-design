@@ -25,7 +25,7 @@ Cascader.Resource = createResource({
     {
       componentName: 'Field',
       props: {
-        title: 'Cascader',
+        title: '级联',
         'x-decorator': 'FormItem',
         'x-component': 'Cascader',
       },

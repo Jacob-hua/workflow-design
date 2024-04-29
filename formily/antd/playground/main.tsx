@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import actions from './service/actions'
+import { ConfigProvider } from 'antd'
+import locale from 'antd/es/locale/zh_CN'
 
 function render(props: Record<string, any>, appDOM: any) {
   const { container } = props
@@ -19,20 +21,24 @@ function render(props: Record<string, any>, appDOM: any) {
 function createDOM(flag: boolean) {
   if (flag) {
     return (
-      <BrowserRouter
-        // 对两种不同的环境分别给出不同的基础路径
-        basename={
-          (window as any).__POWERED_BY_QIANKUN__ ? '/home/Form' : '/'
-        }
-      >
-        <App />
-      </BrowserRouter>
+      <ConfigProvider locale={locale}>
+        <BrowserRouter
+          // 对两种不同的环境分别给出不同的基础路径
+          basename={
+            (window as any).__POWERED_BY_QIANKUN__ ? '/home/Form' : '/'
+          }
+        >
+          <App />
+        </BrowserRouter>
+      </ConfigProvider>
     )
   } else {
     return (
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ConfigProvider locale={locale}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ConfigProvider>
     )
   }
 }

@@ -146,7 +146,7 @@ Display.Resource = createResource({
     {
       componentName: 'Field',
       props: {
-        type: 'string',
+        type: 'void',
         'x-component': 'Display',
       },
     },

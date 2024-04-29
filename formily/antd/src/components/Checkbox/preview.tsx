@@ -26,7 +26,7 @@ Checkbox.Resource = createResource({
       componentName: 'Field',
       props: {
         type: 'Array<string | number>',
-        title: 'Checkbox Group',
+        title: '复选',
         'x-decorator': 'FormItem',
         'x-component': 'Checkbox.Group',
         enum: [

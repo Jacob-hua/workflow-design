@@ -40,7 +40,8 @@ export const DesignerToolsWidget: React.FC<IDesignerToolsWidgetProps> =
               history.undo()
             }}
           >
-            <IconWidget infer="Undo" />
+            {/* <IconWidget infer="Undo" /> */}
+            上一步
           </Button>
           <Button
             size="small"
@@ -49,7 +50,8 @@ export const DesignerToolsWidget: React.FC<IDesignerToolsWidgetProps> =
               history.redo()
             }}
           >
-            <IconWidget infer="Redo" />
+            {/* <IconWidget infer="Redo" /> */}
+            下一步
           </Button>
         </Button.Group>
       )
@@ -67,7 +69,8 @@ export const DesignerToolsWidget: React.FC<IDesignerToolsWidgetProps> =
               cursor.setType(CursorType.Normal)
             }}
           >
-            <IconWidget infer="Move" />
+            {/* <IconWidget infer="Move" /> */}
+            移动
           </Button>
           <Button
             size="small"
@@ -76,7 +79,8 @@ export const DesignerToolsWidget: React.FC<IDesignerToolsWidgetProps> =
               cursor.setType(CursorType.Selection)
             }}
           >
-            <IconWidget infer="Selection" />
+            {/* <IconWidget infer="Selection" /> */}
+            框选
           </Button>
         </Button.Group>
       )
@@ -194,8 +198,8 @@ export const DesignerToolsWidget: React.FC<IDesignerToolsWidgetProps> =
       <div style={props.style} className={cls(prefix, props.className)}>
         {renderHistoryController()}
         {renderCursorController()}
-        {renderScreenTypeController()}
-        {renderMobileController()}
+        {/* {renderScreenTypeController()} */}
+        {/* {renderMobileController()} */}
         {renderResponsiveController()}
       </div>
     )

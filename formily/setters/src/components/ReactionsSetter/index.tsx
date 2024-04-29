@@ -158,6 +158,7 @@ export const ReactionsSetter: React.FC<IReactionsSetterProps> = (props) => {
           initDeclaration().then(() => {
             setInnerVisible(true)
           })
+          // setInnerVisible(true)
         },
         {
           timeout: 400,
@@ -181,6 +182,7 @@ export const ReactionsSetter: React.FC<IReactionsSetterProps> = (props) => {
         bodyStyle={{ padding: 10 }}
         transitionName=""
         maskTransitionName=""
+        maskClosable={false}
         visible={modalVisible}
         onCancel={closeModal}
         destroyOnClose

@@ -38,11 +38,11 @@ Upload.Resource = createResource(
         componentName: 'Field',
         props: {
           type: 'Array<object>',
-          title: 'Upload',
+          title: '上传',
           'x-decorator': 'FormItem',
           'x-component': 'Upload',
           'x-component-props': {
-            textContent: 'Upload',
+            textContent: '上传',
           },
         },
       },

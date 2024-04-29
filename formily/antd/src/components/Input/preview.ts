@@ -38,7 +38,7 @@ Input.Resource = createResource(
         componentName: 'Field',
         props: {
           type: 'string',
-          title: 'Input',
+          title: '输入框',
           'x-decorator': 'FormItem',
           'x-component': 'Input',
         },
@@ -52,7 +52,7 @@ Input.Resource = createResource(
         componentName: 'Field',
         props: {
           type: 'string',
-          title: 'TextArea',
+          title: '多行输入',
           'x-decorator': 'FormItem',
           'x-component': 'Input.TextArea',
         },

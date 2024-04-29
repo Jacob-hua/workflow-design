@@ -25,7 +25,7 @@ Password.Resource = createResource({
     {
       componentName: 'Field',
       props: {
-        title: 'Password',
+        title: '密码',
         'x-decorator': 'FormItem',
         'x-component': 'Password',
       },

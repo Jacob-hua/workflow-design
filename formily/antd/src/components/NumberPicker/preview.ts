@@ -30,7 +30,7 @@ NumberPicker.Resource = createResource({
       componentName: 'Field',
       props: {
         type: 'number',
-        title: 'NumberPicker',
+        title: '数字输入',
         'x-decorator': 'FormItem',
         'x-component': 'NumberPicker',
       },

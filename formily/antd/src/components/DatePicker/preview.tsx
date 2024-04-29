@@ -38,7 +38,7 @@ DatePicker.Resource = createResource(
         componentName: 'Field',
         props: {
           type: 'string',
-          title: 'DatePicker',
+          title: '日期',
           'x-decorator': 'FormItem',
           'x-component': 'DatePicker',
         },
@@ -52,7 +52,7 @@ DatePicker.Resource = createResource(
         componentName: 'Field',
         props: {
           type: 'string[]',
-          title: 'DateRangePicker',
+          title: '日期范围',
           'x-decorator': 'FormItem',
           'x-component': 'DatePicker.RangePicker',
         },

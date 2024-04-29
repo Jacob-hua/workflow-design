@@ -41,7 +41,7 @@ export const FormCollapse: DnFC<CollapseProps> & {
         type: 'void',
         'x-component': 'FormCollapse.CollapsePanel',
         'x-component-props': {
-          header: `Unnamed Title`,
+          header: `标题`,
         },
       },
       children: source,
@@ -106,7 +106,7 @@ export const FormCollapse: DnFC<CollapseProps> & {
                   type: 'void',
                   'x-component': 'FormCollapse.CollapsePanel',
                   'x-component-props': {
-                    header: `Unnamed Title`,
+                    header: `标题`,
                   },
                 },
               })

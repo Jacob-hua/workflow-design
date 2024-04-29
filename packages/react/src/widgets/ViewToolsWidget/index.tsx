@@ -26,7 +26,8 @@ export const ViewToolsWidget: React.FC<IViewToolsWidget> = observer(
             }}
             size="small"
           >
-            <IconWidget infer="Design" />
+            {/* <IconWidget infer="Design" /> */}
+            设计
           </Button>
         )}
         {use.includes('JSONTREE') && (
@@ -37,10 +38,11 @@ export const ViewToolsWidget: React.FC<IViewToolsWidget> = observer(
             }}
             size="small"
           >
-            <IconWidget infer="JSON" />
+            {/* <IconWidget infer="JSON" /> */}
+            JSON
           </Button>
         )}
-        {use.includes('MARKUP') && (
+        {/* {use.includes('MARKUP') && (
           <Button
             disabled={workbench.type === 'MARKUP'}
             onClick={() => {
@@ -50,7 +52,7 @@ export const ViewToolsWidget: React.FC<IViewToolsWidget> = observer(
           >
             <IconWidget infer="Code" />
           </Button>
-        )}
+        )} */}
         {use.includes('PREVIEW') && (
           <Button
             disabled={workbench.type === 'PREVIEW'}
@@ -59,7 +61,8 @@ export const ViewToolsWidget: React.FC<IViewToolsWidget> = observer(
             }}
             size="small"
           >
-            <IconWidget infer="Play" />
+            {/* <IconWidget infer="Play" /> */}
+            预览
           </Button>
         )}
       </Button.Group>
