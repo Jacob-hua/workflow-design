@@ -25,7 +25,7 @@ function createDOM(flag: boolean) {
         <BrowserRouter
           // 对两种不同的环境分别给出不同的基础路径
           basename={
-            (window as any).__POWERED_BY_QIANKUN__ ? '/home/Form' : '/'
+            (window as any).__POWERED_BY_QIANKUN__ ? '/Form' : '/'
           }
         >
           <App />
@@ -34,11 +34,11 @@ function createDOM(flag: boolean) {
     )
   } else {
     return (
-      <ConfigProvider locale={locale}>
+      // <ConfigProvider locale={locale}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </ConfigProvider>
+      // </ConfigProvider>
     )
   }
 }
