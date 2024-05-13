@@ -15,7 +15,7 @@ NumberPicker.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'NumberPicker',
   designerProps: {
-    propsSchema: createFieldSchema(AllSchemas.NumberPicker, [
+    propsSchema: createFieldSchema(AllSchemas.NumberPicker,'NumberPicker', [
       'enum',
       'x-validator',
     ]),

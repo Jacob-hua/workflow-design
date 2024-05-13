@@ -1,11 +1,15 @@
-import { createLocales } from '@designable/core'
-import { Card } from './Card'
-
-export const ArrayCards = createLocales(Card, {
+export const ArrayCards = {
   'zh-CN': {
     title: '自增卡片',
     addIndex: '添加索引',
     addOperation: '添加操作',
+    settings: {
+      'x-component-props': {
+        title: '标题',
+        addable: '复制',
+        foldable: '折叠'
+      },
+    },
   },
   'en-US': {
     title: 'Array Cards',
@@ -17,4 +21,4 @@ export const ArrayCards = createLocales(Card, {
     addIndex: '색인 추가',
     addOperation: '작업 추가',
   },
-})
+}

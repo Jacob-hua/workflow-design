@@ -64,7 +64,7 @@ Display.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'Display',
   designerProps: {
-    propsSchema: createVoidFieldSchema(AllSchemas.DisplayFormily),
+    propsSchema: createVoidFieldSchema(AllSchemas.DisplayFormily, 'Display'),
   },
   designerLocales: AllLocales.DisplayFormily,
 })

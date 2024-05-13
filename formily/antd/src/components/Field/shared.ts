@@ -4,6 +4,7 @@ import {
   DataSourceSetter,
   ValidatorSetter,
 } from '@designable/formily-setters'
+import { uid } from '@designable/shared'
 import { FormItemSwitcher } from '../../common/FormItemSwitcher'
 import { AllSchemas } from '../../schemas'
 
@@ -26,21 +27,21 @@ export const createComponentSchema = (
         'x-component-props': component,
       },
     },
-    'decorator-group': decorator && {
-      type: 'void',
-      'x-component': 'CollapseItem',
-      'x-component-props': { defaultExpand: false },
-      'x-reactions': {
-        fulfill: {
-          state: {
-            visible: '{{!!$form.values["x-decorator"]}}',
-          },
-        },
-      },
-      properties: {
-        'x-decorator-props': decorator,
-      },
-    },
+    // 'decorator-group': decorator && {
+    //   type: 'void',
+    //   'x-component': 'CollapseItem',
+    //   'x-component-props': { defaultExpand: false },
+    //   'x-reactions': {
+    //     fulfill: {
+    //       state: {
+    //         visible: '{{!!$form.values["x-decorator"]}}',
+    //       },
+    //     },
+    //   },
+    //   properties: {
+    //     'x-decorator-props': decorator,
+    //   },
+    // },
     'component-style-group': {
       type: 'void',
       'x-component': 'CollapseItem',
@@ -56,34 +57,37 @@ export const createComponentSchema = (
         'x-component-props.style': AllSchemas.CSSStyle,
       },
     },
-    'decorator-style-group': {
-      type: 'void',
-      'x-component': 'CollapseItem',
-      'x-component-props': { defaultExpand: false },
-      'x-reactions': {
-        fulfill: {
-          state: {
-            visible: '{{!!$form.values["x-decorator"]}}',
-          },
-        },
-      },
-      properties: {
-        'x-decorator-props.style': AllSchemas.CSSStyle,
-      },
-    },
+    // 'decorator-style-group': {
+    //   type: 'void',
+    //   'x-component': 'CollapseItem',
+    //   'x-component-props': { defaultExpand: false },
+    //   'x-reactions': {
+    //     fulfill: {
+    //       state: {
+    //         visible: '{{!!$form.values["x-decorator"]}}',
+    //       },
+    //     },
+    //   },
+    //   properties: {
+    //     'x-decorator-props.style': AllSchemas.CSSStyle,
+    //   },
+    // },
   }
 }
 
 export const createFieldSchema = (
   component?: ISchema,
+  name?: string,
   filterItems?: string[],
-  decorator: ISchema = AllSchemas.FormItem
+  decorator: ISchema = AllSchemas.FormItem,
 ): ISchema => {
   let properties = {
     name: {
       type: 'string',
       'x-decorator': 'FormItem',
       'x-component': 'Input',
+      "x-pattern": "disabled",
+      "x-value":`${uid()}_${name}`
     },
     title: {
       type: 'string',
@@ -155,6 +159,7 @@ export const createFieldSchema = (
 
 export const createVoidFieldSchema = (
   component?: ISchema,
+  name?: string,
   decorator: ISchema = AllSchemas.FormItem
 ) => {
   return {
@@ -168,6 +173,8 @@ export const createVoidFieldSchema = (
             type: 'string',
             'x-decorator': 'FormItem',
             'x-component': 'Input',
+            "x-pattern": "disabled",
+            "x-value":`${uid()}_${name}`
           },
           title: {
             type: 'string',

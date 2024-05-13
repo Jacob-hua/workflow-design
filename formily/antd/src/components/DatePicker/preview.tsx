@@ -15,7 +15,7 @@ DatePicker.Behavior = createBehavior(
     extends: ['Field'],
     selector: (node) => node.props['x-component'] === 'DatePicker',
     designerProps: {
-      propsSchema: createFieldSchema(AllSchemas.DatePicker),
+      propsSchema: createFieldSchema(AllSchemas.DatePicker,'DatePicker'),
     },
     designerLocales: AllLocales.DatePicker,
   },
@@ -24,7 +24,7 @@ DatePicker.Behavior = createBehavior(
     extends: ['Field'],
     selector: (node) => node.props['x-component'] === 'DatePicker.RangePicker',
     designerProps: {
-      propsSchema: createFieldSchema(AllSchemas.DatePicker.RangePicker),
+      propsSchema: createFieldSchema(AllSchemas.DatePicker.RangePicker,'DatePicker.RangePicker'),
     },
     designerLocales: AllLocales.DateRangePicker,
   }

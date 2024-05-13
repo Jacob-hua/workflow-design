@@ -33,7 +33,7 @@ Text.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'Text',
   designerProps: {
-    propsSchema: createVoidFieldSchema(AllSchemas.Text),
+    propsSchema: createVoidFieldSchema(AllSchemas.Text, 'Text'),
   },
   designerLocales: AllLocales.Text,
 })

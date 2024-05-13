@@ -56,7 +56,7 @@ import {
   Text,
   Card,
   ArrayCards,
-  // ObjectContainer,
+  ObjectContainer,
   // ArrayTable,
   // Space,
   // FormTab,
@@ -207,7 +207,7 @@ export const DesingerView = () => {
                       Display,
                       // FormGrid,
                       // FormLayout,
-                      // ObjectContainer,
+                      ObjectContainer,
                       // TestComp,
                     }}
                   />

@@ -14,7 +14,7 @@ TreeSelect.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'TreeSelect',
   designerProps: {
-    propsSchema: createFieldSchema(AllSchemas.TreeSelect),
+    propsSchema: createFieldSchema(AllSchemas.TreeSelect, 'TreeSelect'),
   },
   designerLocales: AllLocales.TreeSelect,
 })

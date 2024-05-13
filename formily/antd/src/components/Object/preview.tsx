@@ -25,6 +25,7 @@ ObjectContainer.Resource = createResource({
       componentName: 'Field',
       props: {
         type: 'object',
+        'x-component': 'Object',
       },
     },
   ],

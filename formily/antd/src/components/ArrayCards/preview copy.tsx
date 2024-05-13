@@ -32,7 +32,8 @@ const ensureObjectItemsNode = createEnsureTypeItemsNode('object')
 
 const isArrayCardsOperation = (name: string) =>
   name === 'ArrayCards.Remove' ||
-  name === 'ArrayCards.MoveDown'
+  name === 'ArrayCards.MoveDown' ||
+  name === 'ArrayCards.MoveUp'
 
 export const ArrayCards: DnFC<CardExtendProps> = observer((props) => {
   const node = useTreeNode()
@@ -57,7 +58,7 @@ export const ArrayCards: DnFC<CardExtendProps> = observer((props) => {
       componentName: node.componentName,
       props: {
         type: 'void',
-        title: 'remove',
+        title: 'Addition',
         'x-component': 'ArrayCards.Remove',
       },
     })
@@ -65,8 +66,8 @@ export const ArrayCards: DnFC<CardExtendProps> = observer((props) => {
       componentName: node.componentName,
       props: {
         type: 'void',
-        title: 'fold',
-        'x-component': 'ArrayCards.MoveDown',
+        title: 'Addition',
+        'x-component': 'ArrayCards.Fold',
       },
     })
     // const moveDownNode = new TreeNode({
@@ -86,14 +87,25 @@ export const ArrayCards: DnFC<CardExtendProps> = observer((props) => {
     //   },
     // })
 
+    // console.log(props);
+    let children = [indexNode, ...source, removeNode]
+    if (props.foldable) {
+      children = [indexNode, ...source, removeNode, foldNode]
+    } else {
+      children = [indexNode, ...source, removeNode]
+    }
+
     const objectNode = new TreeNode({
       componentName: node.componentName,
       props: {
         type: 'object',
       },
-      children: [indexNode, ...source, removeNode, foldNode],
+      children: children,
     })
-    return [objectNode, additionNode]
+    if (props.addable) {
+      return [objectNode, additionNode]
+    }
+    return [objectNode]
   })
   const renderCard = () => {
     if (node.children.length === 0) return <DroppableWidget />
@@ -116,18 +128,11 @@ export const ArrayCards: DnFC<CardExtendProps> = observer((props) => {
       '*',
       (name) => name.indexOf('ArrayCards.') === -1,
     ])
-    const propKeys = Object.keys(props);
-    let properties = JSON.parse(JSON.stringify(props));
-    propKeys.forEach(item => {
-      if (item === 'addable' || item === 'foldable') {
-        delete properties[item]
-      }
-    })
     return (
       <ArrayBase disabled>
         <ArrayBase.Item index={0} record={null}>
           <Card
-            {...properties}
+            {...props}
             title={
               <Fragment>
                 {indexes.map((node, key) => (
@@ -141,19 +146,10 @@ export const ArrayCards: DnFC<CardExtendProps> = observer((props) => {
             className={cls('ant-formily-array-cards-item', props.className)}
             extra={
               <Fragment>
-                {operations.map((node) => {
-                  if (node.props.title === 'fold') {
-                    if (props.foldable) {
-                      return (
-                        <TreeNodeWidget key={node.id} node={node} />
-                      )
-                    }
-                  } else {
-                    return (
-                      <TreeNodeWidget key={node.id} node={node} />
-                    )
-                  }
-                })}
+                {operations.map((node) => (
+                  <TreeNodeWidget key={node.id} node={node} />
+                ))}
+                {props.extra}
               </Fragment>
             }
           >
@@ -168,13 +164,10 @@ export const ArrayCards: DnFC<CardExtendProps> = observer((props) => {
             </div>
           </Card>
         </ArrayBase.Item>
-        {props.addable ? (
-          additions.map((node) => (
-            <TreeNodeWidget key={node.id} node={node} />
-          ))
-        ) : (<></>)
-        }
-      </ArrayBase >
+        {additions.map((node) => (
+          <TreeNodeWidget key={node.id} node={node} />
+        ))}
+      </ArrayBase>
     )
   }
 
@@ -214,12 +207,12 @@ export const ArrayCards: DnFC<CardExtendProps> = observer((props) => {
                 'ArrayCards',
                 'ArrayCards.Addition',
               ])
-              if (!oldAdditionNode && props.addable) {
+              if (!oldAdditionNode) {
                 const additionNode = new TreeNode({
                   componentName: node.componentName,
                   props: {
                     type: 'void',
-                    title: '复制',
+                    title: 'Addition',
                     'x-component': 'ArrayCards.Addition',
                   },
                 })
@@ -230,31 +223,45 @@ export const ArrayCards: DnFC<CardExtendProps> = observer((props) => {
                 '*',
                 'ArrayCards.Remove',
               ])
+              const oldMoveDownNode = findNodeByComponentPath(node, [
+                'ArrayCards',
+                '*',
+                'ArrayCards.MoveDown',
+              ])
+              const oldMoveUpNode = findNodeByComponentPath(node, [
+                'ArrayCards',
+                '*',
+                'ArrayCards.MoveUp',
+              ])
               if (!oldRemoveNode) {
                 ensureObjectItemsNode(node).append(
                   new TreeNode({
                     componentName: node.componentName,
                     props: {
                       type: 'void',
-                      title: 'remove',
                       'x-component': 'ArrayCards.Remove',
                     },
                   })
                 )
               }
-              const oldFoldNode = findNodeByComponentPath(node, [
-                'ArrayCards',
-                '*',
-                'ArrayCards.MoveDown',
-              ])
-              if (!oldFoldNode && props.foldable) {
+              if (!oldMoveDownNode) {
                 ensureObjectItemsNode(node).append(
                   new TreeNode({
                     componentName: node.componentName,
                     props: {
                       type: 'void',
-                      title: 'fold',
                       'x-component': 'ArrayCards.MoveDown',
+                    },
+                  })
+                )
+              }
+              if (!oldMoveUpNode) {
+                ensureObjectItemsNode(node).append(
+                  new TreeNode({
+                    componentName: node.componentName,
+                    props: {
+                      type: 'void',
+                      'x-component': 'ArrayCards.MoveUp',
                     },
                   })
                 )
@@ -282,8 +289,8 @@ ArrayCards.Resource = createResource({
         'x-component': 'ArrayCards',
         'x-component-props': {
           title: `标题`,
-          addable: false,
-          foldable: false
+          addable: true,
+          foldable: true
         },
       },
     },

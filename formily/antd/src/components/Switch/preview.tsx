@@ -13,7 +13,7 @@ Switch.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'Switch',
   designerProps: {
-    propsSchema: createFieldSchema(AllSchemas.Switch),
+    propsSchema: createFieldSchema(AllSchemas.Switch, 'Switch'),
   },
   designerLocales: AllLocales.Switch,
 })
