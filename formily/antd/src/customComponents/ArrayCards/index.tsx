@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, Empty } from 'antd'
 import { CardProps } from 'antd/lib/card'
 import { ArrayField } from '@formily/core'
@@ -15,8 +15,8 @@ import { ArrayBase, ArrayBaseMixins } from '../ArrayBase'
 import './style.less'
 
 interface CardExtendProps extends CardProps {
-  foldable?: boolean,
-  addable?: boolean,
+  foldable?: boolean
+  addable?: boolean
 }
 
 type ComposedArrayCards = React.FC<CardExtendProps> & ArrayBaseMixins
@@ -54,9 +54,29 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
   const field = useField<ArrayField>()
   const schema = useFieldSchema()
   const dataSource = Array.isArray(field.value) ? field.value : []
+  // const [list] = useState<any>(Array.isArray(field.value) ? field.value : [])
   const prefixCls = usePrefixCls('formily-array-cards', props)
-
   if (!schema) throw new Error('can not found schema object')
+  const dataSt = [true]
+  dataSource.forEach(() => {
+    dataSt.push(true)
+  })
+  const [folded, setFolded] = useState<Array<boolean>>([true])
+
+  // const [isAdd, setIsAdd] = useState<boolean>(false)
+
+  const setFoleded = (bool: boolean, index: number) => {
+    dataSt[index] = bool
+    setFolded(dataSt)
+  }
+
+  const addFoleded = () => {
+    setFolded(dataSt)
+  }
+
+  useEffect(() => {
+    setFolded(dataSt)
+  }, [])
 
   const renderItems = () => {
     return dataSource?.map((item, index) => {
@@ -102,23 +122,29 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
           }}
         />
       )
-      const propKeys = Object.keys(props);
-      let properties = JSON.parse(JSON.stringify(props));
-      propKeys.forEach(item => {
+      const propKeys = Object.keys(props)
+      let properties = JSON.parse(JSON.stringify(props))
+      propKeys.forEach((item) => {
         if (item === 'addable' || item === 'foldable') {
           delete properties[item]
         }
       })
       return (
-        <ArrayBase.Item key={index} index={index} record={item}>
+        <ArrayBase.Item
+          key={index}
+          index={index}
+          record={item}
+          setFoleded={setFoleded}
+          addFoleded={addFoleded}
+        >
           <Card
             {...properties}
-            onChange={() => { }}
+            onChange={() => {}}
             className={cls(`${prefixCls}-item`, props.className)}
             title={title}
             extra={extra}
           >
-            {content}
+            {folded[index] ? content : ''}
           </Card>
         </ArrayBase.Item>
       )
@@ -136,9 +162,7 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
 
   const renderEmpty = () => {
     if (dataSource?.length) return
-    const items = Array.isArray(schema.items)
-      ? schema.items[0]
-      : schema.items
+    const items = Array.isArray(schema.items) ? schema.items[0] : schema.items
     const title = (
       <span>
         <RecursionField
@@ -178,9 +202,10 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
         }}
       />
     )
-    const propKeys = Object.keys(props);
-    let properties = JSON.parse(JSON.stringify(props));
-    propKeys.forEach(item => {
+    const propKeys = Object.keys(props)
+    let properties = JSON.parse(JSON.stringify(props))
+    // properties.setfoleded = setFoleded
+    propKeys.forEach((item) => {
       if (item === 'addable' || item === 'foldable') {
         delete properties[item]
       }
@@ -189,11 +214,14 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
       <ArrayBase.Item key={0} index={0} record={items}>
         <Card
           {...properties}
-          onChange={() => { }}
+          onChange={() => {}}
           className={cls(`${prefixCls}-item`, props.className)}
           title={title}
           extra={extra}
         >
+          {/* {
+            folded ? content : ''
+          }  */}
           {content}
         </Card>
       </ArrayBase.Item>

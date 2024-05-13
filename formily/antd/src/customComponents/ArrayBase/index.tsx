@@ -6,7 +6,7 @@ import {
   UpOutlined,
   PlusOutlined,
   MenuOutlined,
-  RightOutlined
+  RightOutlined,
 } from '@ant-design/icons'
 import { AntdIconProps } from '@ant-design/icons/lib/components/AntdIcon'
 import { ButtonProps } from 'antd/lib/button'
@@ -39,6 +39,8 @@ export interface IArrayBaseContext {
 export interface IArrayBaseItemProps {
   index: number
   record: any
+  setFoleded: (status: boolean, index: number) => void
+  addFoleded: () => void
 }
 
 export type ArrayBaseMixins = {
@@ -51,6 +53,7 @@ export type ArrayBaseMixins = {
   useArray?: () => IArrayBaseContext
   useIndex?: (index?: number) => number
   useRecord?: (record?: number) => any
+  useStatus?: (status?: boolean) => any
 }
 
 export interface IArrayBaseProps {
@@ -113,7 +116,13 @@ export const ArrayBase: ComposedArrayBase = (props) => {
   )
 }
 
+let setFoldData = null
+
+let addFoldData = null
+
 ArrayBase.Item = ({ children, ...props }) => {
+  setFoldData = props.setFoleded
+  addFoldData = props.addFoleded
   return (
     <ItemContext.Provider value={props}>
       <ExpressionScope value={{ $record: props.record, $index: props.index }}>
@@ -170,13 +179,14 @@ ArrayBase.Addition = (props) => {
       className={cls(`${prefixCls}-addition`, props.className)}
       onClick={(e) => {
         if (array.props?.disabled) return
-        const defaultValue = getDefaultValue(props.defaultValue, array.schema)        
+        const defaultValue = getDefaultValue(props.defaultValue, array.schema)
         if (props.method === 'unshift') {
           array.field?.unshift?.(defaultValue)
           array.props?.onAdd?.(0)
         } else {
           array.field?.push?.(defaultValue)
           array.props?.onAdd?.(array?.field?.value?.length - 1)
+          addFoldData()
         }
         if (props.onClick) {
           props.onClick(e)
@@ -278,8 +288,7 @@ ArrayBase.MoveDown = React.forwardRef((props, ref) => {
         onClick={(e) => {
           if (array.props?.disabled) return
           e.stopPropagation()
-          // array?.field?.moveUp(index)
-          // array?.props?.onMoveUp?.(index)
+          setFoldData(true, index)
           setFolded(false)
           if (props.onClick) {
             props.onClick(e)
@@ -296,8 +305,7 @@ ArrayBase.MoveDown = React.forwardRef((props, ref) => {
       onClick={(e) => {
         if (array.props?.disabled) return
         e.stopPropagation()
-        // array?.field?.moveUp(index)
-        // array?.props?.onMoveUp?.(index)
+        setFoldData(false, index)
         setFolded(true)
         if (props.onClick) {
           props.onClick(e)
