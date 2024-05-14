@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Card, Empty } from 'antd'
 import { CardProps } from 'antd/lib/card'
 import { ArrayField } from '@formily/core'
@@ -64,8 +64,8 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
   const dataSt = [...folded]
   // const [isAdd, setIsAdd] = useState<boolean>(false)
 
-  const setFoleded = (bool: boolean, index: number) => {
-    dataSt[index] = bool
+  const setFoleded = (status, index) => {
+    dataSt[index] = status
     setFolded(dataSt)
   }
 
@@ -73,11 +73,6 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
     dataSt.push(true)
     setFolded(dataSt)
   }
-
-  // useEffect(() => {
-  //   setFolded(dataSt)
-  //   console.log(folded)
-  // }, [])
 
   const renderItems = () => {
     return dataSource?.map((item, index) => {

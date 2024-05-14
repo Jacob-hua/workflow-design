@@ -39,7 +39,7 @@ export interface IArrayBaseContext {
 export interface IArrayBaseItemProps {
   index: number
   record: any
-  setFoleded: (status: boolean, index: number) => void
+  setFoleded: <D, T>(status: D, index: T) => void
   addFoleded: () => void
 }
 
@@ -116,9 +116,9 @@ export const ArrayBase: ComposedArrayBase = (props) => {
   )
 }
 
-let setFoldData = null
+let setFoldData: IArrayBaseItemProps['setFoleded']
 
-let addFoldData = null
+let addFoldData: IArrayBaseItemProps['addFoleded']
 
 ArrayBase.Item = ({ children, ...props }) => {
   setFoldData = props.setFoleded
