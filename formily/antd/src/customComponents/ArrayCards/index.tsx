@@ -57,12 +57,11 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
   // const [list] = useState<any>(Array.isArray(field.value) ? field.value : [])
   const prefixCls = usePrefixCls('formily-array-cards', props)
   if (!schema) throw new Error('can not found schema object')
-  const dataSt = [true]
-  dataSource.forEach(() => {
-    dataSt.push(true)
-  })
+  // dataSource.forEach(() => {
+  //   dataSt.push(true)
+  // })
   const [folded, setFolded] = useState<Array<boolean>>([true])
-
+  const dataSt = [...folded]
   // const [isAdd, setIsAdd] = useState<boolean>(false)
 
   const setFoleded = (bool: boolean, index: number) => {
@@ -71,12 +70,14 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
   }
 
   const addFoleded = () => {
+    dataSt.push(true)
     setFolded(dataSt)
   }
 
-  useEffect(() => {
-    setFolded(dataSt)
-  }, [])
+  // useEffect(() => {
+  //   setFolded(dataSt)
+  //   console.log(folded)
+  // }, [])
 
   const renderItems = () => {
     return dataSource?.map((item, index) => {
