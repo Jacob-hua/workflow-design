@@ -4,7 +4,6 @@ import {
   DataSourceSetter,
   ValidatorSetter,
 } from '@designable/formily-setters'
-import { uid } from '@designable/shared'
 import { FormItemSwitcher } from '../../common/FormItemSwitcher'
 import { AllSchemas } from '../../schemas'
 
@@ -168,13 +167,13 @@ export const createVoidFieldSchema = (
         type: 'void',
         'x-component': 'CollapseItem',
         properties: {
-          name: {
-            type: 'string',
-            'x-decorator': 'FormItem',
-            'x-component': 'Input',
-            "x-pattern": "disabled",
-            "x-value":`${uid()}_${name}`
-          },
+          // name: {
+          //   type: 'string',
+          //   'x-decorator': 'FormItem',
+          //   'x-component': 'Input',
+          //   "x-pattern": "disabled",
+          //   "x-value":`${uid()}_${name}`
+          // },
           title: {
             type: 'string',
             'x-decorator': 'FormItem',
@@ -201,7 +200,7 @@ export const createVoidFieldSchema = (
           },
           'x-display': {
             type: 'string',
-            enum: ['visible', 'hidden', 'none', ''],
+            enum: ['visible', 'hidden'],
             'x-decorator': 'FormItem',
             'x-component': 'Select',
             'x-component-props': {
@@ -210,7 +209,7 @@ export const createVoidFieldSchema = (
           },
           'x-pattern': {
             type: 'string',
-            enum: ['editable', 'disabled', 'readOnly', 'readPretty', ''],
+            enum: ['editable', 'disabled', 'readOnly', 'readPretty'],
             'x-decorator': 'FormItem',
             'x-component': 'Select',
             'x-component-props': {
