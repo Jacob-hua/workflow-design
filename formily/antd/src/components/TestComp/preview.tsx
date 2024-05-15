@@ -24,7 +24,7 @@ export const TestComp: DnFC<IDesignableTestCompProps> = (props) => {
   const [selectedItems, setSelectedItems] = useState<SparePart[]>([])
   const handleChange = (item) => {
     // eslint-disable-next-line no-console
-    console.log(item)
+    // console.log(item)
     const flag = selectedItems.some(({ value }) => item.value === value)
     if (flag) {
       return

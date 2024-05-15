@@ -18,8 +18,6 @@ const loadDependencies = async (deps: IDependency[]) => {
 }
 
 export const initDeclaration = async () => {
-  // eslint-disable-next-line no-console
-  console.log('aaaa');
   
   return MonacoInput.loader.init().then(async (monaco) => {
     const deps = await loadDependencies([

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext } from 'react'
 import { Button } from 'antd'
 import {
   DeleteOutlined,
@@ -39,8 +39,11 @@ export interface IArrayBaseContext {
 export interface IArrayBaseItemProps {
   index: number
   record: any
+  foldedArr: Array<Boolean>
   setFoleded: <D, T>(status: D, index: T) => void
   addFoleded: () => void
+  deleteFoleded: (index: number) => void
+  getFoleded?: (index: number) => boolean
 }
 
 export type ArrayBaseMixins = {
@@ -120,9 +123,15 @@ let setFoldData: IArrayBaseItemProps['setFoleded']
 
 let addFoldData: IArrayBaseItemProps['addFoleded']
 
+let deleteFoldData: IArrayBaseItemProps['deleteFoleded']
+
+let foldedArrData: IArrayBaseItemProps['foldedArr']
+
 ArrayBase.Item = ({ children, ...props }) => {
   setFoldData = props.setFoleded
   addFoldData = props.addFoleded
+  deleteFoldData = props.deleteFoleded
+  foldedArrData = props.foldedArr
   return (
     <ItemContext.Provider value={props}>
       <ExpressionScope value={{ $record: props.record, $index: props.index }}>
@@ -216,6 +225,7 @@ ArrayBase.Remove = React.forwardRef((props, ref) => {
         // array.field?.setDisplay('none')
         array.field?.remove?.(index)
         array.props?.onRemove?.(index)
+        deleteFoldData(index)
         if (props.onClick) {
           props.onClick(e)
         }
@@ -273,13 +283,13 @@ ArrayBase.MoveUp = React.forwardRef((props, ref) => {
 })
 
 ArrayBase.MoveDown = React.forwardRef((props, ref) => {
-  const [folded, setFolded] = useState<Boolean>(false)
   const index = useIndex(props.index)
   const array = useArray()
+  const folded = foldedArrData ? foldedArrData[index] : true
   const prefixCls = usePrefixCls('formily-array-base')
   if (!array) return null
   if (array.field?.pattern !== 'editable') return null
-  if (folded) {
+  if (!folded) {
     return (
       <RightOutlined
         {...props}
@@ -289,7 +299,7 @@ ArrayBase.MoveDown = React.forwardRef((props, ref) => {
           if (array.props?.disabled) return
           e.stopPropagation()
           setFoldData(true, index)
-          setFolded(false)
+          // setFolded(false)
           if (props.onClick) {
             props.onClick(e)
           }
@@ -306,7 +316,7 @@ ArrayBase.MoveDown = React.forwardRef((props, ref) => {
         if (array.props?.disabled) return
         e.stopPropagation()
         setFoldData(false, index)
-        setFolded(true)
+        // setFolded(true)
         if (props.onClick) {
           props.onClick(e)
         }

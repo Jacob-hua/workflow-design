@@ -54,15 +54,10 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
   const field = useField<ArrayField>()
   const schema = useFieldSchema()
   const dataSource = Array.isArray(field.value) ? field.value : []
-  // const [list] = useState<any>(Array.isArray(field.value) ? field.value : [])
   const prefixCls = usePrefixCls('formily-array-cards', props)
   if (!schema) throw new Error('can not found schema object')
-  // dataSource.forEach(() => {
-  //   dataSt.push(true)
-  // })
   const [folded, setFolded] = useState<Array<boolean>>([true])
   const dataSt = [...folded]
-  // const [isAdd, setIsAdd] = useState<boolean>(false)
 
   const setFoleded = (status, index) => {
     dataSt[index] = status
@@ -71,6 +66,11 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
 
   const addFoleded = () => {
     dataSt.push(true)
+    setFolded(dataSt)
+  }
+
+  const deleteFoleded = (index) => {
+    dataSt.splice(index, 1)
     setFolded(dataSt)
   }
 
@@ -130,12 +130,14 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
           key={index}
           index={index}
           record={item}
+          foldedArr={folded}
           setFoleded={setFoleded}
           addFoleded={addFoleded}
+          deleteFoleded={deleteFoleded}
         >
           <Card
             {...properties}
-            onChange={() => {}}
+            onChange={() => { }}
             className={cls(`${prefixCls}-item`, props.className)}
             title={title}
             extra={extra}
@@ -210,7 +212,7 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
       <ArrayBase.Item key={0} index={0} record={items}>
         <Card
           {...properties}
-          onChange={() => {}}
+          onChange={() => { }}
           className={cls(`${prefixCls}-item`, props.className)}
           title={title}
           extra={extra}

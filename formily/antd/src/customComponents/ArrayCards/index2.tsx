@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Card, Empty, Button } from 'antd'
 import {
   DeleteOutlined,
@@ -14,12 +14,14 @@ import {
   observer,
   useFieldSchema,
   RecursionField,
+  Schema,
 } from '@formily/react'
 import cls from 'classnames'
 import { ISchema } from '@formily/json-schema'
 import { usePrefixCls } from '../__builtins__'
 import { ArrayBase, ArrayBaseMixins } from '../ArrayBase'
 import './style.less'
+import { clone, isValid } from '@formily/shared'
 
 interface CardExtendProps extends CardProps {
   foldable?: boolean,
@@ -60,6 +62,24 @@ const isOperationComponent = (schema: ISchema, foldable = true) => {
   )
 }
 
+const getSchemaDefaultValue = (schema: Schema) => {
+  if (schema?.type === 'array') return []
+  if (schema?.type === 'object') return {}
+  if (schema?.type === 'void') {
+    for (let key in schema.properties) {
+      const value = getSchemaDefaultValue(schema.properties[key])
+      if (isValid(value)) return value
+    }
+  }
+}
+
+const getDefaultValue = (defaultValue: any, schema: Schema) => {
+  if (isValid(defaultValue)) return clone(defaultValue)
+  if (Array.isArray(schema?.items))
+    return getSchemaDefaultValue(schema.items[0])
+  return getSchemaDefaultValue(schema.items)
+}
+
 export const ArrayCards: ComposedArrayCards = observer((props) => {
   const field = useField<ArrayField>()
   const schema = useFieldSchema()
@@ -73,17 +93,9 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
       const items = Array.isArray(schema.items)
         ? schema.items[index] || schema.items[0]
         : schema.items
+      const [folded, setFolded] = useState<Boolean>(false)
       const title = (
         <span>
-          <RecursionField
-            schema={items}
-            name={index}
-            filterProperties={(schema) => {
-              if (!isIndexComponent(schema)) return false
-              return true
-            }}
-            onlyRenderProperties
-          />
           {props.title || field.title}
         </span>
       )
@@ -98,10 +110,34 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
               props?.onRemove?.(index)
             }}
           ></DeleteOutlined>
-          {const [folded, setFolded] = useState<Boolean>(false)
-            props.foldable ? (
-            <></>
-            ) : (</>)}
+          {
+            props.foldable && folded ? (
+              <RightOutlined
+                className={cls(`${prefixCls}-fold`, props.className)}
+                onClick={(e) => {
+                  if (props?.disabled) return
+                  e.stopPropagation()
+                  // array?.field?.moveUp(index)
+                  // array?.props?.onMoveUp?.(index)
+                  setFolded(false)
+                }}
+              />
+            ) : (<></>)
+          }
+          {
+            props.foldable && !folded ? (
+              <DownOutlined
+                className={cls(`${prefixCls}-fold`, props.className)}
+                onClick={(e) => {
+                  if (props?.disabled) return
+                  e.stopPropagation()
+                  // array?.field?.moveUp(index)
+                  // array?.props?.onMoveUp?.(index)
+                  setFolded(false)
+                }}
+              />
+            ) : (<></>)
+          }
           {/* <RecursionField
             schema={items}
             name={index}
@@ -132,68 +168,104 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
         }
       })
       return (
-        <ArrayBase.Item key={index} index={index} record={item}>
-          <Card
-            {...properties}
-            onChange={() => { }}
-            className={cls(`${prefixCls}-item`, props.className)}
-            title={title}
-            extra={extra}
-          >
-            {content}
-          </Card>
-        </ArrayBase.Item>
+        <Card
+          {...properties}
+          key={index}
+          onChange={() => { }}
+          className={cls(`${prefixCls}-item`, props.className)}
+          title={title}
+          extra={extra}
+        >
+          {
+            props.foldable && folded ? null : content
+          }
+        </Card>
       )
     })
   }
 
   const renderAddition = () => {
-    return schema.reduceProperties((addition, schema, key) => {
-      if (isAdditionComponent(schema) && props.addable) {
-        return <RecursionField schema={schema} name={key} />
-      }
-      return addition
-    }, null)
+    if (props.addable) {
+      return (
+        <Button
+          type="dashed"
+          block
+          disabled={props.disabled}
+          className={cls(`${prefixCls}-fold`, props.className)}
+          onClick={(e) => {
+            if (props.disabled) return
+            const defaultValue = getDefaultValue(props.defaultValue, schema)
+            field?.push(defaultValue)
+            props?.onAdd?.(field?.value?.length - 1)
+          }}
+          icon={<PlusOutlined />}
+        >
+          复制
+        </Button>
+      )
+    }
+    return null
   }
 
   const renderEmpty = () => {
     if (dataSource?.length) return
-    // const propKeys = Object.keys(props);
-    // let properties = JSON.parse(JSON.stringify(props));
-    // propKeys.forEach(item => {
-    //   if (item === 'addable' || item === 'foldable') {
-    //     delete properties[item]
-    //   }
-    // })
     const items = Array.isArray(schema.items)
       ? schema.items[0]
       : schema.items
+    const [folded, setFolded] = useState<Boolean>(false)
     const title = (
       <span>
-        <RecursionField
-          schema={items}
-          name={0}
-          filterProperties={(schema) => {
-            if (!isIndexComponent(schema)) return false
-            return true
-          }}
-          onlyRenderProperties
-        />
         {props.title || field.title}
       </span>
     )
     const extra = (
       <span>
-        <RecursionField
+        <DeleteOutlined
+          className={cls(`${prefixCls}-remove`, props.className)}
+          onClick={(e) => {
+            if (props?.disabled) return
+            e.stopPropagation()
+            field.remove(0)
+            props?.onRemove?.(0)
+          }}
+        ></DeleteOutlined>
+        {
+          props.foldable && folded ? (
+            <RightOutlined
+              className={cls(`${prefixCls}-fold`, props.className)}
+              onClick={(e) => {
+                if (props?.disabled) return
+                e.stopPropagation()
+                // array?.field?.moveUp(index)
+                // array?.props?.onMoveUp?.(index)
+                setFolded(false)
+              }}
+            />
+          ) : (<></>)
+        }
+        {
+          props.foldable && !folded ? (
+            <DownOutlined
+              className={cls(`${prefixCls}-fold`, props.className)}
+              onClick={(e) => {
+                if (props?.disabled) return
+                e.stopPropagation()
+                // array?.field?.moveUp(index)
+                // array?.props?.onMoveUp?.(index)
+                setFolded(false)
+              }}
+            />
+          ) : (<></>)
+        }
+        {/* <RecursionField
           schema={items}
-          name={0}
+          name={index}
           filterProperties={(schema) => {
-            if (!isOperationComponent(schema)) return false
+            if (!isOperationComponent(schema, props.foldable)) return false
             return true
           }}
           onlyRenderProperties
-        />
-        {props.extra}
+        /> */}
       </span>
     )
     const content = (
@@ -215,31 +287,32 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
       }
     })
     return (
-      <ArrayBase.Item key={0} index={0} record={items}>
-        <Card
-          {...properties}
-          onChange={() => { }}
-          className={cls(`${prefixCls}-item`, props.className)}
-          title={title}
-          extra={extra}
-        >
-          {content}
-        </Card>
-      </ArrayBase.Item>
+      <Card
+        {...properties}
+        key={0}
+        onChange={() => { }}
+        className={cls(`${prefixCls}-item`, props.className)}
+        title={title}
+        extra={extra}
+      >
+        {
+          props.foldable && folded ? (<></>) : content
+        }
+      </Card>
     )
   }
 
   return (
-    <ArrayBase>
+    <>
       {renderEmpty()}
       {renderItems()}
       {renderAddition()}
-    </ArrayBase>
+    </>
   )
 })
 
 ArrayCards.displayName = 'ArrayCards'
 
-ArrayBase.mixin(ArrayCards)
+// ArrayBase.mixin(ArrayCards)
 
 export default ArrayCards

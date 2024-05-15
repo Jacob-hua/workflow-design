@@ -91,7 +91,7 @@ export const FormPreview = () => {
     location.state ?? JSON.parse(localStorage.getItem('formily-schema') ?? '')
   const handleSubmit = () => {
     // eslint-disable-next-line no-console
-    console.log('a')
+    // console.log('a')
   }
   return (
     <FormProvider {...formProps} form={form}>

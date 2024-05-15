@@ -75,7 +75,7 @@ Display.Resource = createResource({
     {
       componentName: 'Field',
       props: {
-        type: 'void',
+        type: 'object',
         'x-component': 'Display',
       },
     },

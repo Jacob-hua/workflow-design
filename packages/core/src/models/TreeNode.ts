@@ -432,11 +432,11 @@ export class TreeNode {
     return ['y']
   }
 
-  allowRotate() {}
+  allowRotate() { }
 
-  allowRound() {}
+  allowRound() { }
 
-  allowScale() {}
+  allowScale() { }
 
   allowTranslate(): boolean {
     if (this === this.root && !this.isSourceNode) return false
@@ -692,7 +692,7 @@ export class TreeNode {
   clone(parent?: TreeNode) {
     const newNode = new TreeNode(
       {
-        id: uid(),
+        id: `${uid()}_${this.props['x-component']}`,
         componentName: this.componentName,
         sourceName: this.sourceName,
         props: toJS(this.props),

@@ -10,11 +10,11 @@ export const Field = {
       'x-display': {
         title: '展示状态',
         tooltip: '半隐藏只会隐藏UI，全隐藏会删除数据',
-        dataSource: ['显示', '半隐藏', '全隐藏', '继承'],
+        dataSource: ['显示', '全隐藏'],
       },
       'x-pattern': {
         title: 'UI形态',
-        dataSource: ['可编辑', '禁用', '只读', '阅读', '继承'],
+        dataSource: ['可编辑', '禁用', '只读', '阅读'],
       },
       'x-validator': '校验规则',
       'x-decorator': '容器组件',

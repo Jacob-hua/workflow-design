@@ -18,24 +18,24 @@ export const FormItem: ISchema = {
     //   'x-decorator': 'FormItem',
     //   'x-component': 'Input',
     // },
-    labelCol: {
-      type: 'number',
-      'x-decorator': 'FormItem',
-      'x-component': 'NumberPicker',
-    },
-    wrapperCol: {
-      type: 'number',
-      'x-decorator': 'FormItem',
-      'x-component': 'NumberPicker',
-    },
-    labelWidth: {
-      'x-decorator': 'FormItem',
-      'x-component': 'SizeInput',
-    },
-    wrapperWidth: {
-      'x-decorator': 'FormItem',
-      'x-component': 'SizeInput',
-    },
+    // labelCol: {
+    //   type: 'number',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'NumberPicker',
+    // },
+    // wrapperCol: {
+    //   type: 'number',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'NumberPicker',
+    // },
+    // labelWidth: {
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'SizeInput',
+    // },
+    // wrapperWidth: {
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'SizeInput',
+    // },
     colon: {
       type: 'boolean',
       'x-decorator': 'FormItem',
@@ -82,33 +82,33 @@ export const FormItem: ISchema = {
     //   },
     // },
 
-    tooltipLayout: {
-      type: 'string',
-      enum: ['icon', 'text', null],
-      'x-decorator': 'FormItem',
-      'x-component': 'Select',
-      'x-component-props': {
-        defaultValue: 'icon',
-      },
-    },
-    labelAlign: {
-      type: 'string',
-      enum: ['left', 'right', null],
-      'x-decorator': 'FormItem',
-      'x-component': 'Select',
-      'x-component-props': {
-        defaultValue: 'right',
-      },
-    },
-    wrapperAlign: {
-      type: 'string',
-      enum: ['left', 'right', null],
-      'x-decorator': 'FormItem',
-      'x-component': 'Select',
-      'x-component-props': {
-        defaultValue: 'left',
-      },
-    },
+    // tooltipLayout: {
+    //   type: 'string',
+    //   enum: ['icon', 'text', null],
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Select',
+    //   'x-component-props': {
+    //     defaultValue: 'icon',
+    //   },
+    // },
+    // labelAlign: {
+    //   type: 'string',
+    //   enum: ['left', 'right', null],
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Select',
+    //   'x-component-props': {
+    //     defaultValue: 'right',
+    //   },
+    // },
+    // wrapperAlign: {
+    //   type: 'string',
+    //   enum: ['left', 'right', null],
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Select',
+    //   'x-component-props': {
+    //     defaultValue: 'left',
+    //   },
+    // },
     // labelWrap: {
     //   type: 'boolean',
     //   'x-decorator': 'FormItem',

@@ -50,7 +50,7 @@ if (!(window as any).__POWERED_BY_QIANKUN__) {
 // lifecycle => 初始化
 export async function bootstrap(props: Record<string, any>) {
   // eslint-disable-next-line no-console
-  console.log(props)
+  // console.log(props)
 }
 
 // lifecycle => 挂载
