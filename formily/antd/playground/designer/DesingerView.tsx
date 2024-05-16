@@ -39,6 +39,7 @@ import {
   Form,
   Field,
   Input,
+  TextArea,
   Select,
   // TreeSelect,
   Cascader,
@@ -116,6 +117,7 @@ export const DesingerView = () => {
               title="sources.Inputs"
               sources={[
                 Input,
+                TextArea,
                 Password,
                 NumberPicker,
                 Rate,
@@ -183,6 +185,7 @@ export const DesingerView = () => {
                       Form,
                       Field,
                       Input,
+                      TextArea,
                       Select,
                       // TreeSelect,
                       Cascader,

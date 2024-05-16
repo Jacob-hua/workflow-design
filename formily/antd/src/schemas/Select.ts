@@ -69,6 +69,9 @@ export const Select: ISchema = {
       type: 'boolean',
       'x-decorator': 'FormItem',
       'x-component': 'Switch',
+      'x-component-props': {
+        defaultValue: true,
+      },
     },
     showSearch: {
       type: 'boolean',
@@ -83,22 +86,22 @@ export const Select: ISchema = {
         defaultValue: true,
       },
     },
-    filterOption: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'ValueInput',
-      'x-component-props': {
-        include: ['BOOLEAN', 'EXPRESSION'],
-      },
-    },
-    filterSort: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'ValueInput',
-      'x-component-props': {
-        include: ['EXPRESSION'],
-      },
-    },
+    // filterOption: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'ValueInput',
+    //   'x-component-props': {
+    //     include: ['BOOLEAN', 'EXPRESSION'],
+    //   },
+    // },
+    // filterSort: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'ValueInput',
+    //   'x-component-props': {
+    //     include: ['EXPRESSION'],
+    //   },
+    // },
     listHeight: {
       type: 'number',
       'x-decorator': 'FormItem',
@@ -127,7 +130,7 @@ export const Select: ISchema = {
       'x-decorator': 'FormItem',
       'x-component': 'Input',
       'x-component-props': {
-        defaultValue: 'Not Found',
+        defaultValue: '空数据',
       },
     },
     placeholder: {
@@ -136,14 +139,14 @@ export const Select: ISchema = {
       'x-component': 'Input',
     },
 
-    size: {
-      type: 'string',
-      enum: ['large', 'small', 'middle', null],
-      'x-decorator': 'FormItem',
-      'x-component': 'Select',
-      'x-component-props': {
-        defaultValue: 'middle',
-      },
-    },
+    // size: {
+    //   type: 'string',
+    //   enum: ['large', 'small', 'middle', null],
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Select',
+    //   'x-component-props': {
+    //     defaultValue: 'middle',
+    //   },
+    // },
   },
 }

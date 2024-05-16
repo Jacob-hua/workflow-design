@@ -1,2 +1,3 @@
-import './array-base/style.less'
-import './array-cards/style.less'
+import './ArrayBase/style.less'
+import './ArrayCards/style.less'
+import './TextArea/style.less'

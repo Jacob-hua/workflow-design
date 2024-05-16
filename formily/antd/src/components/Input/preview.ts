@@ -19,15 +19,15 @@ Input.Behavior = createBehavior(
     },
     designerLocales: AllLocales.Input,
   },
-  {
-    name: 'Input.TextArea',
-    extends: ['Field'],
-    selector: (node) => node.props['x-component'] === 'Input.TextArea',
-    designerProps: {
-      propsSchema: createFieldSchema(AllSchemas.Input.TextArea,'Input.TextArea'),
-    },
-    designerLocales: AllLocales.TextArea,
-  }
+  // {
+  //   name: 'Input.TextArea',
+  //   extends: ['Field'],
+  //   selector: (node) => node.props['x-component'] === 'Input.TextArea',
+  //   designerProps: {
+  //     propsSchema: createFieldSchema(AllSchemas.Input.TextArea,'Input.TextArea'),
+  //   },
+  //   designerLocales: AllLocales.TextArea,
+  // }
 )
 
 Input.Resource = createResource(
@@ -45,18 +45,18 @@ Input.Resource = createResource(
       },
     ],
   },
-  {
-    icon: 'TextAreaSource',
-    elements: [
-      {
-        componentName: 'Field',
-        props: {
-          type: 'string',
-          title: '多行输入',
-          'x-decorator': 'FormItem',
-          'x-component': 'Input.TextArea',
-        },
-      },
-    ],
-  }
+  // {
+  //   icon: 'TextAreaSource',
+  //   elements: [
+  //     {
+  //       componentName: 'Field',
+  //       props: {
+  //         type: 'string',
+  //         title: '多行输入',
+  //         'x-decorator': 'FormItem',
+  //         'x-component': 'Input.TextArea',
+  //       },
+  //     },
+  //   ],
+  // }
 )

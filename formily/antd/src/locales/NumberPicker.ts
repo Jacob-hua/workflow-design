@@ -1,18 +1,18 @@
 export const NumberPicker = {
   'zh-CN': {
-    title: '数字输入',
+    title: '计数器',
     settings: {
       'x-component-props': {
-        formatter: {
-          title: '格式转换器',
-          tooltip: '格式：function(value: number | string): string',
-        },
+        // formatter: {
+        //   title: '格式转换器',
+        //   tooltip: '格式：function(value: number | string): string',
+        // },
         keyboard: '启用快捷键',
-        parser: {
-          title: '格式解析器',
-          tooltip:
-            '指定从 格式转换器 里转换回数字的方式，和 格式转换器 搭配使用,格式：function(string): number',
-        },
+        // parser: {
+        //   title: '格式解析器',
+        //   tooltip:
+        //     '指定从 格式转换器 里转换回数字的方式，和 格式转换器 搭配使用,格式：function(string): number',
+        // },
         decimalSeparator: '小数点',
         precision: '数字精度',
         max: '最大值',
