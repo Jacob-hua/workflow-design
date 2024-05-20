@@ -14,7 +14,7 @@ import {
   Switch,
   Password,
   PreviewText,
-  Radio,
+  // Radio,
   Reset,
   Select,
   Space,
@@ -31,7 +31,7 @@ import {
   // ArrayTable,
   // ArrayCards,
 } from '@formily/antd'
-import { ArrayCards, TextArea } from '../../src/customComponents'
+import { ArrayCards, TextArea, Radio } from '../../src/customComponents'
 import { Card, Slider, Rate } from 'antd'
 import { TreeNode } from '@designable/core'
 import { transformToSchema } from '@designable/formily-transformer'

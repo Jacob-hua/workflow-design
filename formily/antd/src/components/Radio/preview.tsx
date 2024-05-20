@@ -6,15 +6,15 @@ import { createFieldSchema } from '../Field'
 import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
 
-export const Radio: DnFC<React.ComponentProps<typeof FormilyRadio>> =
-  FormilyRadio
+export const Radio: DnFC<React.ComponentProps<typeof FormilyRadio.Group>> =
+  FormilyRadio.Group
 
 Radio.Behavior = createBehavior({
-  name: 'Radio.Group',
+  name: 'Radio',
   extends: ['Field'],
-  selector: (node) => node.props['x-component'] === 'Radio.Group',
+  selector: (node) => node.props['x-component'] === 'Radio',
   designerProps: {
-    propsSchema: createFieldSchema(AllSchemas.Radio.Group, 'Radio.Group'),
+    propsSchema: createFieldSchema(AllSchemas.Radio.Group, 'Radio'),
   },
   designerLocales: AllLocales.RadioGroup,
 })
@@ -28,7 +28,7 @@ Radio.Resource = createResource({
         type: 'string | number',
         title: '单选',
         'x-decorator': 'FormItem',
-        'x-component': 'Radio.Group',
+        'x-component': 'Radio',
         enum: [
           { label: '选项1', value: 1 },
           { label: '选项2', value: 2 },
