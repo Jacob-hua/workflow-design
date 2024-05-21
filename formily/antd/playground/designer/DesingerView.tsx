@@ -41,30 +41,30 @@ import {
   Input,
   TextArea,
   Select,
-  // TreeSelect,
+  TreeSelect,
   Cascader,
   Radio,
   Checkbox,
   Slider,
   Rate,
   NumberPicker,
-  // Transfer,
+  Transfer,
   Password,
   DatePicker,
-  // TimePicker,
+  TimePicker,
   Upload,
   Switch,
   Text,
   Card,
   ArrayCards,
   ObjectContainer,
-  // ArrayTable,
-  // Space,
-  // FormTab,
+  ArrayTable,
+  Space,
+  FormTab,
   FormCollapse,
   Display,
-  // FormLayout,
-  // FormGrid,
+  FormLayout,
+  FormGrid,
   // TestComp,
 } from '../../src'
 
@@ -135,7 +135,7 @@ export const DesingerView = () => {
                 // ObjectContainer,
               ]}
             />
-            <ResourceWidget
+            {/* <ResourceWidget
               title="sources.Layouts"
               sources={[
                 Card,
@@ -145,7 +145,7 @@ export const DesingerView = () => {
                 FormCollapse,
                 // Space,
               ]}
-            />
+            /> */}
             <ResourceWidget
               title="sources.Arrays"
               sources={[
@@ -187,29 +187,29 @@ export const DesingerView = () => {
                       Input,
                       TextArea,
                       Select,
-                      // TreeSelect,
+                      TreeSelect,
                       Cascader,
                       Radio,
                       Checkbox,
                       Slider,
                       Rate,
                       NumberPicker,
-                      // Transfer,
+                      Transfer,
                       Password,
                       DatePicker,
-                      // TimePicker,
+                      TimePicker,
                       Upload,
                       Switch,
                       Text,
                       Card,
                       ArrayCards,
-                      // ArrayTable,
-                      // Space,
-                      // FormTab,
+                      ArrayTable,
+                      Space,
+                      FormTab,
                       FormCollapse,
                       Display,
-                      // FormGrid,
-                      // FormLayout,
+                      FormGrid,
+                      FormLayout,
                       ObjectContainer,
                       // TestComp,
                     }}
