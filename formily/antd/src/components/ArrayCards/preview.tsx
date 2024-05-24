@@ -281,7 +281,7 @@ ArrayCards.Resource = createResource({
         'x-decorator': 'FormItem',
         'x-component': 'ArrayCards',
         'x-component-props': {
-          title: `标题`,
+          title: '标题',
           addable: false,
           foldable: false
         },

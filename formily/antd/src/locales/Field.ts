@@ -10,7 +10,7 @@ export const Field = {
       'x-display': {
         title: '展示状态',
         tooltip: '半隐藏只会隐藏UI，全隐藏会删除数据',
-        dataSource: ['显示', '全隐藏'],
+        dataSource: ['显示', '隐藏'],
       },
       'x-pattern': {
         title: 'UI形态',

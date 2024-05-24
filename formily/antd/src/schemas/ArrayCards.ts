@@ -24,6 +24,7 @@ export const ArrayCards: ISchema & { Addition?: ISchema } = {
       'x-component-props': {
         defaultChecked: false,
       },
+      "x-value": false
     },
     foldable: {
       type: 'boolean',
@@ -32,6 +33,7 @@ export const ArrayCards: ISchema & { Addition?: ISchema } = {
       'x-component-props': {
         defaultChecked: false,
       },
+      "x-value": false
     }
   },
 }

@@ -118,7 +118,7 @@ export const DesingerView = () => {
               sources={[
                 Input,
                 TextArea,
-                Password,
+                // Password,
                 NumberPicker,
                 Rate,
                 Slider,

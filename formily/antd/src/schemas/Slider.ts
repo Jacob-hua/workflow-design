@@ -21,36 +21,36 @@ export const Slider: ISchema = {
       'x-decorator': 'FormItem',
       'x-component': 'Switch',
     },
-    reverse: {
-      title: GlobalRegistry.getDesignerMessage('settings.sliderReverse'),
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-    },
-    vertical: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-    },
+    // reverse: {
+    //   title: GlobalRegistry.getDesignerMessage('settings.sliderReverse'),
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    // },
+    // vertical: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    // },
     tooltipVisible: {
       type: 'boolean',
       'x-decorator': 'FormItem',
       'x-component': 'Switch',
     },
-    tooltipPlacement: {
-      'x-decorator': 'FormItem',
-      'x-component': 'ValueInput',
-      'x-component-props': {
-        include: ['EXPRESSION'],
-      },
-    },
-    marks: {
-      'x-decorator': 'FormItem',
-      'x-component': 'ValueInput',
-      'x-component-props': {
-        include: ['EXPRESSION'],
-      },
-    },
+    // tooltipPlacement: {
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'ValueInput',
+    //   'x-component-props': {
+    //     include: ['EXPRESSION'],
+    //   },
+    // },
+    // marks: {
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'ValueInput',
+    //   'x-component-props': {
+    //     include: ['EXPRESSION'],
+    //   },
+    // },
     max: {
       type: 'number',
       'x-decorator': 'FormItem',
