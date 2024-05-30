@@ -6,15 +6,15 @@ import { createFieldSchema } from '../Field'
 import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
 
-export const Checkbox: DnFC<React.ComponentProps<typeof FormilyCheckbox>> =
-  FormilyCheckbox
+export const Checkbox: DnFC<React.ComponentProps<typeof FormilyCheckbox.Group>> =
+  FormilyCheckbox.Group
 
 Checkbox.Behavior = createBehavior({
-  name: 'Checkbox.Group',
+  name: 'Checkbox',
   extends: ['Field'],
-  selector: (node) => node.props['x-component'] === 'Checkbox.Group',
+  selector: (node) => node.props['x-component'] === 'Checkbox',
   designerProps: {
-    propsSchema: createFieldSchema(AllSchemas.Checkbox.Group,'Checkbox.Group'),
+    propsSchema: createFieldSchema(AllSchemas.Checkbox.Group, 'Checkbox.Group'),
   },
   designerLocales: AllLocales.CheckboxGroup,
 })
@@ -28,7 +28,7 @@ Checkbox.Resource = createResource({
         type: 'Array<string | number>',
         title: '复选',
         'x-decorator': 'FormItem',
-        'x-component': 'Checkbox.Group',
+        'x-component': 'Checkbox',
         enum: [
           { label: '选项1', value: 1 },
           { label: '选项2', value: 2 },

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, Empty } from 'antd'
+import { Card } from 'antd'
 import { CardProps } from 'antd/lib/card'
 import { ArrayField } from '@formily/core'
 import {
@@ -209,7 +209,10 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
       }
     })
     return (
-      <ArrayBase.Item key={0} index={0} record={items}>
+      <ArrayBase.Item key={0} index={0} record={items} foldedArr={folded}
+        setFoleded={setFoleded}
+        addFoleded={addFoleded}
+        deleteFoleded={deleteFoleded}>
         <Card
           {...properties}
           onChange={() => { }}

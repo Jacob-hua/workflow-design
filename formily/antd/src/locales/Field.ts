@@ -14,7 +14,7 @@ export const Field = {
       },
       'x-pattern': {
         title: 'UI形态',
-        dataSource: ['可编辑', '禁用', '只读', '阅读'],
+        dataSource: ['可编辑', '禁用'],
       },
       'x-validator': '校验规则',
       'x-decorator': '容器组件',

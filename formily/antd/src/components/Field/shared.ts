@@ -108,7 +108,7 @@ export const createFieldSchema = (
     },
     'x-pattern': {
       type: 'string',
-      enum: ['editable', 'disabled', 'readOnly'],
+      enum: ['editable', 'disabled'],
       'x-decorator': 'FormItem',
       'x-component': 'Select',
       'x-component-props': {
@@ -209,7 +209,7 @@ export const createVoidFieldSchema = (
           },
           'x-pattern': {
             type: 'string',
-            enum: ['editable', 'disabled', 'readOnly', 'readPretty'],
+            enum: ['editable', 'disabled'],
             'x-decorator': 'FormItem',
             'x-component': 'Select',
             'x-component-props': {

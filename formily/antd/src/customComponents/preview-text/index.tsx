@@ -1,11 +1,11 @@
 import React, { createContext, useContext } from 'react'
-import { isArr, toArr, isValid } from '@formily/shared'
+import { isArr, isValid } from '@formily/shared'
 import { Field } from '@formily/core'
 import { observer, useField } from '@formily/react'
 import { InputProps } from 'antd/lib/input'
 import { SelectProps } from 'antd/lib/select'
 import { TreeSelectProps } from 'antd/lib/tree-select'
-import { CascaderProps } from 'antd/lib/cascader'
+// import { CascaderProps } from 'antd/lib/cascader'
 import {
   DatePickerProps,
   RangePickerProps as DateRangePickerProps,
@@ -94,8 +94,8 @@ const Select: React.FC<SelectProps<any>> = observer((props) => {
   const dataSource: any[] = field?.dataSource?.length
     ? field.dataSource
     : props?.options?.length
-    ? props.options
-    : []
+      ? props.options
+      : []
   const placeholder = usePlaceholder()
   const getSelected = () => {
     const value = props.value
@@ -146,8 +146,8 @@ const TreeSelect: React.FC<TreeSelectProps<any>> = observer((props) => {
   const dataSource = field?.dataSource?.length
     ? field.dataSource
     : props?.treeData?.length
-    ? props.treeData
-    : []
+      ? props.treeData
+      : []
   const getSelected = () => {
     const value = props.value
     if (props.multiple) {
@@ -203,35 +203,35 @@ const TreeSelect: React.FC<TreeSelectProps<any>> = observer((props) => {
   )
 })
 
-const Cascader: React.FC<CascaderProps> = observer((props) => {
-  const field = useField<Field>()
-  const placeholder = usePlaceholder()
-  const prefixCls = usePrefixCls('form-text', props)
-  const dataSource: any[] = field?.dataSource?.length
-    ? field.dataSource
-    : props?.options?.length
-    ? props.options
-    : []
-  const getSelected = () => {
-    const val = toArr(props.value)
-    return props.multiple
-      ? val.map((item) => item[item.length - 1])
-      : val.slice(props.value.length - 1)
-  }
-  const getLabels = () => {
-    const selected = getSelected()
-    const labels = getValueByValue(dataSource, selected)
-      ?.filter((item) => isValid(item))
-      ?.map((item) => item?.whole?.join('/'))
-      .join(', ')
-    return labels || placeholder
-  }
-  return (
-    <div className={cls(prefixCls, props.className)} style={props.style}>
-      {getLabels()}
-    </div>
-  )
-})
+// const Cascader: React.FC<CascaderProps> = observer((props) => {
+//   const field = useField<Field>()
+//   const placeholder = usePlaceholder()
+//   const prefixCls = usePrefixCls('form-text', props)
+//   const dataSource: any[] = field?.dataSource?.length
+//     ? field.dataSource
+//     : props?.options?.length
+//       ? props.options
+//       : []
+//   const getSelected = () => {
+//     const val = toArr(props.value)
+//     return props.multiple
+//       ? val.map((item) => item[item.length - 1])
+//       : val.slice(props.value.length - 1)
+//   }
+//   const getLabels = () => {
+//     const selected = getSelected()
+//     const labels = getValueByValue(dataSource, selected)
+//       ?.filter((item) => isValid(item))
+//       ?.map((item) => item?.whole?.join('/'))
+//       .join(', ')
+//     return labels || placeholder
+//   }
+//   return (
+//     <div className={cls(prefixCls, props.className)} style={props.style}>
+//       {getLabels()}
+//     </div>
+//   )
+// })
 
 const DatePicker: React.FC<DatePickerProps> = (props) => {
   const placeholder = usePlaceholder()
@@ -298,7 +298,7 @@ const Text = (props: React.PropsWithChildren<any>) => {
 Text.Input = Input
 Text.Select = Select
 Text.TreeSelect = TreeSelect
-Text.Cascader = Cascader
+// Text.Cascader = Cascader
 Text.DatePicker = DatePicker
 Text.DateRangePicker = DateRangePicker
 Text.TimePicker = TimePicker

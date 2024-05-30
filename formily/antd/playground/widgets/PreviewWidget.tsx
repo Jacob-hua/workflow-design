@@ -6,7 +6,7 @@ import {
   Form,
   FormItem,
   DatePicker,
-  Checkbox,
+  // Checkbox,
   Cascader,
   Editable,
   Input,
@@ -31,7 +31,7 @@ import {
   // ArrayTable,
   // ArrayCards,
 } from '@formily/antd'
-import { ArrayCards, TextArea, Radio } from '../../src/customComponents'
+import { ArrayCards, TextArea, Radio, Checkbox } from '../../src/customComponents'
 import { Card, Slider, Rate } from 'antd'
 import { TreeNode } from '@designable/core'
 import { transformToSchema } from '@designable/formily-transformer'
