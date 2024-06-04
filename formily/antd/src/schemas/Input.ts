@@ -3,6 +3,12 @@ import { ISchema } from '@formily/react'
 export const Input: ISchema & { TextArea?: ISchema } = {
   type: 'object',
   properties: {
+    placeholder: {
+      type: 'string',
+      'x-decorator': 'FormItem',
+      'x-component': 'Input',
+      'x-value': '请输入内容'
+    },
     addonBefore: {
       type: 'string',
       'x-decorator': 'FormItem',
@@ -41,11 +47,11 @@ export const Input: ISchema & { TextArea?: ISchema } = {
       'x-decorator': 'FormItem',
       'x-component': 'NumberPicker',
     },
-    placeholder: {
-      type: 'string',
-      'x-decorator': 'FormItem',
-      'x-component': 'Input',
-    },
+    // placeholder: {
+    //   type: 'string',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Input',
+    // },
     // size: {
     //   type: 'string',
     //   enum: ['large', 'small', 'middle', null],
@@ -69,15 +75,16 @@ Input.TextArea = {
     //     defaultChecked: true,
     //   },
     // },
-    maxLength: {
-      type: 'number',
-      'x-decorator': 'FormItem',
-      'x-component': 'NumberPicker',
-    },
     placeholder: {
       type: 'string',
       'x-decorator': 'FormItem',
       'x-component': 'Input',
+      'x-value': '请输入内容'
+    },
+    maxLength: {
+      type: 'number',
+      'x-decorator': 'FormItem',
+      'x-component': 'NumberPicker',
     },
     autoSize: {
       type: 'boolean',

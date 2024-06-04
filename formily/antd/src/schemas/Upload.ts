@@ -25,14 +25,14 @@ export const Upload: ISchema & { Dragger?: ISchema } = {
     //     include: ['TEXT'],
     //   },
     // },
-    name: {
-      type: 'string',
-      'x-decorator': 'FormItem',
-      'x-component': 'Input',
-      'x-component-props': {
-        defaultValue: 'fileName',
-      },
-    },
+    // name: {
+    //   type: 'string',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Input',
+    //   'x-component-props': {
+    //     defaultValue: 'fileName',
+    //   },
+    // },
     maxCount: {
       type: 'number',
       'x-decorator': 'FormItem',

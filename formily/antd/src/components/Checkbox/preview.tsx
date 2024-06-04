@@ -5,6 +5,7 @@ import { DnFC } from '@designable/react'
 import { createFieldSchema } from '../Field'
 import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
+import { FieldSchemas } from '../../fieldSchemas'
 
 export const Checkbox: DnFC<React.ComponentProps<typeof FormilyCheckbox.Group>> =
   FormilyCheckbox.Group
@@ -14,7 +15,7 @@ Checkbox.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'Checkbox',
   designerProps: {
-    propsSchema: createFieldSchema(AllSchemas.Checkbox.Group, 'Checkbox.Group'),
+    propsSchema: createFieldSchema(AllSchemas.Checkbox.Group, FieldSchemas.Checkbox),
   },
   designerLocales: AllLocales.CheckboxGroup,
 })

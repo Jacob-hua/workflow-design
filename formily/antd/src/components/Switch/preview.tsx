@@ -5,6 +5,7 @@ import { DnFC } from '@designable/react'
 import { createFieldSchema } from '../Field'
 import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
+import { FieldSchemas } from '../../fieldSchemas'
 
 export const Switch: DnFC<React.ComponentProps<typeof AntdSwitch>> = AntdSwitch
 
@@ -13,7 +14,7 @@ Switch.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'Switch',
   designerProps: {
-    propsSchema: createFieldSchema(AllSchemas.Switch, 'Switch'),
+    propsSchema: createFieldSchema(AllSchemas.Switch, FieldSchemas.Switch),
   },
   designerLocales: AllLocales.Switch,
 })

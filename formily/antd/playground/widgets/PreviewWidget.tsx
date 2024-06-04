@@ -22,7 +22,7 @@ import {
   TimePicker,
   Transfer,
   TreeSelect,
-  Upload,
+  // Upload,
   FormGrid,
   FormLayout,
   FormTab,
@@ -31,7 +31,7 @@ import {
   // ArrayTable,
   // ArrayCards,
 } from '@formily/antd'
-import { ArrayCards, TextArea, Radio, Checkbox } from '../../src/customComponents'
+import { ArrayCards, TextArea, Radio, Checkbox, Upload, RangePicker } from '../../src/customComponents'
 import { Card, Slider, Rate } from 'antd'
 import { TreeNode } from '@designable/core'
 import { transformToSchema } from '@designable/formily-transformer'
@@ -58,6 +58,7 @@ const SchemaField = createSchemaField({
     ArrayCards,
     FormItem,
     DatePicker,
+    RangePicker,
     Checkbox,
     Cascader,
     Editable,

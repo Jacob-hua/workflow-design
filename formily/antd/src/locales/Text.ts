@@ -1,6 +1,6 @@
 export const Text = {
   'zh-CN': {
-    title: '文本',
+    title: '文本标题',
     settings: {
       'x-component-props': {
         content: '文本内容',

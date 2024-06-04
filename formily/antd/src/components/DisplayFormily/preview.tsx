@@ -8,12 +8,13 @@ import { createBehavior, createResource } from '@designable/core'
 import { createVoidFieldSchema } from '../Field'
 import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
+import { Container } from '../../common/Container'
 // import { FormProvider, createSchemaField } from '@formily/react'
 
 import './index.less'
 
 export const Display: DnFC<any> = (props) => {
-  const [schemaList] = useState<any>([])
+  // const [schemaList] = useState<any>([])
   // const options: any = {
   //   method: 'POST',
   //   headers: {
@@ -45,8 +46,8 @@ export const Display: DnFC<any> = (props) => {
   //   }
   // }
 
-  useEffect(() => {}, [props.httpUrl])
-  useEffect(() => {}, [schemaList.httpUrl])
+  // useEffect(() => {}, [props.httpUrl])
+  // useEffect(() => {}, [schemaList.httpUrl])
   return (
     <AntdCard
       {...props}
@@ -56,6 +57,9 @@ export const Display: DnFC<any> = (props) => {
     >
       <div className="display-http">本组件将自动拉取工单关联的知识库细项</div>
     </AntdCard>
+    // <Container>
+    //   {props.children}
+    // </Container>
   )
 }
 
@@ -64,7 +68,7 @@ Display.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'Display',
   designerProps: {
-    propsSchema: createVoidFieldSchema(AllSchemas.DisplayFormily, 'Display'),
+    propsSchema: createVoidFieldSchema(AllSchemas.DisplayFormily),
   },
   designerLocales: AllLocales.DisplayFormily,
 })
@@ -75,7 +79,7 @@ Display.Resource = createResource({
     {
       componentName: 'Field',
       props: {
-        type: 'object',
+        type: 'void',
         'x-component': 'Display',
       },
     },

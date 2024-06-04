@@ -76,8 +76,7 @@ export const createComponentSchema = (
 
 export const createFieldSchema = (
   component?: ISchema,
-  name?: string,
-  filterItems?: string[],
+  FieldSchema?: ISchema,
   decorator: ISchema = AllSchemas.FormItem,
 ): ISchema => {
   let properties = {
@@ -137,19 +136,20 @@ export const createFieldSchema = (
       'x-component': 'Switch',
     },
   }
-  if (filterItems && filterItems.length) {
-    for (let item of filterItems) {
-      delete properties[item]
-    }
+  // if (filterItems && filterItems.length) {
+  //   for (let item of filterItems) {
+  //     delete properties[item]
+  //   }
+  // }
+  let fieldGroup = FieldSchema || {
+    type: 'void',
+    'x-component': 'CollapseItem',
+    properties: properties,
   }
   return {
     type: 'object',
     properties: {
-      'field-group': {
-        type: 'void',
-        'x-component': 'CollapseItem',
-        properties: properties,
-      },
+      'field-group': fieldGroup,
       ...createComponentSchema(component, decorator),
     },
   }
@@ -157,7 +157,6 @@ export const createFieldSchema = (
 
 export const createVoidFieldSchema = (
   component?: ISchema,
-  name?: string,
   decorator: ISchema = AllSchemas.FormItem
 ) => {
   return {
