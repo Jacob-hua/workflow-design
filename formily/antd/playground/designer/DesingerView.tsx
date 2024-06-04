@@ -67,6 +67,8 @@ import {
   FormGrid,
   RangePicker
   // TestComp,
+  Abnormal,
+  ChooseEq,
 } from '../../src'
 
 setNpmCDNRegistry('//unpkg.com')
@@ -78,6 +80,7 @@ GlobalRegistry.registerDesignerLocales({
       Layouts: '布局组件',
       Arrays: '自增组件',
       Displays: '展示组件',
+      workerOrder: '业务组件',
     },
   },
   'en-US': {
@@ -86,6 +89,7 @@ GlobalRegistry.registerDesignerLocales({
       Layouts: 'Layouts',
       Arrays: 'Arrays',
       Displays: 'Displays',
+      workerOrder: 'workerOrder',
     },
   },
 })
@@ -159,9 +163,13 @@ export const DesingerView = () => {
               title="sources.Displays"
               sources={[
                 Text,
-                Display,
+                // Display,
                 // TestComp
               ]}
+            />
+            <ResourceWidget
+              title="sources.workerOrder"
+              sources={[Abnormal, Display, ChooseEq]}
             />
           </CompositePanel.Item>
           <CompositePanel.Item title="panels.OutlinedTree" icon="Outline">
@@ -210,10 +218,12 @@ export const DesingerView = () => {
                       Space,
                       FormTab,
                       FormCollapse,
-                      Display,
                       FormGrid,
                       FormLayout,
                       ObjectContainer,
+                      Abnormal,
+                      Display,
+                      ChooseEq,
                       // TestComp,
                     }}
                   />

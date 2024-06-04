@@ -2,6 +2,9 @@ import React, { useMemo } from 'react'
 import { createForm } from '@formily/core'
 import { createSchemaField } from '@formily/react'
 import { Display } from '../../src/components/DisplayFormily'
+import { Abnormal } from '../../src/components/Abnormal'
+import { ChooseEq } from '../../src/components/ChooseEq'
+
 import {
   Form,
   FormItem,
@@ -27,7 +30,7 @@ import {
   FormLayout,
   FormTab,
   FormCollapse,
-  ArrayCollapse
+  ArrayCollapse,
   // ArrayTable,
   // ArrayCards,
 } from '@formily/antd'
@@ -82,6 +85,8 @@ const SchemaField = createSchemaField({
     Rate,
     TestComp,
     Display,
+    Abnormal,
+    ChooseEq,
   },
 })
 

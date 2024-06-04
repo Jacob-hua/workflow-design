@@ -50,6 +50,7 @@ export const Display: DnFC<any> = (props) => {
   // useEffect(() => {}, [schemaList.httpUrl])
   return (
     <AntdCard
+      className="display-wrapper"
       {...props}
       title={
         <span data-content-editable="x-component-props.title">知识库组件</span>

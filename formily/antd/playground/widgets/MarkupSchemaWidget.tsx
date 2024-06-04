@@ -65,6 +65,9 @@ const transformToMarkupSchemaCode = (tree: TreeNode) => {
 import { createForm } from '@formily/core'
 import { createSchemaField } from '@formily/react'
 import { Display } from '../../src/components/DisplayFormily'
+import { Abnormal } from '../../src/components/Abnormal'
+import { ChooseEq } from '../../src/components/ChooseEq'
+
 import {
   Form,
   FormItem,
@@ -137,7 +140,9 @@ const SchemaField = createSchemaField({
     Slider,
     Rate,
     TestComp,
-    Display
+    Display,
+    Abnormal,
+    ChooseEq
   },
 })
 
