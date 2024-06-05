@@ -4,6 +4,8 @@ import { createSchemaField } from '@formily/react'
 import { Display } from '../../src/components/DisplayFormily'
 import { Abnormal } from '../../src/components/Abnormal'
 import { ChooseEq } from '../../src/components/ChooseEq'
+import { CheckIn } from '../../src/components/CheckIn'
+import { DataTranscription } from '../../src/components/DataTranscription'
 
 import {
   Form,
@@ -91,6 +93,8 @@ const SchemaField = createSchemaField({
     Display,
     Abnormal,
     ChooseEq,
+    CheckIn,
+    DataTranscription,
   },
 })
 

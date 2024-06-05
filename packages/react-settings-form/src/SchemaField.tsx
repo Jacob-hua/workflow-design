@@ -36,6 +36,7 @@ import {
   FlexStyleSetter,
   DrawerSetter,
   CollapseItem,
+  TreeItem,
 } from './components'
 
 export const SchemaField = createSchemaField({
@@ -74,5 +75,6 @@ export const SchemaField = createSchemaField({
     FormGrid,
     FormLayout,
     FormTab,
+    TreeItem,
   },
 })

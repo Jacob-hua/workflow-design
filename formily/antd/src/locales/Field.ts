@@ -6,6 +6,7 @@ export const Field = {
       required: '必填',
       description: '描述',
       default: '默认值',
+      models: '模型',
       enum: '可选项',
       'x-display': {
         title: '展示状态',
@@ -50,6 +51,7 @@ export const Field = {
         addonAfter: '后缀标签',
         addonBefore: '前缀标签',
         httpUrl: '请求地址',
+        models: '模型',
         tooltip: '提示',
         asterisk: '星号',
         gridSpan: '网格跨列',
@@ -105,6 +107,7 @@ export const Field = {
       required: 'Required',
       description: 'Description',
       default: 'Default',
+      models: 'models',
       enum: 'Options',
       'x-display': {
         title: 'Display State',
@@ -158,6 +161,7 @@ export const Field = {
       'x-decorator-props': {
         addonAfter: 'Addon After',
         httpUrl: 'Http Url',
+        models: 'models',
         addonBefore: 'Addon Before',
         tooltip: 'Tooltip',
         asterisk: 'Asterisk',
