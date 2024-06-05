@@ -4,6 +4,8 @@ import { createSchemaField } from '@formily/react'
 import { Display } from '../../src/components/DisplayFormily'
 import { Abnormal } from '../../src/components/Abnormal'
 import { ChooseEq } from '../../src/components/ChooseEq'
+import { CheckIn } from '../../src/components/CheckIn'
+import { DataTranscription } from '../../src/components/DataTranscription'
 
 import {
   Form,
@@ -25,7 +27,7 @@ import {
   TimePicker,
   Transfer,
   TreeSelect,
-  Upload,
+  // Upload,
   FormGrid,
   FormLayout,
   FormTab,
@@ -39,6 +41,8 @@ import {
   TextArea,
   Radio,
   Checkbox,
+  Upload,
+  RangePicker,
 } from '../../src/customComponents'
 import { Card, Slider, Rate } from 'antd'
 import { TreeNode } from '@designable/core'
@@ -66,6 +70,7 @@ const SchemaField = createSchemaField({
     ArrayCards,
     FormItem,
     DatePicker,
+    RangePicker,
     Checkbox,
     Cascader,
     Editable,
@@ -91,6 +96,8 @@ const SchemaField = createSchemaField({
     Display,
     Abnormal,
     ChooseEq,
+    CheckIn,
+    DataTranscription,
   },
 })
 

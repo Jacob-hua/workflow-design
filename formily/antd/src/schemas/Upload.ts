@@ -11,11 +11,16 @@ export const Upload: ISchema & { Dragger?: ISchema } = {
     accept: {
       type: 'string',
       name: 'accept',
-      enum: ['.pdf, .doc, .docx, .xls, .xlsx', '.jpeg, .jpg, .png, .svg, .gif', '.mp3', '.mp4'],
+      enum: [
+        '.pdf, .doc, .docx, .xls, .xlsx',
+        '.jpeg, .jpg, .png, .svg, .gif',
+        '.mp3',
+        '.mp4',
+      ],
       'x-decorator': 'FormItem',
       'x-component': 'Select',
-      "x-component-props": {
-        mode: 'multiple'
+      'x-component-props': {
+        mode: 'multiple',
       },
     },
     // action: {
@@ -25,22 +30,22 @@ export const Upload: ISchema & { Dragger?: ISchema } = {
     //     include: ['TEXT'],
     //   },
     // },
-    name: {
-      type: 'string',
-      'x-decorator': 'FormItem',
-      'x-component': 'Input',
-      'x-component-props': {
-        defaultValue: 'fileName',
-      },
-    },
+    // name: {
+    //   type: 'string',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Input',
+    //   'x-component-props': {
+    //     defaultValue: 'fileName',
+    //   },
+    // },
     maxCount: {
       type: 'number',
       'x-decorator': 'FormItem',
       'x-component': 'NumberPicker',
       'x-component-props': {
         stpe: 1,
-        precision: 0
-      }
+        precision: 0,
+      },
     },
     // method: {
     //   enum: ['POST', 'PUT', 'GET'],

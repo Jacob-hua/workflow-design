@@ -13,6 +13,12 @@ export const Select: ISchema = {
         optionType: 'button',
       },
     },
+    placeholder: {
+      type: 'string',
+      'x-decorator': 'FormItem',
+      'x-component': 'Input',
+      'x-value': '请选择',
+    },
     allowClear: {
       type: 'boolean',
       'x-decorator': 'FormItem',
@@ -26,45 +32,45 @@ export const Select: ISchema = {
     //     defaultChecked: true,
     //   },
     // },
-    dropdownMatchSelectWidth: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-      'x-component-props': {
-        defaultChecked: true,
-      },
-    },
-    autoFocus: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-    },
-    bordered: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-      'x-component-props': {
-        defaultChecked: true,
-      },
-    },
-    defaultActiveFirstOption: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-      'x-component-props': {
-        defaultChecked: true,
-      },
-    },
-    defaultOpen: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-    },
-    labelInValue: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-    },
+    // dropdownMatchSelectWidth: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    //   'x-component-props': {
+    //     defaultChecked: true,
+    //   },
+    // },
+    // autoFocus: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    // },
+    // bordered: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    //   'x-component-props': {
+    //     defaultChecked: true,
+    //   },
+    // },
+    // defaultActiveFirstOption: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    //   'x-component-props': {
+    //     defaultChecked: true,
+    //   },
+    // },
+    // defaultOpen: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    // },
+    // labelInValue: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    // },
     showArrow: {
       type: 'boolean',
       'x-decorator': 'FormItem',
@@ -78,14 +84,14 @@ export const Select: ISchema = {
       'x-decorator': 'FormItem',
       'x-component': 'Switch',
     },
-    virtual: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-      'x-component-props': {
-        defaultValue: true,
-      },
-    },
+    // virtual: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    //   'x-component-props': {
+    //     defaultValue: true,
+    //   },
+    // },
     // filterOption: {
     //   type: 'boolean',
     //   'x-decorator': 'FormItem',
@@ -109,22 +115,23 @@ export const Select: ISchema = {
       'x-component-props': {
         defaultValue: 256,
       },
+      'x-value': 256,
     },
     maxTagCount: {
       type: 'number',
       'x-decorator': 'FormItem',
       'x-component': 'NumberPicker',
     },
-    maxTagPlaceholder: {
-      type: 'string',
-      'x-decorator': 'FormItem',
-      'x-component': 'Input',
-    },
-    maxTagTextLength: {
-      type: 'number',
-      'x-decorator': 'FormItem',
-      'x-component': 'NumberPicker',
-    },
+    // maxTagPlaceholder: {
+    //   type: 'string',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Input',
+    // },
+    // maxTagTextLength: {
+    //   type: 'number',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'NumberPicker',
+    // },
     notFoundContent: {
       type: 'string',
       'x-decorator': 'FormItem',
@@ -132,11 +139,7 @@ export const Select: ISchema = {
       'x-component-props': {
         defaultValue: '空数据',
       },
-    },
-    placeholder: {
-      type: 'string',
-      'x-decorator': 'FormItem',
-      'x-component': 'Input',
+      'x-value': '空数据',
     },
 
     // size: {

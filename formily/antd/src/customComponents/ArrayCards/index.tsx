@@ -70,6 +70,7 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
   }
 
   const deleteFoleded = (index) => {
+    if (dataSt.length === 1) return
     dataSt.splice(index, 1)
     setFolded(dataSt)
   }
@@ -137,7 +138,7 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
         >
           <Card
             {...properties}
-            onChange={() => { }}
+            onChange={() => {}}
             className={cls(`${prefixCls}-item`, props.className)}
             title={title}
             extra={extra}
@@ -209,13 +210,18 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
       }
     })
     return (
-      <ArrayBase.Item key={0} index={0} record={items} foldedArr={folded}
+      <ArrayBase.Item
+        key={0}
+        index={0}
+        record={items}
+        foldedArr={folded}
         setFoleded={setFoleded}
         addFoleded={addFoleded}
-        deleteFoleded={deleteFoleded}>
+        deleteFoleded={deleteFoleded}
+      >
         <Card
           {...properties}
-          onChange={() => { }}
+          onChange={() => {}}
           className={cls(`${prefixCls}-item`, props.className)}
           title={title}
           extra={extra}

@@ -5,6 +5,7 @@ import { DnFC } from '@designable/react'
 import { createFieldSchema } from '../Field'
 import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
+import { FieldSchemas } from '../../fieldSchemas'
 
 export const Rate: DnFC<React.ComponentProps<typeof AntdRate>> = AntdRate
 
@@ -13,7 +14,7 @@ Rate.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'Rate',
   designerProps: {
-    propsSchema: createFieldSchema(AllSchemas.Rate, 'Rate'),
+    propsSchema: createFieldSchema(AllSchemas.Rate, FieldSchemas.Rate),
   },
   designerLocales: AllLocales.Rate,
 })

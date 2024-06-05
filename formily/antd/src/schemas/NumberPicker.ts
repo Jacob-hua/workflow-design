@@ -8,6 +8,12 @@ export const NumberPicker: ISchema = {
     //   'x-decorator': 'FormItem',
     //   'x-component': 'Input',
     // },
+    placeholder: {
+      type: 'string',
+      'x-decorator': 'FormItem',
+      'x-component': 'Input',
+      'x-value': '请输入内容',
+    },
     precision: {
       type: 'number',
       'x-decorator': 'FormItem',
@@ -27,11 +33,6 @@ export const NumberPicker: ISchema = {
       type: 'number',
       'x-decorator': 'FormItem',
       'x-component': 'NumberPicker',
-    },
-    placeholder: {
-      type: 'string',
-      'x-decorator': 'FormItem',
-      'x-component': 'Input',
     },
     // size: {
     //   type: 'string',
@@ -61,21 +62,21 @@ export const NumberPicker: ISchema = {
     //   'x-decorator': 'FormItem',
     //   'x-component': 'Switch',
     // },
-    bordered: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-      'x-component-props': {
-        defaultChecked: true,
-      },
-    },
-    keyboard: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-      'x-component-props': {
-        defaultChecked: true,
-      },
-    },
+    // bordered: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    //   'x-component-props': {
+    //     defaultChecked: true,
+    //   },
+    // },
+    // keyboard: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    //   'x-component-props': {
+    //     defaultChecked: true,
+    //   },
+    // },
   },
 }

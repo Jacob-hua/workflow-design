@@ -9,19 +9,19 @@ const CommonDatePickerAPI = {
       defaultChecked: true,
     },
   },
-  autoFocus: {
-    type: 'boolean',
-    'x-decorator': 'FormItem',
-    'x-component': 'Switch',
-  },
-  bordered: {
-    type: 'boolean',
-    'x-decorator': 'FormItem',
-    'x-component': 'Switch',
-    'x-component-props': {
-      defaultChecked: true,
-    },
-  },
+  // autoFocus: {
+  //   type: 'boolean',
+  //   'x-decorator': 'FormItem',
+  //   'x-component': 'Switch',
+  // },
+  // bordered: {
+  //   type: 'boolean',
+  //   'x-decorator': 'FormItem',
+  //   'x-component': 'Switch',
+  //   'x-component-props': {
+  //     defaultChecked: true,
+  //   },
+  // },
   // disabledTime: {
   //   'x-decorator': 'FormItem',
   //   'x-component': 'ValueInput',
@@ -36,33 +36,33 @@ const CommonDatePickerAPI = {
   //     include: ['EXPRESSION'],
   //   },
   // },
-  inputReadOnly: {
-    type: 'boolean',
-    'x-decorator': 'FormItem',
-    'x-component': 'Switch',
-  },
-  placeholder: {
-    type: 'string',
-    'x-decorator': 'FormItem',
-    'x-component': 'Input',
-  },
-  size: {
-    type: 'string',
-    enum: ['large', 'small', 'middle', null],
-    'x-decorator': 'FormItem',
-    'x-component': 'Select',
-    'x-component-props': {
-      defaultValue: 'middle',
-    },
-  },
-  format: {
-    type: 'string',
-    'x-decorator': 'FormItem',
-    'x-component': 'Input',
-    'x-component-props': {
-      placeholder: 'YYYY-MM-DD',
-    },
-  },
+  // inputReadOnly: {
+  //   type: 'boolean',
+  //   'x-decorator': 'FormItem',
+  //   'x-component': 'Switch',
+  // },
+  // placeholder: {
+  //   type: 'string',
+  //   'x-decorator': 'FormItem',
+  //   'x-component': 'Input',
+  // },
+  // size: {
+  //   type: 'string',
+  //   enum: ['large', 'small', 'middle', null],
+  //   'x-decorator': 'FormItem',
+  //   'x-component': 'Select',
+  //   'x-component-props': {
+  //     defaultValue: 'middle',
+  //   },
+  // },
+  // format: {
+  //   type: 'string',
+  //   'x-decorator': 'FormItem',
+  //   'x-component': 'Input',
+  //   'x-component-props': {
+  //     placeholder: 'YYYY-MM-DD',
+  //   },
+  // },
 }
 
 export const DatePicker: ISchema & { RangePicker?: ISchema } = {
@@ -78,21 +78,21 @@ export const DatePicker: ISchema & { RangePicker?: ISchema } = {
       },
     },
     ...CommonDatePickerAPI,
-    showNow: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-    },
-    showTime: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-    },
-    showToday: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-    },
+    // showNow: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    // },
+    // showTime: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    // },
+    // showToday: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    // },
   },
 }
 
@@ -109,10 +109,10 @@ DatePicker.RangePicker = {
       },
     },
     ...CommonDatePickerAPI,
-    showTime: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-    },
+    // showTime: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    // },
   },
 }

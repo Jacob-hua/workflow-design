@@ -133,7 +133,7 @@ const useValidator = (validator: (value: any) => string) => {
   }, [])
 }
 
-const useUploadValidator = (serviceErrorMessage = 'Upload Service Error') => {
+const useUploadValidator = (serviceErrorMessage = '上传失败') => {
   useValidator((value) => {
     const list = toArr(value)
     for (let i = 0; i < list.length; i++) {
@@ -178,7 +178,7 @@ const getPlaceholder = (props: IUploadProps) => {
 export const Upload: ComposedUpload = connect(
   (props: React.PropsWithChildren<IUploadProps>) => {
     return (
-      <AntdUpload {...useUploadProps(props)}>
+      <AntdUpload {...useUploadProps(props)} disabled={true}>
         {props.children || getPlaceholder(props)}
       </AntdUpload>
     )

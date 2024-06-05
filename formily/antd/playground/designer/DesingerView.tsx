@@ -65,9 +65,11 @@ import {
   Display,
   FormLayout,
   FormGrid,
-  // TestComp,
+  RangePicker,
   Abnormal,
   ChooseEq,
+  CheckIn,
+  DataTranscription,
 } from '../../src'
 
 setNpmCDNRegistry('//unpkg.com')
@@ -133,6 +135,7 @@ export const DesingerView = () => {
                 Checkbox,
                 Radio,
                 DatePicker,
+                RangePicker,
                 // TimePicker,
                 Upload,
                 Switch,
@@ -167,7 +170,13 @@ export const DesingerView = () => {
             />
             <ResourceWidget
               title="sources.workerOrder"
-              sources={[Abnormal, Display, ChooseEq]}
+              sources={[
+                Abnormal,
+                Display,
+                ChooseEq,
+                CheckIn,
+                DataTranscription,
+              ]}
             />
           </CompositePanel.Item>
           <CompositePanel.Item title="panels.OutlinedTree" icon="Outline">
@@ -205,6 +214,7 @@ export const DesingerView = () => {
                       Transfer,
                       Password,
                       DatePicker,
+                      RangePicker,
                       TimePicker,
                       Upload,
                       Switch,
@@ -221,6 +231,8 @@ export const DesingerView = () => {
                       Abnormal,
                       Display,
                       ChooseEq,
+                      CheckIn,
+                      DataTranscription,
                       // TestComp,
                     }}
                   />

@@ -1,0 +1,30 @@
+@import '~antd/lib/style/themes/dark.less';
+.model-properties-wrapper {
+  margin-left: 0px;
+  width: 280px;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  .tree-data {
+    width: 200px;
+    height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+  .properties-item {
+    width: 300px;
+    margin-top: 20px;
+    display: flex;
+    label {
+      width: 50px;
+      color: #fff;
+      margin-right: 70px;
+      margin-left: -28px;
+    }
+    .select-wrapper {
+      width: 140px;
+    }
+  }
+}
+.ant-tree .ant-tree-node-content-wrapper.ant-tree-node-selected {
+  background: #1890ff;
+}
