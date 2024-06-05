@@ -19,7 +19,7 @@ Input.Behavior = createBehavior(
       propsSchema: createFieldSchema(AllSchemas.Input, FieldSchemas.Input),
     },
     designerLocales: AllLocales.Input,
-  },
+  }
   // {
   //   name: 'Input.TextArea',
   //   extends: ['Field'],
@@ -45,7 +45,7 @@ Input.Resource = createResource(
         },
       },
     ],
-  },
+  }
   // {
   //   icon: 'TextAreaSource',
   //   elements: [

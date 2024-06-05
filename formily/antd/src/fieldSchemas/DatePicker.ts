@@ -57,5 +57,5 @@ export const DatePicker: ISchema = {
       'x-decorator': 'FormItem',
       'x-component': 'Switch',
     },
-  }
+  },
 }

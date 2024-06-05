@@ -55,5 +55,5 @@ export const ArrayCards: ISchema = {
     //   'x-decorator': 'FormItem',
     //   'x-component': 'Switch',
     // },
-  }
+  },
 }

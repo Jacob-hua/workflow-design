@@ -29,7 +29,7 @@ Switch.Resource = createResource({
         title: '开关',
         'x-decorator': 'FormItem',
         'x-component': 'Switch',
-        'default': false
+        default: false,
       },
     },
   ],

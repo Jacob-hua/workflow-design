@@ -70,5 +70,5 @@ export const Checkbox: ISchema = {
       'x-decorator': 'FormItem',
       'x-component': 'Switch',
     },
-  }
+  },
 }

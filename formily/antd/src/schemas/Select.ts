@@ -123,7 +123,7 @@ export const Select: ISchema = {
       'x-component-props': {
         defaultValue: 256,
       },
-      'x-value': 256
+      'x-value': 256,
     },
     maxTagCount: {
       type: 'number',
@@ -147,7 +147,7 @@ export const Select: ISchema = {
       'x-component-props': {
         defaultValue: '空数据',
       },
-      'x-value': '空数据'
+      'x-value': '空数据',
     },
 
     // size: {

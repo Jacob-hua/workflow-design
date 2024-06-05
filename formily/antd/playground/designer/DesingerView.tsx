@@ -66,9 +66,10 @@ import {
   FormLayout,
   FormGrid,
   RangePicker,
-  // TestComp,
   Abnormal,
   ChooseEq,
+  CheckIn,
+  DataTranscription,
 } from '../../src'
 
 setNpmCDNRegistry('//unpkg.com')
@@ -169,7 +170,13 @@ export const DesingerView = () => {
             />
             <ResourceWidget
               title="sources.workerOrder"
-              sources={[Abnormal, Display, ChooseEq]}
+              sources={[
+                Abnormal,
+                Display,
+                ChooseEq,
+                CheckIn,
+                DataTranscription,
+              ]}
             />
           </CompositePanel.Item>
           <CompositePanel.Item title="panels.OutlinedTree" icon="Outline">
@@ -224,6 +231,8 @@ export const DesingerView = () => {
                       Abnormal,
                       Display,
                       ChooseEq,
+                      CheckIn,
+                      DataTranscription,
                       // TestComp,
                     }}
                   />

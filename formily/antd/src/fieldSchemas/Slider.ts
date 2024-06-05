@@ -33,7 +33,8 @@ export const Slider: ISchema = {
     },
     default: {
       'x-decorator': 'FormItem',
-      'x-component': 'ValueInput', 'x-component-props': {
+      'x-component': 'ValueInput',
+      'x-component-props': {
         include: ['NUMBER'],
       },
     },
@@ -59,5 +60,5 @@ export const Slider: ISchema = {
       'x-decorator': 'FormItem',
       'x-component': 'Switch',
     },
-  }
+  },
 }

@@ -55,5 +55,5 @@ export const Upload: ISchema = {
       'x-decorator': 'FormItem',
       'x-component': 'Switch',
     },
-  }
+  },
 }

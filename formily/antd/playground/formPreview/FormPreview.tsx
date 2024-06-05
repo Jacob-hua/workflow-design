@@ -4,6 +4,9 @@ import { FormProvider, createSchemaField } from '@formily/react'
 import { Display } from '../../src/components/DisplayFormily'
 import { Abnormal } from '../../src/components/Abnormal'
 import { ChooseEq } from '../../src/components/ChooseEq'
+import { CheckIn } from '../../src/components/CheckIn'
+import { DataTranscription } from '../../src/components/DataTranscription'
+
 import {
   FormItem,
   DatePicker,
@@ -81,6 +84,8 @@ const SchemaField = createSchemaField({
     Display,
     Abnormal,
     ChooseEq,
+    CheckIn,
+    DataTranscription,
   },
 })
 

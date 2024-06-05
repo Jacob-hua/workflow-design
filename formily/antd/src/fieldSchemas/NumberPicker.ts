@@ -1,8 +1,5 @@
 import { ISchema } from '@formily/react'
-import {
-  ReactionsSetter,
-  ValidatorSetter,
-} from '@designable/formily-setters'
+import { ReactionsSetter, ValidatorSetter } from '@designable/formily-setters'
 
 export const NumberPicker: ISchema = {
   type: 'void',
@@ -34,7 +31,8 @@ export const NumberPicker: ISchema = {
     default: {
       type: 'number',
       'x-decorator': 'FormItem',
-      'x-component': 'ValueInput','x-component-props': {
+      'x-component': 'ValueInput',
+      'x-component-props': {
         include: ['NUMBER'],
       },
     },
@@ -61,5 +59,5 @@ export const NumberPicker: ISchema = {
       'x-decorator': 'FormItem',
       'x-component': 'Switch',
     },
-  }
+  },
 }

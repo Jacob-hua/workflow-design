@@ -20,7 +20,7 @@ export const Select: React.FC<SelectProps<any>> = connect(
           ) : (
             props.suffixIcon
           ),
-        getPopupContainer: (triggerNode) => triggerNode.parentNode
+        getPopupContainer: (triggerNode) => triggerNode.parentNode,
       }
     }
   ),

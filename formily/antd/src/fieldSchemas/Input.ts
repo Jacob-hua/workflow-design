@@ -1,8 +1,5 @@
 import { ISchema } from '@formily/react'
-import {
-  ReactionsSetter,
-  ValidatorSetter,
-} from '@designable/formily-setters'
+import { ReactionsSetter, ValidatorSetter } from '@designable/formily-setters'
 
 export const Input: ISchema = {
   type: 'void',
@@ -34,7 +31,8 @@ export const Input: ISchema = {
     default: {
       type: 'string',
       'x-decorator': 'FormItem',
-      'x-component': 'ValueInput','x-component-props': {
+      'x-component': 'ValueInput',
+      'x-component-props': {
         include: ['TEXT'],
       },
     },
@@ -61,5 +59,5 @@ export const Input: ISchema = {
       'x-decorator': 'FormItem',
       'x-component': 'Switch',
     },
-  }
+  },
 }

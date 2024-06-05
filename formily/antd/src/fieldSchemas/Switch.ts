@@ -34,7 +34,8 @@ export const Switch: ISchema = {
     },
     default: {
       'x-decorator': 'FormItem',
-      'x-component': 'ValueInput', 'x-component-props': {
+      'x-component': 'ValueInput',
+      'x-component-props': {
         include: ['BOOLEAN'],
       },
     },
@@ -55,5 +56,5 @@ export const Switch: ISchema = {
     //   'x-decorator': 'FormItem',
     //   'x-component': 'Switch',
     // },
-  }
+  },
 }

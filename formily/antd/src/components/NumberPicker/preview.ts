@@ -16,7 +16,10 @@ NumberPicker.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'NumberPicker',
   designerProps: {
-    propsSchema: createFieldSchema(AllSchemas.NumberPicker, FieldSchemas.NumberPicker),
+    propsSchema: createFieldSchema(
+      AllSchemas.NumberPicker,
+      FieldSchemas.NumberPicker
+    ),
   },
   designerLocales: AllLocales.NumberPicker,
 })

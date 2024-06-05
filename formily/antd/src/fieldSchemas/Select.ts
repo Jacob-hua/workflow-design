@@ -2,7 +2,7 @@ import { ISchema } from '@formily/react'
 import {
   ReactionsSetter,
   // ValidatorSetter,
-  DataSourceSetter
+  DataSourceSetter,
 } from '@designable/formily-setters'
 
 export const Select: ISchema = {
@@ -79,5 +79,5 @@ export const Select: ISchema = {
       'x-decorator': 'FormItem',
       'x-component': 'Switch',
     },
-  }
+  },
 }

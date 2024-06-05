@@ -12,7 +12,10 @@ export const createArrayBehavior = (name: string) => {
       selector: (node) => node.props['x-component'] === name,
       designerProps: {
         droppable: true,
-        propsSchema: createFieldSchema(AllSchemas[name], FieldSchemas.ArrayCards),
+        propsSchema: createFieldSchema(
+          AllSchemas[name],
+          FieldSchemas.ArrayCards
+        ),
       },
       designerLocales: AllLocales[name],
     },
@@ -75,6 +78,6 @@ export const createArrayBehavior = (name: string) => {
         propsSchema: createVoidFieldSchema(),
       },
       designerLocales: AllLocales.ArrayMoveDown,
-    },
+    }
   )
 }

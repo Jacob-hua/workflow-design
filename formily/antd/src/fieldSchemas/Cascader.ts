@@ -2,7 +2,7 @@ import { ISchema } from '@formily/react'
 import {
   ReactionsSetter,
   // ValidatorSetter,
-  DataSourceSetter
+  DataSourceSetter,
 } from '@designable/formily-setters'
 
 export const Cascader: ISchema = {
@@ -62,5 +62,5 @@ export const Cascader: ISchema = {
       'x-decorator': 'FormItem',
       'x-component': 'Switch',
     },
-  }
+  },
 }

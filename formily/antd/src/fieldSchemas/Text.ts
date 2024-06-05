@@ -60,5 +60,5 @@ export const Text: ISchema = {
     //   'x-decorator': 'FormItem',
     //   'x-component': 'Switch',
     // },
-  }
+  },
 }

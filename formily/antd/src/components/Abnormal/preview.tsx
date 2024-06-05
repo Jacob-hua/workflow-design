@@ -186,7 +186,7 @@ Abnormal.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'Abnormal',
   designerProps: {
-    propsSchema: createVoidFieldSchema(AllSchemas.Abnormal, 'Abnormal'),
+    propsSchema: createVoidFieldSchema(AllSchemas.Abnormal),
   },
   designerLocales: AllLocales.Abnormal,
 })

@@ -77,7 +77,7 @@ export const createComponentSchema = (
 export const createFieldSchema = (
   component?: ISchema,
   FieldSchema?: ISchema,
-  decorator: ISchema = AllSchemas.FormItem,
+  decorator: ISchema = AllSchemas.FormItem
 ): ISchema => {
   let properties = {
     // name: {

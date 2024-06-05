@@ -31,7 +31,7 @@ Select.Resource = createResource({
         'x-component': 'Select',
         'x-component-props': {
           // getPopupContainer: (triggerNode) => triggerNode.parentNode,
-        }
+        },
       },
     },
   ],

@@ -67,5 +67,5 @@ export const Radio: ISchema = {
       'x-decorator': 'FormItem',
       'x-component': 'Switch',
     },
-  }
+  },
 }

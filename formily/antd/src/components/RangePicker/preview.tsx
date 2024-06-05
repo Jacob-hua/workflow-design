@@ -7,8 +7,9 @@ import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
 import { FieldSchemas } from '../../fieldSchemas'
 
-export const RangePicker: DnFC<React.ComponentProps<typeof FormilyDatePicker.RangePicker>> =
-  FormilyDatePicker.RangePicker
+export const RangePicker: DnFC<
+  React.ComponentProps<typeof FormilyDatePicker.RangePicker>
+> = FormilyDatePicker.RangePicker
 
   RangePicker.Behavior = createBehavior(
   {
@@ -22,19 +23,17 @@ export const RangePicker: DnFC<React.ComponentProps<typeof FormilyDatePicker.Ran
   }
 )
 
-RangePicker.Resource = createResource(
-  {
-    icon: 'DateRangePickerSource',
-    elements: [
-      {
-        componentName: 'Field',
-        props: {
-          type: 'string[]',
-          title: '日期范围',
-          'x-decorator': 'FormItem',
-          'x-component': 'RangePicker',
-        },
+RangePicker.Resource = createResource({
+  icon: 'DateRangePickerSource',
+  elements: [
+    {
+      componentName: 'Field',
+      props: {
+        type: 'string[]',
+        title: '日期范围',
+        'x-decorator': 'FormItem',
+        'x-component': 'RangePicker',
       },
-    ],
-  }
-)
+    },
+  ],
+})

@@ -180,7 +180,7 @@ export const Upload: ComposedUpload = connect(
     return (
       <AntdUpload {...useUploadProps(props)} disabled={true}>
         {props.children || getPlaceholder(props)}
-      </AntdUpload >
+      </AntdUpload>
     )
   },
   mapProps({
