@@ -65,7 +65,7 @@ import {
   Display,
   FormLayout,
   FormGrid,
-  RangePicker
+  RangePicker,
   // TestComp,
   Abnormal,
   ChooseEq,

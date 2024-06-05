@@ -43,7 +43,7 @@ const mapDateFormat = function () {
           onChange(formatMomentValue(value, format))
         }
       },
-      getCalendarContainer: (trigger) => trigger.parentNode
+      getPopupContainer: (trigger) => trigger.parentNode
     }
   }
 }

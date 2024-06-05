@@ -150,9 +150,15 @@ export const ValidatorSetter: React.FC<IValidatorSetterProps> = observer(
       <FoldItem label={field.title}>
         <FoldItem.Base>
           <Select
-            value={Array.isArray(props.value) ? undefined : props.value}
-            onChange={props.onChange}
+            value={Array.isArray(props.value) ? undefined : JSON.stringify(props.value)}
+            onChange={(val) => {
+              // console.log(field);
+              
+              // const val = JSON.parse(props.value);
+              props.onChange(JSON.parse(val))
+            }}
             allowClear
+            // labelInValue
             placeholder={GlobalRegistry.getDesignerMessage(
               'SettingComponents.ValidatorSetter.pleaseSelect'
             )}

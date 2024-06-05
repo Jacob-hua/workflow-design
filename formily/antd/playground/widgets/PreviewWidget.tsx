@@ -8,7 +8,7 @@ import { ChooseEq } from '../../src/components/ChooseEq'
 import {
   Form,
   FormItem,
-  DatePicker,
+  // DatePicker,
   // Checkbox,
   Cascader,
   Editable,
@@ -19,7 +19,7 @@ import {
   PreviewText,
   // Radio,
   Reset,
-  Select,
+  // Select,
   Space,
   Submit,
   TimePicker,
@@ -34,7 +34,7 @@ import {
   // ArrayTable,
   // ArrayCards,
 } from '@formily/antd'
-import { ArrayCards, TextArea, Radio, Checkbox, Upload, RangePicker } from '../../src/customComponents'
+import { ArrayCards, TextArea, Radio, Checkbox, Upload, RangePicker, DatePicker, Select } from '../../src/customComponents'
 import { Card, Slider, Rate } from 'antd'
 import { TreeNode } from '@designable/core'
 import { transformToSchema } from '@designable/formily-transformer'

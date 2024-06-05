@@ -1,11 +1,11 @@
 import { ISchema } from '@formily/react'
 import {
   ReactionsSetter,
-  DataSourceSetter,
+  // DataSourceSetter,
   // ValidatorSetter,
 } from '@designable/formily-setters'
 
-export const Checkbox: ISchema = {
+export const RangePicker: ISchema = {
   type: 'void',
   'x-component': 'CollapseItem',
   properties: {
@@ -32,31 +32,18 @@ export const Checkbox: ISchema = {
         defaultValue: 'editable',
       },
     },
-    // default: {
-    //   'x-decorator': 'FormItem',
-    //   'x-component': 'ValueInput', 'x-component-props': {
-    //     include: ['TEXT','NUMBER','BOOLEAN'],
-    //   },
-    // },
     default: {
       'x-decorator': 'FormItem',
-      'x-component': 'Select',
-      'x-reactions': {
-        dependencies: ['.enum'],
-        fulfill: {
-          state: {
-            dataSource: '{{$deps[0]}}'
-          }
-        }
-      },
+      'x-component': 'DatePicker.RangePicker',
       'x-component-props': {
-        mode: 'multiple'
+        // getPopupContainer: trigger => trigger.parentNode,
+        showTime: true
       }
     },
-    enum: {
-      'x-decorator': 'FormItem',
-      'x-component': DataSourceSetter,
-    },
+    // enum: {
+    //   'x-decorator': 'FormItem',
+    //   'x-component': DataSourceSetter,
+    // },
     'x-reactions': {
       'x-decorator': 'FormItem',
       'x-component': ReactionsSetter,

@@ -34,10 +34,11 @@ export const DatePicker: ISchema = {
     },
     default: {
       'x-decorator': 'FormItem',
-      'x-component': 'ValueInput',
+      'x-component': 'DatePicker',
       'x-component-props': {
-        include: ['TEXT'],
-      },
+        // getPopupContainer: trigger => trigger.parentNode,
+        showTime: true
+      }
     },
     // enum: {
     //   'x-decorator': 'FormItem',

@@ -39,11 +39,12 @@ export const Cascader: ISchema = {
     //     include: ['TEXT'],
     //   },
     // },
-    // placeholder: {
-    //   type: 'string',
-    //   'x-decorator': 'FormItem',
-    //   'x-component': 'Input',
-    // },
+    defaultholder: {
+      type: 'string',
+      'x-decorator': 'FormItem',
+      'x-component': 'Input',
+      'x-value': '请输入内容'
+    },
     enum: {
       'x-decorator': 'FormItem',
       'x-component': DataSourceSetter,

@@ -32,17 +32,36 @@ export const Select: ISchema = {
         defaultValue: 'editable',
       },
     },
+    // default: {
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'ValueInput','x-component-props': {
+    //     include: ['TEXT','NUMBER','BOOLEAN'],
+    //   },
+    // },
     default: {
       'x-decorator': 'FormItem',
-      'x-component': 'ValueInput','x-component-props': {
-        include: ['TEXT','NUMBER','BOOLEAN'],
+      'x-component': 'Select',
+      'x-reactions': {
+        dependencies: ['.enum', '*.mode'],
+        fulfill: {
+          state: {
+            dataSource: '{{$deps[0]}}'
+          },
+          schema: {
+            "x-component-props.mode": '{{$deps[1]}}'
+          }
+        }
       },
+      // 'x-component-props': {
+      //   mode: 'multiple'
+      // }
     },
-    // placeholder: {
-    //   type: 'string',
-    //   'x-decorator': 'FormItem',
-    //   'x-component': 'Input',
-    // },
+    defaultholder: {
+      type: 'string',
+      'x-decorator': 'FormItem',
+      'x-component': 'Input',
+      'x-value': '请选择'
+    },
     enum: {
       'x-decorator': 'FormItem',
       'x-component': DataSourceSetter,

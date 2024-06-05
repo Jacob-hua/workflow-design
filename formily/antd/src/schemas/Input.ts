@@ -7,7 +7,16 @@ export const Input: ISchema & { TextArea?: ISchema } = {
       type: 'string',
       'x-decorator': 'FormItem',
       'x-component': 'Input',
-      'x-value': '请输入内容'
+      'x-value': '请输入内容',
+      'x-visible': false,
+      'x-reactions': {
+        dependencies: ['*.defaultholder'],
+        fulfill: {
+          state: {
+            value: '{{$deps[0]}}'
+          }
+        }
+      }
     },
     addonBefore: {
       type: 'string',
@@ -79,7 +88,15 @@ Input.TextArea = {
       type: 'string',
       'x-decorator': 'FormItem',
       'x-component': 'Input',
-      'x-value': '请输入内容'
+      'x-visible': false,
+      'x-reactions': {
+        dependencies: ['*.defaultholder'],
+        fulfill: {
+          state: {
+            value: '{{$deps[0]}}'
+          }
+        }
+      }
     },
     maxLength: {
       type: 'number',

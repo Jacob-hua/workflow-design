@@ -16,7 +16,7 @@ export const RangePicker: DnFC<React.ComponentProps<typeof FormilyDatePicker.Ran
     extends: ['Field'],
     selector: (node) => node.props['x-component'] === 'RangePicker',
     designerProps: {
-      propsSchema: createFieldSchema(AllSchemas.DatePicker.RangePicker, FieldSchemas.DatePicker),
+      propsSchema: createFieldSchema(AllSchemas.RangePicker, FieldSchemas.RangePicker),
     },
     designerLocales: AllLocales.DateRangePicker,
   }

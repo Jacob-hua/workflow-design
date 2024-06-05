@@ -88,8 +88,8 @@ export const ValueInput = createPolyInput([
       <Select
         {...props}
         options={[
-          { label: 'True', value: true },
-          { label: 'False', value: false },
+          { label: '是', value: true },
+          { label: '否', value: false },
         ]}
       />
     ),

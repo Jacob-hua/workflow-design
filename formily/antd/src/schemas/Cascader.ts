@@ -7,7 +7,15 @@ export const Cascader: ISchema = {
       type: 'string',
       'x-decorator': 'FormItem',
       'x-component': 'Input',
-      'x-value': '请选择'
+      'x-visible': false,
+      'x-reactions': {
+        dependencies: ['*.defaultholder'],
+        fulfill: {
+          state: {
+            value: '{{$deps[0]}}'
+          }
+        }
+      }
     },
     allowClear: {
       type: 'boolean',

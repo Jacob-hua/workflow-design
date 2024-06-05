@@ -32,11 +32,23 @@ export const Radio: ISchema = {
         defaultValue: 'editable',
       },
     },
+    // default: {
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'ValueInput', 'x-component-props': {
+    //     include: ['TEXT','NUMBER','BOOLEAN'],
+    //   },
+    // },
     default: {
       'x-decorator': 'FormItem',
-      'x-component': 'ValueInput', 'x-component-props': {
-        include: ['TEXT','NUMBER','BOOLEAN'],
-      },
+      'x-component': 'Select',
+      'x-reactions': {
+        dependencies: ['.enum'],
+        fulfill: {
+          state: {
+            dataSource: '{{$deps[0]}}'
+          }
+        }
+      }
     },
     enum: {
       'x-decorator': 'FormItem',

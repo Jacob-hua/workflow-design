@@ -5,11 +5,11 @@ export const Select: ISchema = {
   properties: {
     mode: {
       type: 'string',
-      enum: ['multiple', 'tags', null],
+      enum: ['multiple', 'tags', ''],
       'x-decorator': 'FormItem',
       'x-component': 'Radio.Group',
       'x-component-props': {
-        defaultValue: null,
+        defaultValue: '',
         optionType: 'button',
       },
     },
@@ -17,7 +17,15 @@ export const Select: ISchema = {
       type: 'string',
       'x-decorator': 'FormItem',
       'x-component': 'Input',
-      'x-value': '请选择'
+      'x-visible': false,
+      'x-reactions': {
+        dependencies: ['*.defaultholder'],
+        fulfill: {
+          state: {
+            value: '{{$deps[0]}}'
+          }
+        }
+      }
     },
     allowClear: {
       type: 'boolean',

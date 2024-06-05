@@ -17,7 +17,11 @@ export const DatePicker = {
         format: '格式',
         picker: {
           title: '选择器类型',
-          dataSource: ['时间', '日期', '月份', '年', '季度', '财年'],
+          dataSource: ['时间', '日期', '日期-时间', '年', '季度', '财年'],
+        },
+        precision: {
+          title: '精度',
+          dataSource: ['时', '分', '秒']
         },
         showNow: '显示此刻',
         showTime: '时间选择',
