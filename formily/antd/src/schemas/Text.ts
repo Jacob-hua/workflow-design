@@ -7,6 +7,7 @@ export const Text: ISchema = {
       type: 'string',
       'x-decorator': 'FormItem',
       'x-component': 'Input.TextArea',
+      'x-value': '文本标题'
     },
     mode: {
       type: 'string',

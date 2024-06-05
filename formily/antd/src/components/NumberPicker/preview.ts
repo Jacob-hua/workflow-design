@@ -5,6 +5,7 @@ import { DnFC } from '@designable/react'
 import { createFieldSchema } from '../Field'
 import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
+import { FieldSchemas } from '../../fieldSchemas'
 
 export const NumberPicker: DnFC<
   React.ComponentProps<typeof FormilyNumberPicker>
@@ -15,10 +16,7 @@ NumberPicker.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'NumberPicker',
   designerProps: {
-    propsSchema: createFieldSchema(AllSchemas.NumberPicker,'NumberPicker', [
-      'enum',
-      'x-validator',
-    ]),
+    propsSchema: createFieldSchema(AllSchemas.NumberPicker, FieldSchemas.NumberPicker),
   },
   designerLocales: AllLocales.NumberPicker,
 })

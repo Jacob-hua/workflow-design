@@ -70,6 +70,7 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
   }
 
   const deleteFoleded = (index) => {
+    if(dataSt.length === 1) return;
     dataSt.splice(index, 1)
     setFolded(dataSt)
   }

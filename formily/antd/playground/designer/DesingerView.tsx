@@ -65,6 +65,7 @@ import {
   Display,
   FormLayout,
   FormGrid,
+  RangePicker
   // TestComp,
   Abnormal,
   ChooseEq,
@@ -135,6 +136,7 @@ export const DesingerView = () => {
                 Checkbox,
                 Radio,
                 DatePicker,
+                RangePicker,
                 // TimePicker,
                 Upload,
                 Switch,
@@ -213,6 +215,7 @@ export const DesingerView = () => {
                       Transfer,
                       Password,
                       DatePicker,
+                      RangePicker,
                       TimePicker,
                       Upload,
                       Switch,

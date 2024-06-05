@@ -5,6 +5,7 @@ import { DnFC } from '@designable/react'
 import { createFieldSchema } from '../Field'
 import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
+import { FieldSchemas } from '../../fieldSchemas'
 
 export const Input: DnFC<React.ComponentProps<typeof FormilyInput>> =
   FormilyInput
@@ -15,7 +16,7 @@ Input.Behavior = createBehavior(
     extends: ['Field'],
     selector: (node) => node.props['x-component'] === 'Input',
     designerProps: {
-      propsSchema: createFieldSchema(AllSchemas.Input, 'Input', ['enum']),
+      propsSchema: createFieldSchema(AllSchemas.Input, FieldSchemas.Input),
     },
     designerLocales: AllLocales.Input,
   },

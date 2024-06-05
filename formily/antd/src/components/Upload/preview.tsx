@@ -5,6 +5,7 @@ import { DnFC } from '@designable/react'
 import { createFieldSchema } from '../Field'
 import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
+import { FieldSchemas } from '../../fieldSchemas'
 
 export const Upload: DnFC<React.ComponentProps<typeof FormilyUpload>> =
   FormilyUpload
@@ -15,7 +16,7 @@ Upload.Behavior = createBehavior(
     extends: ['Field'],
     selector: (node) => node.props['x-component'] === 'Upload',
     designerProps: {
-      propsSchema: createFieldSchema(AllSchemas.Upload, 'Upload'),
+      propsSchema: createFieldSchema(AllSchemas.Upload, FieldSchemas.Upload),
     },
     designerLocales: AllLocales.Upload,
   }
@@ -44,7 +45,7 @@ Upload.Resource = createResource(
           'x-component-props': {
             textContent: '上传',
             'showUploadList': true,
-            'accept': '.jpeg, .jpg, .png, .svg, .gif',
+            'accept': ['.jpeg, .jpg, .png, .svg, .gif'],
             'name': 'fileName'
           },
         },

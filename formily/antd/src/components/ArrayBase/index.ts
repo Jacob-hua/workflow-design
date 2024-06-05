@@ -2,6 +2,7 @@ import { createBehavior } from '@designable/core'
 import { createFieldSchema, createVoidFieldSchema } from '../Field'
 import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
+import { FieldSchemas } from '../../fieldSchemas'
 
 export const createArrayBehavior = (name: string) => {
   return createBehavior(
@@ -11,7 +12,7 @@ export const createArrayBehavior = (name: string) => {
       selector: (node) => node.props['x-component'] === name,
       designerProps: {
         droppable: true,
-        propsSchema: createFieldSchema(AllSchemas[name],name),
+        propsSchema: createFieldSchema(AllSchemas[name], FieldSchemas.ArrayCards),
       },
       designerLocales: AllLocales[name],
     },

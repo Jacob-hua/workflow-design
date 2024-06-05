@@ -1,9 +1,10 @@
 import React from 'react'
 import { createBehavior, createResource } from '@designable/core'
 import { DnFC } from '@designable/react'
-import { createVoidFieldSchema } from '../Field'
+import { createFieldSchema } from '../Field'
 import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
+import { FieldSchemas } from '../../fieldSchemas'
 import cls from 'classnames'
 import './styles.less'
 
@@ -33,7 +34,7 @@ Text.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'Text',
   designerProps: {
-    propsSchema: createVoidFieldSchema(AllSchemas.Text, 'Text'),
+    propsSchema: createFieldSchema(AllSchemas.Text, FieldSchemas.Text),
   },
   designerLocales: AllLocales.Text,
 })

@@ -5,6 +5,7 @@ import { DnFC } from '@designable/react'
 import { createFieldSchema } from '../Field'
 import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
+import { FieldSchemas } from '../../fieldSchemas'
 
 export const TextArea: DnFC<React.ComponentProps<typeof FormilyInput.TextArea>> =
   FormilyInput.TextArea
@@ -15,7 +16,7 @@ TextArea.Behavior = createBehavior(
     extends: ['Field'],
     selector: (node) => node.props['x-component'] === 'TextArea',
     designerProps: {
-      propsSchema: createFieldSchema(AllSchemas.Input.TextArea,'TextArea'),
+      propsSchema: createFieldSchema(AllSchemas.Input.TextArea, FieldSchemas.TextArea),
     },
     designerLocales: AllLocales.TextArea,
   }
