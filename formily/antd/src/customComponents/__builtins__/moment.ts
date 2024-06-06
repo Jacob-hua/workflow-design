@@ -1,11 +1,21 @@
 import { isArr, isFn, isEmpty } from '@formily/shared'
 import moment from 'moment'
 
-export const momentable = (value: any, format?: string) => {
+// export const momentable = (value: any, format?: string) => {
+//   console.log(moment(value, format));
+  
+//   return Array.isArray(value)
+//     ? value.map((val) => moment(val, format))
+//     : value
+//     ? moment(value, format)
+//     : value
+// }
+
+export const momentable = (value: any) => {  
   return Array.isArray(value)
-    ? value.map((val) => moment(val, format))
+    ? value.map((val) => moment(val))
     : value
-    ? moment(value, format)
+    ? moment(value)
     : value
 }
 

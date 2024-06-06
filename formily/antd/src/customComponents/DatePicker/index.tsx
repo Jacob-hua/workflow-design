@@ -34,12 +34,15 @@ const mapDateFormat = function () {
   }
 
   const getShowTime = props => {
-    const showTime = props.showTime
+    const picker = props?.picker;
     const precision = props?.precision;
-    if(showTime){
-      return {format: precision}
+    if (picker === 'time') {
+      return { format: precision };
     }
-    return showTime
+    if (picker === 'date_time') {
+      return { format: 'HH:mm' };
+    }
+    return false;
   }
   return (props: any) => {
     const format = getDefaultFormat(props)
@@ -51,7 +54,7 @@ const mapDateFormat = function () {
       picker,
       showTime,
       format: format,
-      value: momentable(props.value, format),
+      value: momentable(props.value),
       onChange: (value: moment.Moment | moment.Moment[]) => {
         if (onChange) {
           onChange(formatMomentValue(value, format))

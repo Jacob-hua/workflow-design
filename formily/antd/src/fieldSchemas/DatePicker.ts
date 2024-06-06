@@ -33,6 +33,7 @@ export const DatePicker: ISchema = {
       },
     },
     default: {
+      type: 'moment',
       'x-decorator': 'FormItem',
       'x-component': 'DatePicker',
       'x-component-props': {

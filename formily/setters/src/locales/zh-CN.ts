@@ -16,8 +16,17 @@ const ValidatorFormats = [
   },
   {
     label: '邮箱格式',
-    value: '{"pattern":"^\\\\w+([-+.]\\\\w+)*@\\\\w+([-.]\\\\w+)*\\\\.\\\\w+([-.]\\\\w+)*$\\"","message":"请输入正确的邮箱","triggerType":"onBlur"}'
+    value: '{"pattern":"\\\\w[-\\\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\\\.)+[A-Za-z]{2,14}","message":"请输入正确的邮箱","triggerType":"onBlur"}'
   },
+  // {
+  //   label: '邮箱格式',
+  //   value: '{"pattern":"\\\\w[-\\\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\\\.)+[A-Za-z]{2,14}","message":"请输入正确的邮箱","triggerType":"onBlur"}',
+  //   sss: {
+  //     pattern: "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
+  //     message: "请输入正确的邮箱",
+  //     triggerType: "onBlur"
+  //   }
+  // },
   {
     label: '数字格式',
     value: '{"pattern":"^[0-9]*$","message":"请输入正确的数字","triggerType":"onBlur"}'

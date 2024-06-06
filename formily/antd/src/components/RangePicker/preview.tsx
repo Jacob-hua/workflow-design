@@ -1,5 +1,6 @@
 import React from 'react'
-import { DatePicker as FormilyDatePicker } from '@formily/antd'
+// import { DatePicker as FormilyDatePicker } from '@formily/antd'
+import { RangePicker as FormilyRangePicker} from '../../customComponents'
 import { createBehavior, createResource } from '@designable/core'
 import { DnFC } from '@designable/react'
 import { createFieldSchema } from '../Field'
@@ -8,8 +9,8 @@ import { AllLocales } from '../../locales'
 import { FieldSchemas } from '../../fieldSchemas'
 
 export const RangePicker: DnFC<
-  React.ComponentProps<typeof FormilyDatePicker.RangePicker>
-> = FormilyDatePicker.RangePicker
+  React.ComponentProps<typeof FormilyRangePicker>
+> = FormilyRangePicker
 
   RangePicker.Behavior = createBehavior(
   {

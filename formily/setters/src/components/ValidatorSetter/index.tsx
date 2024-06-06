@@ -150,12 +150,13 @@ export const ValidatorSetter: React.FC<IValidatorSetterProps> = observer(
       <FoldItem label={field.title}>
         <FoldItem.Base>
           <Select
-            value={Array.isArray(props.value) ? undefined : JSON.stringify(props.value)}
+            // value={Array.isArray(props.value) ? undefined : JSON.stringify(props.value)}
+            value={props.value.length > 1 ? undefined : JSON.stringify(props.value[0])}
             onChange={(val) => {
               // console.log(field);
-              
+
               // const val = JSON.parse(props.value);
-              props.onChange(JSON.parse(val))
+              props.onChange([JSON.parse(val)])
             }}
             allowClear
             // labelInValue

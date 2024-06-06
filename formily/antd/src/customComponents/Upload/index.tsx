@@ -166,7 +166,7 @@ function useUploadProps<T extends IExtendsUploadProps = IUploadProps>({
 const getPlaceholder = (props: IUploadProps) => {
   if (props.listType !== 'picture-card') {
     return (
-      <Button>
+      <Button disabled>
         <UploadOutlined />
         {props.textContent}
       </Button>
