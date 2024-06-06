@@ -8,38 +8,50 @@ import {
 import { PreviewText } from '../preview-text'
 import { formatMomentValue, momentable } from '../__builtins__'
 
-type DatePickerProps<PickerProps> = Exclude<
-  PickerProps,
-  'value' | 'onChange'
-> & {
-  value: string
-  onChange: (value: string | string[]) => void
-}
+// type DatePickerProps<PickerProps> = Exclude<
+//   PickerProps,
+//   'value' | 'onChange'
+// > & {
+//   value: string
+//   onChange: (value: string | string[]) => void
+// }
 
 type ComposedDatePicker = React.FC<AntdDatePickerProps> & {
   RangePicker?: React.FC<RangePickerProps>
 }
 
 const mapDateFormat = function () {
-  const getDefaultFormat = (props: DatePickerProps<AntdDatePickerProps>) => {
-    if (props['picker'] === 'month') {
-      return 'YYYY-MM'
-    } else if (props['picker'] === 'quarter') {
-      return 'YYYY-\\QQ'
-    } else if (props['picker'] === 'year') {
-      return 'YYYY'
-    } else if (props['picker'] === 'week') {
-      return 'gggg-wo'
+  const getDefaultFormat = (props) => {
+    const picker = props?.picker;
+    const precision = props?.precision;
+    if(picker === 'date_time'){
+      return 'YYYY-MM-DD HH:mm'
     }
-    return props['showTime'] ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD'
+    if(picker === 'time'){
+      return precision
+    }
+    return 'YYYY-MM-DD'
+  }
+
+  const getShowTime = props => {
+    const showTime = props.showTime
+    const precision = props?.precision;
+    if(showTime){
+      return {format: precision}
+    }
+    return showTime
   }
   return (props: any) => {
-    const format = props['format'] || getDefaultFormat(props)
+    const format = getDefaultFormat(props)
     const onChange = props.onChange
+    const picker = props.picker === 'time' ? 'time' : 'date'
+    const showTime = getShowTime(props)
     return {
       ...props,
+      picker,
+      showTime,
       format: format,
-      value: momentable(props.value, format === 'gggg-wo' ? 'gggg-ww' : format),
+      value: momentable(props.value, format),
       onChange: (value: moment.Moment | moment.Moment[]) => {
         if (onChange) {
           onChange(formatMomentValue(value, format))
