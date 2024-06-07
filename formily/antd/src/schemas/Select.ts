@@ -12,6 +12,7 @@ export const Select: ISchema = {
         defaultValue: '',
         optionType: 'button',
       },
+      'x-value': ''
     },
     placeholder: {
       type: 'string',
@@ -129,6 +130,14 @@ export const Select: ISchema = {
       type: 'number',
       'x-decorator': 'FormItem',
       'x-component': 'NumberPicker',
+      'x-reactions': {
+        dependencies: ['.mode'],
+        fulfill: {
+          state: {
+            visible: '{{$deps[0] !== ""}}'
+          }
+        }
+      }
     },
     // maxTagPlaceholder: {
     //   type: 'string',

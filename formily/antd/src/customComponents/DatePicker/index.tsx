@@ -54,13 +54,13 @@ const mapDateFormat = function () {
       picker,
       showTime,
       format: format,
-      value: momentable(props.value),
+      value: momentable(props.value, format),
       onChange: (value: moment.Moment | moment.Moment[]) => {
         if (onChange) {
           onChange(formatMomentValue(value, format))
         }
       },
-      getPopupContainer: (trigger) => trigger.parentNode
+      getPopupContainer: trigger => trigger.parentNode
     }
   }
 }

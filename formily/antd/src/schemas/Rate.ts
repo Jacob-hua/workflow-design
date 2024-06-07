@@ -15,9 +15,7 @@ export const Rate: ISchema = {
       type: 'number',
       'x-decorator': 'FormItem',
       'x-component': 'NumberPicker',
-      'x-component-props': {
-        defaultValue: 5,
-      },
+      'default': 5
     },
     allowHalf: {
       type: 'boolean',

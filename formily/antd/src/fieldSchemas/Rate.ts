@@ -33,10 +33,24 @@ export const Rate: ISchema = {
     },
     default: {
       'x-decorator': 'FormItem',
-      'x-component': 'ValueInput',
+      'x-component': 'NumberPicker',
       'x-component-props': {
-        include: ['NUMBER'],
+        min: 0,
       },
+      'x-reactions': {
+        dependencies: ['*.count', '*.allowHalf'],
+        fulfill: {
+          schema: {
+            'x-component-props': {
+              max: '{{$deps[0]}}',
+              step: '{{$deps[1] ? 0.5 : 1}}'
+            }
+          },
+          state: {
+            value: '{{!$deps[1] ? Math.floor($self.value) : $self.value}}'
+          }
+        }
+      }
     },
     // placeholder: {
     //   type: 'string',

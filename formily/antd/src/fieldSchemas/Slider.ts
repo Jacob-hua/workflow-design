@@ -33,10 +33,22 @@ export const Slider: ISchema = {
     },
     default: {
       'x-decorator': 'FormItem',
-      'x-component': 'ValueInput',
-      'x-component-props': {
-        include: ['NUMBER'],
-      },
+      'x-component': 'NumberPicker',
+      // 'x-component-props': {
+      //   include: ['NUMBER'],
+      // },
+      'x-reactions': {
+        dependencies: ['*.min', '*.max', '*.step'],
+        fulfill: {
+          schema: {
+            'x-component-props': {
+              min: '{{$deps[0]}}',
+              max: '{{$deps[1]}}',
+              step: '{{$deps[2]}}'
+            }
+          }
+        }
+      }
     },
     // placeholder: {
     //   type: 'string',

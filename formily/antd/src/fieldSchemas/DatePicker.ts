@@ -36,9 +36,22 @@ export const DatePicker: ISchema = {
       type: 'moment',
       'x-decorator': 'FormItem',
       'x-component': 'DatePicker',
-      'x-component-props': {
-        // getPopupContainer: trigger => trigger.parentNode,
-        showTime: true
+      'x-reactions': {
+        dependencies: ['*.picker', '*.precision'],
+        fulfill: {
+          schema: {
+            // 'x-component-props.showTime': '{{$deps[0] === "date" ? false : $deps[0] === "date_time" ? {format: "YYYY-MM-DD HH:mm"} : {format: $deps[1]}}}',
+            // 'x-component-props.picker': '{{$deps[0] === "time" ? "time" : "date"}}',
+            'x-component-props': {
+              showTime: '{{$deps[0] === "date" ? false : $deps[0] === "date_time" ? {format: "YYYY-MM-DD HH:mm"} : {format: $deps[1]}}}',
+              picker: '{{$deps[0] === "time" ? "time" : "date"}}',
+              format: '{{$deps[0] === "date" ? "YYYY-MM-DD" : $deps[0] === "date_time" ? "YYYY-MM-DD HH:mm" : $deps[1]}}'
+            }
+          },
+          state: {
+            value: '{{""}}'
+          }
+        }
       }
     },
     // enum: {

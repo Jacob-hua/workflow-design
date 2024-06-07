@@ -22,15 +22,15 @@ export const Text: ISchema = {
         defaultValue: 'visible',
       },
     },
-    'x-pattern': {
-      type: 'string',
-      enum: ['editable', 'disabled'],
-      'x-decorator': 'FormItem',
-      'x-component': 'Select',
-      'x-component-props': {
-        defaultValue: 'editable',
-      },
-    },
+    // 'x-pattern': {
+    //   type: 'string',
+    //   enum: ['editable', 'disabled'],
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Select',
+    //   'x-component-props': {
+    //     defaultValue: 'editable',
+    //   },
+    // },
     // default: {
     //   type: 'string',
     //   'x-decorator': 'FormItem',

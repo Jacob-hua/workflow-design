@@ -83,7 +83,7 @@ export const DatePicker: ISchema = {
       enum: ['HH', 'HH:mm', 'HH:mm:ss'],
       'x-decorator': 'FormItem',
       'x-component': 'Select',
-      default: 'HH:mm',
+      'x-value': 'HH:mm',
       'x-reactions': {
         dependencies: ['.picker'],
         fulfill: {
