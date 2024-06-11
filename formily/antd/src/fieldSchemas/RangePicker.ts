@@ -46,7 +46,7 @@ export const RangePicker: ISchema = {
             }
           },
           state: {
-            value: '{{["",""]}}'
+            value: '{{$self.value[0].length === ($deps[0] === "date" ? "YYYY-MM-DD" : $deps[0] === "date_time" ? "YYYY-MM-DD HH:mm" : $deps[1]).length ? $self.value : ""}}'
           }
         }
       }

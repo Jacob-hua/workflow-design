@@ -79,7 +79,7 @@ GlobalRegistry.registerDesignerLocales({
     sources: {
       Inputs: '输入控件',
       Layouts: '布局组件',
-      Arrays: '自增组件',
+      Arrays: '栅格组件',
       Displays: '展示组件',
       workerOrder: '业务组件',
     },

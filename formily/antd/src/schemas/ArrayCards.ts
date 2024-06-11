@@ -9,14 +9,14 @@ export const ArrayCards: ISchema & { Addition?: ISchema } = {
       'x-decorator': 'FormItem',
       'x-component': 'Input',
     },
-    bordered: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-      'x-component-props': {
-        defaultChecked: true,
-      },
-    },
+    // bordered: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    //   'x-component-props': {
+    //     defaultChecked: true,
+    //   },
+    // },
     addable: {
       type: 'boolean',
       'x-decorator': 'FormItem',

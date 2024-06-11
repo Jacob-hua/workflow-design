@@ -22,6 +22,20 @@ export const Text: ISchema = {
         defaultValue: 'visible',
       },
     },
+    textContent: {
+      type: 'string',
+      'x-decorator': 'FormItem',
+      'x-component': 'Input.TextArea',
+      'default': '文本标题',
+      'x-reactions': {
+        dependencies: ['*.content'],
+        fulfill: {
+          state: {
+            value: '{{$deps[0]}}'
+          }
+        }
+      }
+    },
     // 'x-pattern': {
     //   type: 'string',
     //   enum: ['editable', 'disabled'],

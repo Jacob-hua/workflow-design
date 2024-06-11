@@ -7,7 +7,16 @@ export const Text: ISchema = {
       type: 'string',
       'x-decorator': 'FormItem',
       'x-component': 'Input.TextArea',
-      'x-value': '文本标题',
+      // 'x-value': '文本标题',
+      'x-visible': false,
+      'x-reactions': {
+        dependencies: ['*.textContent'],
+        fulfill: {
+          state: {
+            value: '{{$deps[0]}}'
+          }
+        }
+      }
     },
     mode: {
       type: 'string',

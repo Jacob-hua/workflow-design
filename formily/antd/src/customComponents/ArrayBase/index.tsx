@@ -39,11 +39,11 @@ export interface IArrayBaseContext {
 export interface IArrayBaseItemProps {
   index: number
   record: any
-  foldedArr: Array<Boolean>
-  setFoleded: <D, T>(status: D, index: T) => void
-  addFoleded: () => void
-  deleteFoleded: (index: number) => void
-  getFoleded?: (index: number) => boolean
+  // foldedArr: Array<Boolean>
+  // setFoleded: <D, T>(status: D, index: T) => void
+  // addFoleded: () => void
+  // deleteFoleded: (index: number) => void
+  // getFoleded?: (index: number) => boolean
 }
 
 export type ArrayBaseMixins = {
@@ -61,6 +61,10 @@ export type ArrayBaseMixins = {
 
 export interface IArrayBaseProps {
   disabled?: boolean
+  foldedArr: Array<Boolean>
+  setFoleded: <D, T>(status: D, index: T) => void
+  addFoleded: () => void
+  deleteFoleded: (index: number) => void
   onAdd?: (index: number) => void
   onRemove?: (index: number) => void
   onMoveDown?: (index: number) => void
@@ -119,19 +123,19 @@ export const ArrayBase: ComposedArrayBase = (props) => {
   )
 }
 
-let setFoldData: IArrayBaseItemProps['setFoleded']
+// let setFoldData: IArrayBaseItemProps['setFoleded']
 
-let addFoldData: IArrayBaseItemProps['addFoleded']
+// let addFoldData: IArrayBaseItemProps['addFoleded']
 
-let deleteFoldData: IArrayBaseItemProps['deleteFoleded']
+// let deleteFoldData: IArrayBaseItemProps['deleteFoleded']
 
-let foldedArrData: IArrayBaseItemProps['foldedArr']
+// let foldedArrData: IArrayBaseItemProps['foldedArr']
 
 ArrayBase.Item = ({ children, ...props }) => {
-  setFoldData = props.setFoleded
-  addFoldData = props.addFoleded
-  deleteFoldData = props.deleteFoleded
-  foldedArrData = props.foldedArr
+  // setFoldData = props.setFoleded
+  // addFoldData = props.addFoleded
+  // deleteFoldData = props.deleteFoleded
+  // foldedArrData = props.foldedArr
   return (
     <ItemContext.Provider value={props}>
       <ExpressionScope value={{ $record: props.record, $index: props.index }}>
@@ -195,7 +199,7 @@ ArrayBase.Addition = (props) => {
         } else {
           array.field?.push?.(defaultValue)
           array.props?.onAdd?.(array?.field?.value?.length - 1)
-          addFoldData()
+          array.props.addFoleded()
         }
         if (props.onClick) {
           props.onClick(e)
@@ -225,7 +229,7 @@ ArrayBase.Remove = React.forwardRef((props, ref) => {
         // array.field?.setDisplay('none')
         array.field?.remove?.(index)
         array.props?.onRemove?.(index)
-        deleteFoldData(index)
+        array.props.deleteFoleded(index)
         if (props.onClick) {
           props.onClick(e)
         }
@@ -285,11 +289,11 @@ ArrayBase.MoveUp = React.forwardRef((props, ref) => {
 ArrayBase.MoveDown = React.forwardRef((props, ref) => {
   const index = useIndex(props.index)
   const array = useArray()
-  const folded = foldedArrData ? foldedArrData[index] : true
+  const foldedList = array.props.foldedArr
   const prefixCls = usePrefixCls('formily-array-base')
   if (!array) return null
   if (array.field?.pattern !== 'editable') return null
-  if (!folded) {
+  if (foldedList && foldedList[index]) {
     return (
       <RightOutlined
         {...props}
@@ -298,7 +302,7 @@ ArrayBase.MoveDown = React.forwardRef((props, ref) => {
         onClick={(e) => {
           if (array.props?.disabled) return
           e.stopPropagation()
-          setFoldData(true, index)
+          array.props.setFoleded(false, index)
           // setFolded(false)
           if (props.onClick) {
             props.onClick(e)
@@ -315,7 +319,7 @@ ArrayBase.MoveDown = React.forwardRef((props, ref) => {
       onClick={(e) => {
         if (array.props?.disabled) return
         e.stopPropagation()
-        setFoldData(false, index)
+        array.props.setFoleded(true, index)
         // setFolded(true)
         if (props.onClick) {
           props.onClick(e)

@@ -17,6 +17,7 @@ export const Field = {
         title: 'UI形态',
         dataSource: ['可编辑', '禁用'],
       },
+      textContent: '文本内容',
       'x-validator': '校验规则',
       'x-decorator': '容器组件',
       'x-reactions': '响应器规则',

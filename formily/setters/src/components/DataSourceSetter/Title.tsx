@@ -1,5 +1,5 @@
 import React from 'react'
-import { clone, toArr } from '@formily/shared'
+import { clone, toArr, uid } from '@formily/shared'
 import { observer } from '@formily/reactive-react'
 import { IconWidget, TextWidget, usePrefix } from '@designable/react'
 import { INodeItem, ITreeDataSource } from './types'
@@ -48,17 +48,45 @@ export const Title: React.FC<ITitleProps> = observer((props) => {
       <span style={{ marginRight: '5px' }}>
         {renderTitle(props?.map || [])}
       </span>
-      <IconWidget
-        className={prefix + '-icon'}
-        infer="Remove"
-        onClick={() => {
-          const newDataSource = clone(props?.treeDataSource?.dataSource)
-          traverseTree(newDataSource || [], (dataItem, i, data) => {
-            if (data[i].key === props.duplicateKey) toArr(data).splice(i, 1)
-          })
-          props.treeDataSource.dataSource = newDataSource
-        }}
-      />
+      <span style={{ display: 'flex', gap: '5px' }}>
+        <IconWidget
+          className={prefix + '-icon'}
+          infer="Add"
+          onClick={() => {
+            const uuid = uid()
+            const newDataSource = clone(props?.treeDataSource?.dataSource)
+            traverseTree(newDataSource || [], (dataItem, i, data) => {
+              if (data[i].key === props.duplicateKey) {
+                const map = [
+                  {
+                    label: 'label',
+                    value: `${data[i].map[0].value}_${data[i].children.length + 1}`,
+                  },
+                  { label: 'value', value: uuid },
+                ]
+                data[i].children.push({
+                  key: uuid,
+                  duplicateKey: uuid,
+                  map: map,
+                  children: [],
+                })
+              }
+            })
+            props.treeDataSource.dataSource = newDataSource
+          }}
+        />
+        <IconWidget
+          className={prefix + '-icon'}
+          infer="Remove"
+          onClick={() => {
+            const newDataSource = clone(props?.treeDataSource?.dataSource)
+            traverseTree(newDataSource || [], (dataItem, i, data) => {
+              if (data[i].key === props.duplicateKey) toArr(data).splice(i, 1)
+            })
+            props.treeDataSource.dataSource = newDataSource
+          }}
+        />
+      </span>
     </div>
   )
 })

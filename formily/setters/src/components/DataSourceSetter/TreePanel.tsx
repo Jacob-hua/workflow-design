@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useReducer, useState } from 'react'
 import { Tree, Button, TreeProps } from 'antd'
 import { uid } from '@formily/shared'
 import { observer } from '@formily/reactive-react'
@@ -28,6 +28,7 @@ export interface ITreePanelProps {
 
 export const TreePanel: React.FC<ITreePanelProps> = observer((props) => {
   const prefix = usePrefix('data-source-setter')
+  const [defaultExpandedKeys, setDefaultExpandedKeys] = useState([])
   const dropHandler = (info: Parameters<TreeProps['onDrop']>[0]) => {
     const dropKey = info.node?.key
     const dragKey = info.dragNode?.key
@@ -77,6 +78,27 @@ export const TreePanel: React.FC<ITreePanelProps> = observer((props) => {
     }
     props.treeDataSource.dataSource = data
   }
+
+  // const [, forceUpdate] = useReducer(x => x + 1, 0);
+
+  const handleDefaultExpand = (tree,expandKeys = []) => {
+    // const expandKeys = []
+    for (let treeItem of tree) {
+      if(treeItem.children.length) {
+        handleDefaultExpand(treeItem.children, expandKeys)
+      }else{
+        expandKeys.push(treeItem.key)
+      }
+    }
+    return expandKeys
+  }
+
+  useEffect(() => {
+    const dataSource = props.treeDataSource.dataSource;
+    const defaultKeys = handleDefaultExpand(dataSource)
+    setDefaultExpandedKeys(defaultKeys)
+  }, [props.treeDataSource.dataSource])
+  
   return (
     <Fragment>
       <Header
@@ -92,14 +114,14 @@ export const TreePanel: React.FC<ITreePanelProps> = observer((props) => {
               const initialKeyValuePairs = props.defaultOptionValue?.map(
                 (item) => ({ ...item })
               ) || [
-                {
-                  label: 'label',
-                  value: `${GlobalRegistry.getDesignerMessage(
-                    `SettingComponents.DataSourceSetter.item`
-                  )} ${dataSource.length + 1}`,
-                },
-                { label: 'value', value: uuid },
-              ]
+                  {
+                    label: 'label',
+                    value: `${GlobalRegistry.getDesignerMessage(
+                      `SettingComponents.DataSourceSetter.item`
+                    )} ${dataSource.length + 1}`,
+                  },
+                  { label: 'value', value: uuid },
+                ]
               props.treeDataSource.dataSource = dataSource.concat({
                 key: uuid,
                 duplicateKey: uuid,
@@ -118,12 +140,13 @@ export const TreePanel: React.FC<ITreePanelProps> = observer((props) => {
           blockNode
           draggable={true}
           allowDrop={props.allowTree ? () => true : limitTreeDrag}
-          defaultExpandAll
-          defaultExpandParent
-          autoExpandParent
+          defaultExpandAll={true}
+          defaultExpandParent={true}
+          autoExpandParent={true}
+          defaultExpandedKeys={defaultExpandedKeys}
           showLine={{ showLeafIcon: false }}
           treeData={props.treeDataSource.dataSource}
-          onDragEnter={() => {}}
+          onDragEnter={() => { }}
           onDrop={dropHandler}
           titleRender={(titleProps: INodeItem) => {
             return (

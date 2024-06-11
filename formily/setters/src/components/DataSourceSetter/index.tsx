@@ -59,6 +59,7 @@ export const DataSourceSetter: React.FC<IDataSourceSetterProps> = observer(
           }
           width="65%"
           bodyStyle={{ padding: 10 }}
+          destroyOnClose
           transitionName=""
           maskTransitionName=""
           maskClosable={false}

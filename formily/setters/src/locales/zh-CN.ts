@@ -12,11 +12,11 @@
 const ValidatorFormats = [
   {
     label: 'URL地址',
-    value: '{"pattern":"^((https|http|ftp|rtsp|mms)?:\\\\/\\\\/)[^\\\\s]+","message":"请输入正确的url","triggerType":"onBlur"}'
+    value: '{"pattern":"^((https|http|ftp|rtsp|mms)?:\\\\/\\\\/)[^\\\\s]+$","message":"请输入正确的url","triggerType":"onBlur"}'
   },
   {
     label: '邮箱格式',
-    value: '{"pattern":"\\\\w[-\\\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\\\.)+[A-Za-z]{2,14}","message":"请输入正确的邮箱","triggerType":"onBlur"}'
+    value: '{"pattern":"^\\\\w[-\\\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\\\.)+[A-Za-z]{2,14}$","message":"请输入正确的邮箱","triggerType":"onBlur"}'
   },
   // {
   //   label: '邮箱格式',
@@ -53,7 +53,7 @@ const ValidatorFormats = [
   },
   {
     label: '货币格式',
-    value: '{"pattern":"(-)?\\\\d+(\\\\.\\\\d\\\\d)?","message":"请输入正确的货币","triggerType":"onBlur"}'
+    value: '{"pattern":"^(-)?\\\\d+(\\\\.\\\\d\\\\d)?$","message":"请输入正确的货币","triggerType":"onBlur"}'
   },
   {
     label: '中文格式',
@@ -61,11 +61,11 @@ const ValidatorFormats = [
   },
   {
     label: '日期格式',
-    value: '{"pattern":"^\\\\d{4}-\\\\d{1,2}-\\\\d{1,2}","message":"请输入正确的日期","triggerType":"onBlur"}'
+    value: '{"pattern":"^\\\\d{4}-\\\\d{1,2}-\\\\d{1,2}$","message":"请输入正确的日期","triggerType":"onBlur"}'
   },
   {
     label: '邮编格式',
-    value: '{"pattern":"[1-9]\\\\d{5}(?!\\\\d)","message":"请输入正确的邮编","triggerType":"onBlur"}'
+    value: '{"pattern":"^[1-9]\\\\d{5}(?!\\\\d)$","message":"请输入正确的邮编","triggerType":"onBlur"}'
   },
 ]
 

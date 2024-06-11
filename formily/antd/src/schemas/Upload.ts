@@ -13,7 +13,7 @@ export const Upload: ISchema & { Dragger?: ISchema } = {
       name: 'accept',
       enum: [
         '.pdf, .doc, .docx, .xls, .xlsx',
-        '.jpeg, .jpg, .png, .svg, .gif',
+        '.jpeg, .jpg, .png, .gif',
         '.mp3',
         '.mp4',
       ],

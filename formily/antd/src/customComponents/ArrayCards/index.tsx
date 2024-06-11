@@ -56,7 +56,7 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
   const dataSource = Array.isArray(field.value) ? field.value : []
   const prefixCls = usePrefixCls('formily-array-cards', props)
   if (!schema) throw new Error('can not found schema object')
-  const [folded, setFolded] = useState<Array<boolean>>([true])
+  const [folded, setFolded] = useState<Array<boolean>>([false])
   const dataSt = [...folded]
 
   const setFoleded = (status, index) => {
@@ -65,7 +65,7 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
   }
 
   const addFoleded = () => {
-    dataSt.push(true)
+    dataSt.push(false)
     setFolded(dataSt)
   }
 
@@ -131,19 +131,19 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
           key={index}
           index={index}
           record={item}
-          foldedArr={folded}
-          setFoleded={setFoleded}
-          addFoleded={addFoleded}
-          deleteFoleded={deleteFoleded}
+        // foldedArr={folded}
+        // setFoleded={setFoleded}
+        // addFoleded={addFoleded}
+        // deleteFoleded={deleteFoleded}
         >
           <Card
             {...properties}
-            onChange={() => {}}
+            onChange={() => { }}
             className={cls(`${prefixCls}-item`, props.className)}
             title={title}
             extra={extra}
           >
-            {folded[index] ? content : ''}
+            {folded[index] ? '' : content}
           </Card>
         </ArrayBase.Item>
       )
@@ -214,14 +214,14 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
         key={0}
         index={0}
         record={items}
-        foldedArr={folded}
-        setFoleded={setFoleded}
-        addFoleded={addFoleded}
-        deleteFoleded={deleteFoleded}
+      // foldedArr={folded}
+      // setFoleded={setFoleded}
+      // addFoleded={addFoleded}
+      // deleteFoleded={deleteFoleded}
       >
         <Card
           {...properties}
-          onChange={() => {}}
+          onChange={() => { }}
           className={cls(`${prefixCls}-item`, props.className)}
           title={title}
           extra={extra}
@@ -236,7 +236,11 @@ export const ArrayCards: ComposedArrayCards = observer((props) => {
   }
 
   return (
-    <ArrayBase>
+    <ArrayBase
+      foldedArr={folded}
+      setFoleded={setFoleded}
+      addFoleded={addFoleded}
+      deleteFoleded={deleteFoleded}>
       {renderEmpty()}
       {renderItems()}
       {renderAddition()}

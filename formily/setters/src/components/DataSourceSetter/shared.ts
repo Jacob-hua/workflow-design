@@ -5,6 +5,7 @@ export interface INode {
   key?: string
   map?: any
   children?: INode[]
+  duplicateKey?: string
 }
 
 export const traverseTree = <T extends INode>(

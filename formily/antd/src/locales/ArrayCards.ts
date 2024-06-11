@@ -1,6 +1,6 @@
 export const ArrayCards = {
   'zh-CN': {
-    title: '自增卡片',
+    title: '栅格',
     addIndex: '添加索引',
     addOperation: '添加操作',
     settings: {
