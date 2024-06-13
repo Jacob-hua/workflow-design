@@ -1,9 +1,9 @@
 import React from 'react'
 import { Button } from 'antd'
 import { observer } from '@formily/reactive-react'
-import { WorkbenchTypes } from '@designable/core'
+import { WorkbenchTypes, TreeNode } from '@designable/core'
 import { IconWidget } from '../IconWidget'
-import { usePrefix, useWorkbench } from '../../hooks'
+import { usePrefix, useTreeNode, useWorkbench } from '../../hooks'
 import cls from 'classnames'
 
 export interface IViewToolsWidget {
@@ -15,6 +15,7 @@ export interface IViewToolsWidget {
 export const ViewToolsWidget: React.FC<IViewToolsWidget> = observer(
   ({ use, style, className }) => {
     const workbench = useWorkbench()
+    const node = useTreeNode()
     const prefix = usePrefix('view-tools')
     return (
       <Button.Group style={style} className={cls(prefix, className)}>
@@ -42,7 +43,7 @@ export const ViewToolsWidget: React.FC<IViewToolsWidget> = observer(
             JSON
           </Button>
         )}
-        {/* {use.includes('MARKUP') && (
+        {use.includes('MARKUP') && (
           <Button
             disabled={workbench.type === 'MARKUP'}
             onClick={() => {
@@ -52,7 +53,7 @@ export const ViewToolsWidget: React.FC<IViewToolsWidget> = observer(
           >
             <IconWidget infer="Code" />
           </Button>
-        )} */}
+        )}
         {use.includes('PREVIEW') && (
           <Button
             disabled={workbench.type === 'PREVIEW'}
@@ -65,6 +66,16 @@ export const ViewToolsWidget: React.FC<IViewToolsWidget> = observer(
             预览
           </Button>
         )}
+        {/* <Button
+            onClick={() => {
+              console.log(node);
+              
+              // TreeNode.remove()
+            }}
+            size="small"
+          >
+            清空
+          </Button> */}
       </Button.Group>
     )
   }

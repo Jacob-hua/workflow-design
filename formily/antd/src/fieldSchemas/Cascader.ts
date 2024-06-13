@@ -43,7 +43,7 @@ export const Cascader: ISchema = {
       type: 'string',
       'x-decorator': 'FormItem',
       'x-component': 'Input',
-      'x-value': '请输入内容'
+      'x-value': '请选择'
     },
     enum: {
       'x-decorator': 'FormItem',

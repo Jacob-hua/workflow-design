@@ -191,7 +191,7 @@ export const DesingerView = () => {
             <ToolbarPanel>
               <DesignerToolsWidget />
               <ViewToolsWidget
-                use={['DESIGNABLE', 'JSONTREE', 'MARKUP', 'PREVIEW']}
+                use={['DESIGNABLE', 'JSONTREE', 'PREVIEW']}
               />
             </ToolbarPanel>
             <ViewportPanel style={{ height: '100%' }}>
