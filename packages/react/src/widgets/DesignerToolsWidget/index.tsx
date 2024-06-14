@@ -30,6 +30,7 @@ export const DesignerToolsWidget: React.FC<IDesignerToolsWidgetProps> =
     const sizeRef = useRef<{ width?: any; height?: any }>({})
     const prefix = usePrefix('designer-tools')
     const renderHistoryController = () => {
+      if (workbench.type !== 'DESIGNABLE') return null
       if (!props.use.includes('HISTORY')) return null
       return (
         <Button.Group size="small" style={{ marginRight: 20 }}>
