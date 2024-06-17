@@ -2,7 +2,7 @@ import React, { useMemo, Fragment } from 'react'
 import { Button } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { ArrayItems, Form, Input, FormItem } from '@formily/antd'
-import { createForm, Form as FormCore } from '@formily/core'
+import { createForm, Form as FormCore, onFieldValueChange } from '@formily/core'
 import { observer } from '@formily/reactive-react'
 import { createSchemaField } from '@formily/react'
 import { ValueInput } from '@designable/react-settings-form'
@@ -11,6 +11,7 @@ import { Header } from './Header'
 import { traverseTree } from './shared'
 import { ITreeDataSource } from './types'
 import './styles.less'
+import { clone } from '@formily/shared'
 
 const SchemaField = createSchemaField({
   components: {
@@ -40,7 +41,18 @@ export const DataSettingPanel: React.FC<IDataSettingPanelProps> = observer(
       })
       return createForm({
         values,
-        effects: effects,
+        effects: () => {
+          onFieldValueChange('map[0].value', field => {
+            const newDataSource = clone(props?.treeDataSource?.dataSource)
+            traverseTree(newDataSource, (dataItem) => {
+              if (dataItem.key === props.treeDataSource.selectedKey) {
+                dataItem.title = field.value
+                dataItem.map[0].value = field.value
+              }
+            })
+            props.treeDataSource.dataSource = newDataSource
+          })
+        },
       })
     }, [
       props.treeDataSource.selectedKey,
@@ -106,6 +118,9 @@ export const DataSettingPanel: React.FC<IDataSettingPanelProps> = observer(
                     x-decorator="FormItem"
                     name="value"
                     x-component="ValueInput"
+                    x-component-props={
+                      { include: ['TEXT', 'NUMBER', 'BOOLEAN'] }
+                    }
                   />
                   <SchemaField.Void
                     x-component="ArrayItems.Remove"

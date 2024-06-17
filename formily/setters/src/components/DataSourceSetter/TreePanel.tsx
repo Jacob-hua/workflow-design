@@ -124,6 +124,7 @@ export const TreePanel: React.FC<ITreePanelProps> = observer((props) => {
                 ]
               props.treeDataSource.dataSource = dataSource.concat({
                 key: uuid,
+                title: initialKeyValuePairs[0].value,
                 duplicateKey: uuid,
                 map: initialKeyValuePairs,
                 children: [],

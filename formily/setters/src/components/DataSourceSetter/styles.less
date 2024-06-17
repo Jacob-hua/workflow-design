@@ -29,6 +29,13 @@
         color: @primary-color;
       }
     }
+
+    span:first-child {
+      width: 70%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 
   &-layout {
@@ -40,11 +47,16 @@
     .@{ant-prefix}-tree-treenode {
       padding-right: 10px;
       white-space: nowrap;
+      width: 100%;
 
       &:hover {
         .dn-data-source-setter-node-title-icon {
           opacity: 1;
         }
+      }
+
+      .ant-tree-node-content-wrapper {
+        overflow: hidden;
       }
     }
 

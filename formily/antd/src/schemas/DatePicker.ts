@@ -93,21 +93,21 @@ export const DatePicker: ISchema = {
         }
       }
     },
-    showTime: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      "x-component": 'Switch',
-      'x-visible': false,
-      default: false,
-      'x-reactions': {
-        dependencies: ['.picker'],
-        fulfill: {
-          state: {
-            value: '{{$deps[0] !== "date"}}'
-          }
-        }
-      }
-    },
+    // showTime: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   "x-component": 'Switch',
+    //   'x-visible': false,
+    //   default: false,
+    //   'x-reactions': {
+    //     dependencies: ['.picker'],
+    //     fulfill: {
+    //       state: {
+    //         value: '{{$deps[0] !== "date"}}'
+    //       }
+    //     }
+    //   }
+    // },
     allowClear: {
       type: 'boolean',
       'x-decorator': 'FormItem',

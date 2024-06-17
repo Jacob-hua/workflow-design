@@ -40,7 +40,9 @@ export const Title: React.FC<ITitleProps> = observer((props) => {
       return (
         <TextWidget token="SettingComponents.DataSourceSetter.defaultTitle" />
       )
-    else return nodeTitle + ''
+    else {
+      return nodeTitle + ''
+    }
   }
 
   return (
@@ -66,6 +68,7 @@ export const Title: React.FC<ITitleProps> = observer((props) => {
                 ]
                 data[i].children.push({
                   key: uuid,
+                  title: map[0].value,
                   duplicateKey: uuid,
                   map: map,
                   children: [],
