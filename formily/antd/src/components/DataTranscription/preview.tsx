@@ -41,10 +41,7 @@ DataTranscription.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'DataTranscription',
   designerProps: {
-    propsSchema: createVoidFieldSchema(
-      AllSchemas.DataTranscription,
-      'DataTranscription'
-    ),
+    propsSchema: createVoidFieldSchema(AllSchemas.DataTranscription),
   },
   designerLocales: AllLocales.DataTranscription,
 })
@@ -55,7 +52,8 @@ DataTranscription.Resource = createResource({
     {
       componentName: 'Field',
       props: {
-        type: 'void',
+        type: 'Object',
+        'x-decorator': 'FormItem',
         'x-component': 'DataTranscription',
       },
     },

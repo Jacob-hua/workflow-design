@@ -13,5 +13,4 @@ export * from './ArrayCards'
 export * from './Text'
 export * from './Slider'
 export * from './RangePicker'
-
- 
+export * from './Abnormal'

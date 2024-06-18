@@ -3,7 +3,7 @@ export const DisplayFormily = {
     title: '知识库组件',
     settings: {
       'x-component-props': {
-        httpUrl: '请求地址',
+        isShowInsCode: '实例树',
       },
     },
   },
@@ -11,7 +11,7 @@ export const DisplayFormily = {
     title: 'Display',
     settings: {
       'x-component-props': {
-        httpUrl: 'httpUrl',
+        isShowInsCode: 'isShowInsCode',
       },
     },
   },

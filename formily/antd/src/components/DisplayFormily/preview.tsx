@@ -1,7 +1,7 @@
 import React from 'react'
 // import { createForm } from '@formily/core'
 import { DnFC } from '@designable/react'
-import { Card as AntdCard } from 'antd'
+import { Card as AntdCard, Input } from 'antd'
 import { createBehavior, createResource } from '@designable/core'
 // import { observer } from '@formily/reactive-react'
 // import { DroppableWidget } from '@designable/react'
@@ -56,11 +56,20 @@ export const Display: DnFC<any> = (props) => {
         <span data-content-editable="x-component-props.title">知识库组件</span>
       }
     >
+      {props.isShowInsCode ? (
+        <div className="form-data">
+          <label>实例:</label>
+          <Input
+            className="input-wrapper"
+            type="text"
+            style={{ width: '500px' }}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
       <div className="display-http">本组件将自动拉取工单关联的知识库细项</div>
     </AntdCard>
-    // <Container>
-    //   {props.children}
-    // </Container>
   )
 }
 
@@ -82,6 +91,10 @@ Display.Resource = createResource({
       props: {
         type: 'void',
         'x-component': 'Display',
+        'x-component-props': {
+          httpUrl: '/pc/common/instance/knowledge/',
+          isShowInsCode: false,
+        },
       },
     },
   ],
