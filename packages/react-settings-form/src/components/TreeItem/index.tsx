@@ -1,147 +1,74 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Tree, Select } from 'antd'
 import './styles.less'
 
 export const TreeItem: React.FC<any> = (props) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Workflow-Platform-Authorization':
+      'R7P+1X8OQrdDGO6B+G4ZkRHtp1DTIZdvq+aNXa9UR5hViubDu7zIgbThItXx9xQnxG2ZFmYPzr4W0BLZDHww17BVnErrU8etYZPMRdJCArvNYvgPbpDocH6xaOoq+XlGd4germfwf3CcovUg+WFs6wWB4vtSSJVvNZYihnHLbxyVRWtoCjljS8IZkb9GONCdh0FBHP2rzWLOIaY794mclbbUWQ1mW3YIIVLFiRrf6fstpCTSZVZ7N+0K7uo0IV/6s//PmFWwVe6ELiCpBfXjUM6Ri1NOb46WQZksIFX+kggR/V+mIbEE/+cM+RNQXcnKVEJDmpAnfByAzd34d8eZ6UtmujQOGL3Y5rAJRRKXD3WakSYBGMLrv2wC0Lz0ckmUepH09co4C/uHyddds+sE/8nmb2y4vXFIpnj9hLyyU7+Zvh2or/FBP4UsuIHK0uG5U/e0tC+siEphsXq2ZR9jwNrvIHF0UnshnG7D67duOEXSUNhCoLKJfnrhLEMKF+rulHtnljRURyAlqMgo929HoWQYnM3kDcrgfo9giyRp7pZyq87xjNch6ylIKOK0qYIGWmnG9KArJRLyIeo345j5YKeIls1OdfHyGBERZp7LvDbB44H4KiIb31U2dkHpDx9nwBuUYx6I3bWXVFaKdPKxRr4iRylWsMvZgegi5pLzW2Xvak6NCn4VbiK3Zqj3KepTl/6rsgQJY3GPDlzmfwNhsO9qTo0KfhVuIrdmqPcp6lOwr5qZbkyflBbFn+xEVgWVjkIf0y30TiwlyURiWCbLhX1jKxlfYpizH3Uzl4DImpvANJdxlXrXc+bak/TXcz+agQhCO4GgomuvxlRmyX/a34vKeCBu3EneCmX5jaQYH5+8OrQbnwedEMkQmbTSWGwrHaSvDd61//TcAHzpLIbGejczr6TBEA3mH8WYFH3BWtFY4td9P/0eebVPxyMFwySLcuZoxcPUDdYrA29cn4BRK08lvaqrUP0ZO4liG+XiYHr+2K/KmNDhwrlLc/Vp0lGqAYfWPJbwXtUFzUPc8Pn4prKREKq1bC/Mk3WdLWXjBbDkt2HbDtT1IP/WEFCnaYXM9kA9prw/ULjSoL1qmzx9xMN2eMyFI6Hvs4oYFzT1BudiJhwx+BKFRdpKndZiYf/VTYABLmiqEVVbEnvjbB+gjkkDDiKWrS3Io+Qu5ujH2eSXjOHeeyllIcVRET3Ls0uK+XdQqS2mHoZ6zdyUIVyYnN3mZxhIVUOTZ+f6SySSQJEHQQx07zV2TqJO0pI80FuHKH1pFFR6zgVoW06JKAA+K7lVoLTMxjQ8TaL/BXhh/NMemtva/huAqkBgiyF/d5JCtDdMThpBXCzwJMideh2482Tfp24hkx4ey8tqY/1VV8WqbRHKhPjhpr+bk56mNm5jnws03Jh4byV+uEcQY8tsmvg16yp1zC0QUOW0L0ZCT6z4JQT/oY/Uii+nXKW1MBBD5oCJvDhsT8QUQd+fEVjIIg==',
+  }
+  const getTreeData = async () => {
+    const result = await fetch(
+      '/workflow/workflow/design/form/sec/model/trees',
+      {
+        method: 'GET',
+        headers,
+      }
+    )
+    result.json().then((res) => {
+      setTreeData(res.data)
+      if (props.value?.key) {
+        getpropertiesData(props.value?.key)
+      }
+    })
+  }
+  const getpropertiesData = async (code) => {
+    const result = await fetch(
+      '/workflow/workflow/design/form/sec/model/props',
+      {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+          dataCode: code,
+          propGroup: 'dynamic',
+          page: 1,
+          limit: 1000,
+        }),
+      }
+    )
+    result.json().then((res) => {
+      setEquipmentList(res.data.props ?? [])
+    })
+  }
+  useEffect(() => {
+    getTreeData()
+  }, [])
   const loop = (data) =>
     data.map((item) => {
       if (item.children && item.children.length) {
         return (
-          <Tree.TreeNode key={item.dataCode} title={item.name}>
+          <Tree.TreeNode key={item.dataCode} title={item.modelName}>
             {loop(item.children)}
           </Tree.TreeNode>
         )
       }
-      return <Tree.TreeNode key={item.dataCode} title={item.name} />
+      return <Tree.TreeNode key={item.dataCode} title={item.modelName} />
     })
-  const [treeData] = useState<Array<any>>([
-    {
-      id: '1644597570006728705',
-      name: '工业综合能源',
-      type: 'project',
-      children: [
-        {
-          id: '1644597648800923649',
-          name: '制冷系统',
-          type: 'system',
-          children: [],
-          dataCode: 'PGY02_SZL01_ST00000_U00000_EQ000000000_MP0000',
-        },
-        {
-          id: '1655756865398190081',
-          name: '供暖系统',
-          type: 'system',
-          children: [],
-          dataCode: 'PGY02_SGN01_ST00000_U00000_EQ000000000_MP0000',
-        },
-        {
-          id: '1655757372401463298',
-          name: '配电系统',
-          type: 'system',
-          children: [],
-          dataCode: 'PGY02_SPD01_ST00000_U00000_EQ000000000_MP0000',
-        },
-        {
-          id: '1661649373947281409',
-          name: '充电系统',
-          type: 'system',
-          children: [],
-          dataCode: 'PGY02_SCD01_ST00000_U00000_EQ000000000_MP0000',
-        },
-        {
-          id: '1661650497991393282',
-          name: '光伏系统',
-          type: 'system',
-          children: [],
-          dataCode: 'PGY02_SGFXT_ST00000_U00000_EQ000000000_MP0000',
-        },
-        {
-          id: '1661672747025088514',
-          name: '新风系统',
-          type: 'system',
-          children: [],
-          dataCode: 'PGY02_SXF01_ST00000_U00000_EQ000000000_MP0000',
-        },
-        {
-          id: '1662699228866068482',
-          name: '储能系统',
-          type: 'system',
-          children: [],
-          dataCode: 'PGY02_SCN01_ST00000_U00000_EQ000000000_MP0000',
-        },
-        {
-          id: '1684023765117222914',
-          name: '制氢系统',
-          type: 'system',
-          children: [],
-          dataCode: 'PGY02_SZQ01_ST00000_U00000_EQ000000000_MP0000',
-        },
-        {
-          id: '1686977041627906050',
-          name: 'zlxt',
-          type: 'system',
-          children: [],
-          dataCode: 'PGY02_Sfdfd_ST00000_U00000_EQ000000000_MP0000',
-        },
-        {
-          id: '1690931005359177729',
-          name: '风电系统',
-          type: 'system',
-          children: [],
-          dataCode: 'PGY02_SFDXT_ST00000_U00000_EQ000000000_MP0000',
-        },
-        {
-          id: '1715172468221591554',
-          name: '供水系统',
-          type: 'system',
-          children: [],
-          dataCode: 'PGY02_SSS01_ST00000_U00000_EQ000000000_MP0000',
-        },
-        {
-          id: '1703696946931294210',
-          name: '冷负荷',
-          type: 'load',
-          children: [],
-          dataCode: 'PGY02_S0000_ST00000_U00000_FH0000LFH01_MP0000',
-        },
-        {
-          id: '1710901346750746625',
-          name: '热负荷',
-          type: 'load',
-          children: [],
-          dataCode: 'PGY02_S0000_ST00000_U00000_FH0000RFH01_MP0000',
-        },
-        {
-          id: '1710901405332590594',
-          name: '电负荷',
-          type: 'load',
-          children: [],
-          dataCode: 'PGY02_S0000_ST00000_U00000_FH0000DFH01_MP0000',
-        },
-      ],
-      dataCode: 'PGY02_S0000_ST00000_U00000_EQ000000000_MP0000',
-    },
+  const [treeData, setTreeData] = useState<Array<any>>([])
+  const [equipmentList, setEquipmentList] = useState<Array<any>>([
+    { propName: '设备1', propCode: 'eq1' },
+    { propName: '设备2', propCode: 'eq2' },
+    { propName: '设备3', propCode: 'eq3' },
+    { propName: '设备4', propCode: 'eq4' },
+    { propName: '设备5', propCode: 'eq5' },
+    { propName: '设备6', propCode: 'eq6' },
+    { propName: '设备7', propCode: 'eq7' },
+    { propName: '设备8', propCode: 'eq8' },
+    { propName: '设备9', propCode: 'eq9' },
+    { propName: '设备10', propCode: 'eq10' },
+    { propName: '设备11', propCode: 'eq12' },
   ])
-  let equipmentList = [
-    { key: '设备1', value: 'eq1' },
-    { key: '设备2', value: 'eq2' },
-    { key: '设备3', value: 'eq3' },
-    { key: '设备4', value: 'eq4' },
-    { key: '设备5', value: 'eq5' },
-    { key: '设备6', value: 'eq6' },
-    { key: '设备7', value: 'eq7' },
-    { key: '设备8', value: 'eq8' },
-    { key: '设备9', value: 'eq9' },
-    { key: '设备10', value: 'eq10' },
-    { key: '设备11', value: 'eq12' },
-    { key: '设备12', value: 'eq13' },
-    { key: '设备14', value: 'eq14' },
-    { key: '设备15', value: 'eq15' },
-    { key: '设备16', value: 'eq16' },
-    { key: '设备17', value: 'eq17' },
-    { key: '设备18', value: 'eq18' },
-    { key: '设备19', value: 'eq19' },
-  ]
 
   const [selectData, setSelectData] = useState<Array<any>>(
     props.value?.propertiesList ?? []
@@ -149,6 +76,7 @@ export const TreeItem: React.FC<any> = (props) => {
   let treeDataItem = props.value ?? { key: '', title: '', propertiesList: [] }
   const handlerChooseTreeItem = (_, e) => {
     treeDataItem = { key: e.node.key, title: e.node.title, propertiesList: [] }
+    getpropertiesData(e.node.key)
     props.onChange(treeDataItem)
     setSelectData([])
   }
@@ -178,8 +106,8 @@ export const TreeItem: React.FC<any> = (props) => {
         >
           {equipmentList.map((itm) => {
             return (
-              <Select.Option value={itm.value} key={itm.value}>
-                {itm.key}
+              <Select.Option value={itm.propCode} key={itm.propCode}>
+                {itm.propName}
               </Select.Option>
             )
           })}

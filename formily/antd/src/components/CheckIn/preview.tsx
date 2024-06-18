@@ -10,9 +10,12 @@ import { DroppableWidget } from '@designable/react'
 import './styles.less'
 
 export const CheckIn: DnFC<any> = observer((props) => {
-  const isArray =
-    Object.prototype.toString.call(props.children.props.children[0]) ===
-    '[object Array]'
+  let isArray = false
+  if (props.children) {
+    isArray =
+      Object.prototype.toString.call(props.children?.props?.children[0]) ===
+      '[object Array]'
+  }
   return (
     <AntdCard
       className="display-wrapper"
@@ -23,8 +26,8 @@ export const CheckIn: DnFC<any> = observer((props) => {
     >
       <DroppableWidget>
         {!isArray
-          ? props.children.props.children[0]
-          : props.children.props.children[0].filter(
+          ? props.children?.props?.children[0]
+          : props.children?.props?.children[0].filter(
               (item: any) => item.key.indexOf('CheckIn') < 0
             )}
       </DroppableWidget>
@@ -37,7 +40,7 @@ CheckIn.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'CheckIn',
   designerProps: {
-    propsSchema: createVoidFieldSchema(AllSchemas.CheckIn, 'CheckIn'),
+    propsSchema: createVoidFieldSchema(AllSchemas.CheckIn),
   },
   designerLocales: AllLocales.CheckIn,
 })

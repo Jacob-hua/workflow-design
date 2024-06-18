@@ -3,7 +3,6 @@ import { DnFC } from '@designable/react'
 import {
   Card as AntdCard,
   Button as AntdButton,
-  Form as AntdForm,
   Select as AntdSelect,
   Input as AntdInput,
   DatePicker as AntdDatePicker,
@@ -33,16 +32,16 @@ const setId = () => {
 
 const AbnormalItem: DnFC<AbnormalItemObj> = (props) => {
   let timer = null
-  const formItemLayout = {
-    labelCol: {
-      xs: { span: 24 },
-      sm: { span: 4 },
-    },
-    wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 16 },
-    },
-  }
+  // const formItemLayout = {
+  //   labelCol: {
+  //     xs: { span: 24 },
+  //     sm: { span: 4 },
+  //   },
+  //   wrapperCol: {
+  //     xs: { span: 24 },
+  //     sm: { span: 16 },
+  //   },
+  // }
   const equipmentList = [
     { key: '设备1', value: '设备1' },
     { key: '设备2', value: '设备2' },
@@ -86,43 +85,59 @@ const AbnormalItem: DnFC<AbnormalItemObj> = (props) => {
   }
   return (
     <div className="abnormal-wrapper-item">
-      <AntdForm {...formItemLayout}>
-        <AntdForm.Item label="异常设备">
-          <AntdSelect onChange={handlerChangeEq}>
-            {equipmentList.map((itm) => {
-              return (
-                <AntdSelect.Option value={itm.value} key={itm.value}>
-                  {itm.key}
-                </AntdSelect.Option>
-              )
-            })}
-          </AntdSelect>
-        </AntdForm.Item>
-        <AntdForm.Item label="异常类型">
-          <AntdSelect onChange={handlerChangeType}>
-            {abnormalTypeList.map((itm) => {
-              return (
-                <AntdSelect.Option value={itm.value} key={itm.value}>
-                  {itm.key}
-                </AntdSelect.Option>
-              )
-            })}
-          </AntdSelect>
-        </AntdForm.Item>
-        <AntdForm.Item label="异常时间">
-          <AntdDatePicker
-            onChange={handlerChangeTime}
-            format="YYYY-MM-DD HH:mm"
-            showTime={{ defaultValue: moment('00:00', 'HH:mm') }}
-          ></AntdDatePicker>
-        </AntdForm.Item>
-        <AntdForm.Item label="异常描述">
-          <AntdInput.TextArea onChange={handlerChangeDesc} />
-        </AntdForm.Item>
-        <AntdForm.Item label="备注">
-          <AntdInput.TextArea onChange={handlerChangeMark} />
-        </AntdForm.Item>
-      </AntdForm>
+      <div style={{ marginBottom: '20px' }}>
+        <label style={{ width: '100px', textAlign: 'right' }}>异常设备:</label>
+        <AntdSelect
+          onChange={handlerChangeEq}
+          style={{ width: '500px', marginLeft: '20px' }}
+        >
+          {equipmentList.map((itm) => {
+            return (
+              <AntdSelect.Option value={itm.value} key={itm.value}>
+                {itm.key}
+              </AntdSelect.Option>
+            )
+          })}
+        </AntdSelect>
+      </div>
+      <div style={{ marginBottom: '20px' }}>
+        <label style={{ width: '100px', textAlign: 'right' }}>异常类型:</label>
+        <AntdSelect
+          onChange={handlerChangeType}
+          style={{ width: '500px', marginLeft: '20px' }}
+        >
+          {abnormalTypeList.map((itm) => {
+            return (
+              <AntdSelect.Option value={itm.value} key={itm.value}>
+                {itm.key}
+              </AntdSelect.Option>
+            )
+          })}
+        </AntdSelect>
+      </div>
+      <div style={{ marginBottom: '20px' }}>
+        <label style={{ width: '100px', textAlign: 'right' }}>异常时间:</label>
+        <AntdDatePicker
+          onChange={handlerChangeTime}
+          format="YYYY-MM-DD HH:mm"
+          showTime={{ defaultValue: moment('00:00', 'HH:mm') }}
+          style={{ width: '500px', marginLeft: '20px' }}
+        ></AntdDatePicker>
+      </div>
+      <div style={{ marginBottom: '20px' }}>
+        <label style={{ width: '100px', textAlign: 'right' }}>异常描述:</label>
+        <AntdInput.TextArea
+          onChange={handlerChangeDesc}
+          style={{ width: '500px', marginLeft: '20px' }}
+        />
+      </div>
+      <div style={{ marginBottom: '20px' }}>
+        <label style={{ width: '100px', textAlign: 'right' }}>备注:</label>
+        <AntdInput.TextArea
+          onChange={handlerChangeMark}
+          style={{ width: '500px', marginLeft: '20px' }}
+        />
+      </div>
     </div>
   )
 }
@@ -197,7 +212,8 @@ Abnormal.Resource = createResource({
     {
       componentName: 'Field',
       props: {
-        type: 'void',
+        type: 'Array<any>',
+        'x-decorator': 'FormItem',
         'x-component': 'Abnormal',
       },
     },
