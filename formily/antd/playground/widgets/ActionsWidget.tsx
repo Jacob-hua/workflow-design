@@ -17,6 +17,14 @@ export const ActionsWidget = observer(() => {
   }, [])
   return (
     <Space style={{ marginRight: 10 }}>
+    <Button
+      type="primary"
+      onClick={() => {
+        saveSchema(designer)
+      }}
+    >
+      <TextWidget>Save</TextWidget>
+    </Button>
       <Button
         type="default"
         onClick={() => {
@@ -24,14 +32,6 @@ export const ActionsWidget = observer(() => {
         }}
       >
         <TextWidget>取消</TextWidget>
-      </Button>
-      <Button
-        type="primary"
-        onClick={() => {
-          saveSchema(designer)
-        }}
-      >
-        <TextWidget>Save</TextWidget>
       </Button>
     </Space>
   )

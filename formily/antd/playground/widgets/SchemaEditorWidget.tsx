@@ -14,14 +14,26 @@ export interface ISchemaEditorWidgetProps {
 export const SchemaEditorWidget: React.FC<ISchemaEditorWidgetProps> = (
   props
 ) => {
-  return (
-    <MonacoInput
-      {...props}
-      value={JSON.stringify(transformToSchema(props.tree), null, 2)}
-      onChange={(value) => {
-        props.onChange?.(transformToTreeNode(JSON.parse(value)))
-      }}
-      language="json"
-    />
-  )
+  const defaultSchema = '{"form":{"labelCol":6,"warapperCol":12},"schema":{"type":"object","properties":{},"x-designable-id":"q0geqjk15nk"}}'
+  // const a = {
+  //   form: {
+  //     labelCol: 6,
+  //     warapperCol: 12
+  //   },
+  //   schema: {
+  //     type: 'object',
+  //     properties: {},
+  //     'x-designable-id': 'q0geqjk15nk'
+  //   }
+  // }
+return (
+  <MonacoInput
+    {...props}
+    value={JSON.stringify(transformToSchema(props.tree), null, 2)}
+    onChange={(value) => {
+      props.onChange?.(transformToTreeNode(JSON.parse(value || defaultSchema)))
+    }}
+    language="json"
+  />
+)
 }

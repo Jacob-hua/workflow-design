@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useEffect } from 'react'
+import React, { useRef, useContext, useEffect, useState } from 'react'
 import {
   TreeNode,
   ClosestPosition,
@@ -27,6 +27,10 @@ export interface IOutlineTreeNodeProps {
   workspaceId?: string
 }
 
+const componentList = [
+  'Input', 'TextArea', 'Select', 'Cascader', 'Radio', 'Checkbox', 'Slider', 'Rate', 'NumberPicker', 'DatePicker', 'RangePicker', 'ArrayCards', 'Upload', 'Switch', 'Text'
+]
+
 export const OutlineTreeNode: React.FC<IOutlineTreeNodeProps> = observer(
   ({ node, className, style, workspaceId }) => {
     const prefix = usePrefix('outline-tree-node')
@@ -37,6 +41,7 @@ export const OutlineTreeNode: React.FC<IOutlineTreeNodeProps> = observer(
     const cursor = useCursor()
     const selection = useSelection(workspaceId)
     const moveHelper = useMoveHelper(workspaceId)
+    // const [paintFlag, setPaintFlag] = useState(true)
 
     useEffect(() => {
       return engine.subscribeTo(DragMoveEvent, () => {
@@ -98,6 +103,13 @@ export const OutlineTreeNode: React.FC<IOutlineTreeNodeProps> = observer(
     }, [node, selection, moveHelper])
 
     if (!node) return null
+    let paintFlag = true
+    if (node !== node.root) {
+      const componentName = node?.props['x-component']
+      if (!componentName) paintFlag = false
+      else if (!componentList.includes(componentName)) paintFlag = false
+      else paintFlag = true
+    }
 
     const renderIcon = (node: TreeNode) => {
       const icon = node.designerProps.icon
@@ -132,55 +144,56 @@ export const OutlineTreeNode: React.FC<IOutlineTreeNodeProps> = observer(
         className={cls(prefix, className, 'expanded')}
         data-designer-outline-node-id={node.id}
       >
-        <div className={prefix + '-header'}>
-          <div
-            className={prefix + '-header-head'}
-            style={{
-              left: -node.depth * 16,
-              width: node.depth * 16,
-            }}
-          ></div>
-          <div className={prefix + '-header-content'}>
-            <div className={prefix + '-header-base'}>
-              {(node?.children?.length > 0 || node === node.root) && (
-                <div
-                  className={prefix + '-expand'}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    e.stopPropagation()
-                    if (ref.current?.classList?.contains('expanded')) {
-                      ref.current?.classList.remove('expanded')
-                    } else {
-                      ref.current?.classList.add('expanded')
-                    }
-                  }}
-                >
-                  <IconWidget infer="Expand" size={10} />
-                </div>
-              )}
-              <div className={prefix + '-icon'}>{renderIcon(node)}</div>
-              <div className={prefix + '-title'}>{renderTitle(node)}</div>
-            </div>
+        {(paintFlag) &&
+          <div className={prefix + '-header'}>
             <div
-              className={prefix + '-header-actions'}
-              data-click-stop-propagation
-            >
-              {renderActions(node)}
-              {node !== node.root && (
-                <IconWidget
-                  className={cls(prefix + '-hidden-icon', {
-                    hidden: node.hidden,
-                  })}
-                  infer={node.hidden ? 'EyeClose' : 'Eye'}
-                  size={14}
-                  onClick={() => {
-                    node.hidden = !node.hidden
-                  }}
-                />
-              )}
+              className={prefix + '-header-head'}
+              style={{
+                left: -node.depth * 16,
+                width: node.depth * 16,
+              }}
+            ></div>
+            <div className={prefix + '-header-content'}>
+              <div className={prefix + '-header-base'}>
+                {(node?.children?.length > 0 || node === node.root) && (
+                  <div
+                    className={prefix + '-expand'}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      if (ref.current?.classList?.contains('expanded')) {
+                        ref.current?.classList.remove('expanded')
+                      } else {
+                        ref.current?.classList.add('expanded')
+                      }
+                    }}
+                  >
+                    <IconWidget infer="Expand" size={10} />
+                  </div>
+                )}
+                <div className={prefix + '-icon'}>{renderIcon(node)}</div>
+                <div className={prefix + '-title'}>{renderTitle(node)}</div>
+              </div>
+              <div
+                className={prefix + '-header-actions'}
+                data-click-stop-propagation
+              >
+                {renderActions(node)}
+                {node !== node.root && (
+                  <IconWidget
+                    className={cls(prefix + '-hidden-icon', {
+                      hidden: node.hidden,
+                    })}
+                    infer={node.hidden ? 'EyeClose' : 'Eye'}
+                    size={14}
+                    onClick={() => {
+                      node.hidden = !node.hidden
+                    }}
+                  />
+                )}
+              </div>
             </div>
-          </div>
-        </div>
+          </div>}
         <div className={prefix + '-children'}>
           {node.children?.map((child) => {
             return (
