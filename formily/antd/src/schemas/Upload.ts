@@ -21,7 +21,9 @@ export const Upload: ISchema & { Dragger?: ISchema } = {
       'x-component': 'Select',
       'x-component-props': {
         mode: 'multiple',
+        optionLabelProp: 'value'
       },
+      default: ['.jpeg, .jpg, .png, .gif']
     },
     // action: {
     //   'x-decorator': 'FormItem',

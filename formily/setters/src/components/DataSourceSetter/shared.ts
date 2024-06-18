@@ -3,6 +3,7 @@ import { IDataSourceItem, INodeItem } from './types'
 
 export interface INode {
   key?: string
+  title?: string,
   map?: any
   children?: INode[]
   duplicateKey?: string

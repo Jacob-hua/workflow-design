@@ -20,6 +20,7 @@ export const Select: React.FC<SelectProps<any>> = connect(
           ) : (
             props.suffixIcon
           ),
+        optionFilterProp: 'label',
         getPopupContainer: (triggerNode) => triggerNode.parentNode,
       }
     }

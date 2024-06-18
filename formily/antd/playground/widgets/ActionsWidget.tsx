@@ -18,25 +18,20 @@ export const ActionsWidget = observer(() => {
   return (
     <Space style={{ marginRight: 10 }}>
       <Button
-        type="primary"
-        onClick={() => {
-          saveSchema(designer)
-          // if ((window as any).__POWERED_BY_QIANKUN__) {
-          //   navigate('/preview', {
-          //     state: transformToSchema(designer.getCurrentTree()),
-          //   })
-          // }
-        }}
-      >
-        <TextWidget>Save</TextWidget>
-      </Button>
-      <Button
         type="default"
         onClick={() => {
           cancle()
         }}
       >
         <TextWidget>取消</TextWidget>
+      </Button>
+      <Button
+        type="primary"
+        onClick={() => {
+          saveSchema(designer)
+        }}
+      >
+        <TextWidget>Save</TextWidget>
       </Button>
     </Space>
   )
