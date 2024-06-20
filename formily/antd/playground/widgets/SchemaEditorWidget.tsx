@@ -14,7 +14,7 @@ export interface ISchemaEditorWidgetProps {
 export const SchemaEditorWidget: React.FC<ISchemaEditorWidgetProps> = (
   props
 ) => {
-  const defaultSchema = '{"form":{"labelCol":6,"warapperCol":12},"schema":{"type":"object","properties":{},"x-designable-id":"q0geqjk15nk"}}'
+  const defaultSchema = '{"form":{"labelCol":6,"warapperCol":12},"schema":{"type":"object","properties":{}}}'
   // const a = {
   //   form: {
   //     labelCol: 6,
