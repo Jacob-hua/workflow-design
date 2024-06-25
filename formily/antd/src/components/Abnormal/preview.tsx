@@ -89,7 +89,7 @@ const AbnormalItem: DnFC<AbnormalItemObj> = (props) => {
         <label style={{ width: '100px', textAlign: 'right' }}>异常设备:</label>
         <AntdSelect
           onChange={handlerChangeEq}
-          style={{ width: '500px', marginLeft: '20px' }}
+          style={{ width: 'calc(100% - 160px)', marginLeft: '20px' }}
         >
           {equipmentList.map((itm) => {
             return (
@@ -104,7 +104,7 @@ const AbnormalItem: DnFC<AbnormalItemObj> = (props) => {
         <label style={{ width: '100px', textAlign: 'right' }}>异常类型:</label>
         <AntdSelect
           onChange={handlerChangeType}
-          style={{ width: '500px', marginLeft: '20px' }}
+          style={{ width: 'calc(100% - 160px)', marginLeft: '20px' }}
         >
           {abnormalTypeList.map((itm) => {
             return (
@@ -121,21 +121,21 @@ const AbnormalItem: DnFC<AbnormalItemObj> = (props) => {
           onChange={handlerChangeTime}
           format="YYYY-MM-DD HH:mm"
           showTime={{ defaultValue: moment('00:00', 'HH:mm') }}
-          style={{ width: '500px', marginLeft: '20px' }}
+          style={{ width: 'calc(100% - 160px)', marginLeft: '20px' }}
         ></AntdDatePicker>
       </div>
       <div style={{ marginBottom: '20px' }}>
         <label style={{ width: '100px', textAlign: 'right' }}>异常描述:</label>
         <AntdInput.TextArea
           onChange={handlerChangeDesc}
-          style={{ width: '500px', marginLeft: '20px' }}
+          style={{ width: 'calc(100% - 160px)', marginLeft: '20px' }}
         />
       </div>
       <div style={{ marginBottom: '20px' }}>
         <label style={{ width: '100px', textAlign: 'right' }}>备注:</label>
         <AntdInput.TextArea
           onChange={handlerChangeMark}
-          style={{ width: '500px', marginLeft: '20px' }}
+          style={{ width: 'calc(100% - 160px)', marginLeft: '20px' }}
         />
       </div>
     </div>

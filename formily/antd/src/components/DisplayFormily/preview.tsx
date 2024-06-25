@@ -14,40 +14,6 @@ import { AllLocales } from '../../locales'
 import './index.less'
 
 export const Display: DnFC<any> = (props) => {
-  // const [schemaList] = useState<any>([])
-  // const options: any = {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   },
-  //   body: JSON.stringify({
-  //     procinstId: '83200430-efaa-4783-94a6-40bcb1bd10f8_test'
-  //   })
-  // }
-
-  // const getData = async () => {
-  //   const result: Response | void = await fetch(props.httpUrl, options).catch(err => {
-  //     console.log(err)
-  //   });
-  //   const list = []
-  //   if (!result) return;
-  //   const datas = await result.json()
-  //   if (datas.code === '200') {
-  //     datas.data.forEach(item => {
-  //       list.push({
-  //         contentId: item.contentId,
-  //         nodeCode: item.nodeCode,
-  //         content: item.content ? JSON.parse(item.content) : {}
-  //       })
-  //       console.log(JSON.parse(item.content))
-  //     })
-  //     useSchemaList(list)
-  //     console.log(schemaList)
-  //   }
-  // }
-
-  // useEffect(() => {}, [props.httpUrl])
-  // useEffect(() => {}, [schemaList.httpUrl])
   return (
     <AntdCard
       className="display-wrapper"
@@ -89,10 +55,12 @@ Display.Resource = createResource({
     {
       componentName: 'Field',
       props: {
-        type: 'void',
+        type: 'Array<any>',
         'x-component': 'Display',
         'x-component-props': {
-          httpUrl: '/pc/common/instance/knowledge/',
+          'x-decorator': 'FormItem',
+          pcHttpUrl: '/zhyw/pc/common/instance/knowledge/',
+          appHttpUrl: '/zhyw/ap/common/instance/knowledge/',
           isShowInsCode: false,
         },
       },
