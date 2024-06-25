@@ -4,6 +4,7 @@ export const DisplayFormily = {
     settings: {
       'x-component-props': {
         isShowInsCode: '实例树',
+        defaultid: '唯一标识',
       },
     },
   },
@@ -12,6 +13,7 @@ export const DisplayFormily = {
     settings: {
       'x-component-props': {
         isShowInsCode: 'isShowInsCode',
+        defaultid: 'defaultId',
       },
     },
   },
