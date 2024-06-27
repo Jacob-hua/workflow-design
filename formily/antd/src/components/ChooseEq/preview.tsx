@@ -13,11 +13,7 @@ import './styles.less'
 
 export const ChooseEq: DnFC<any> = (props) => {
   const [eqList, setEqList] = useState<Array<string>>([''])
-  const equipmentList = [
-    { key: '设备1', value: '设备1' },
-    { key: '设备2', value: '设备2' },
-    { key: '设备3', value: '设备3' },
-  ]
+  const equipmentList = []
   const handlerChangeEq = (val: string, index: number) => {
     const newData = [...eqList]
     newData[index] = val
@@ -31,7 +27,7 @@ export const ChooseEq: DnFC<any> = (props) => {
       className="eq-wrapper"
       {...props}
       title={
-        <span data-content-editable="x-component-props.title">选择设备</span>
+        <span data-content-editable="x-component-props.title">设备选择</span>
       }
     >
       {eqList.map((item, index) => {

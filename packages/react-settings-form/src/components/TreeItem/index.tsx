@@ -59,26 +59,18 @@ export const TreeItem: React.FC<any> = (props) => {
       return <Tree.TreeNode key={item.dataCode} title={item.modelName} />
     })
   const [treeData, setTreeData] = useState<Array<any>>([])
-  const [equipmentList, setEquipmentList] = useState<Array<any>>([
-    { propName: '设备1', propCode: 'eq1' },
-    { propName: '设备2', propCode: 'eq2' },
-    { propName: '设备3', propCode: 'eq3' },
-    { propName: '设备4', propCode: 'eq4' },
-    { propName: '设备5', propCode: 'eq5' },
-    { propName: '设备6', propCode: 'eq6' },
-    { propName: '设备7', propCode: 'eq7' },
-    { propName: '设备8', propCode: 'eq8' },
-    { propName: '设备9', propCode: 'eq9' },
-    { propName: '设备10', propCode: 'eq10' },
-    { propName: '设备11', propCode: 'eq12' },
-  ])
+  const [equipmentList, setEquipmentList] = useState<Array<any>>([])
 
   const [selectData, setSelectData] = useState<Array<any>>(
     props.value?.propertiesList ?? []
   )
   let treeDataItem = props.value ?? { key: '', title: '', propertiesList: [] }
   const handlerChooseTreeItem = (_, e) => {
-    treeDataItem = { key: e.node.key, title: e.node.title, propertiesList: [] }
+    treeDataItem = {
+      key: e.node.key,
+      title: e.node.modelName,
+      propertiesList: [],
+    }
     getpropertiesData(e.node.key)
     props.onChange(treeDataItem)
     setSelectData([])
@@ -90,14 +82,24 @@ export const TreeItem: React.FC<any> = (props) => {
   }
   return (
     <div className="model-properties-wrapper">
-      <Tree
-        className="tree-data"
-        defaultExpandAll
-        selectedKeys={[props.value?.key]}
-        onSelect={handlerChooseTreeItem}
-      >
-        {loop(treeData)}
-      </Tree>
+      {treeData.length ? (
+        <Tree
+          className="tree-data"
+          defaultExpandedKeys={[props.value?.key]}
+          defaultSelectedKeys={[props.value?.key]}
+          fieldNames={{
+            title: 'modelName',
+            key: 'dataCode',
+            children: 'children',
+          }}
+          onSelect={handlerChooseTreeItem}
+          treeData={treeData}
+        >
+          {/* {loop(treeData)} */}
+        </Tree>
+      ) : (
+        <></>
+      )}
       <div className="properties-item">
         <label>属性</label>
         <Select

@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useEffect, useState } from 'react'
+import React, { useRef, useContext, useEffect } from 'react'
 import {
   TreeNode,
   ClosestPosition,
@@ -28,7 +28,26 @@ export interface IOutlineTreeNodeProps {
 }
 
 const componentList = [
-  'Input', 'TextArea', 'Select', 'Cascader', 'Radio', 'Checkbox', 'Slider', 'Rate', 'NumberPicker', 'DatePicker', 'RangePicker', 'ArrayCards', 'Upload', 'Switch', 'Text'
+  'Input',
+  'TextArea',
+  'Select',
+  'Cascader',
+  'Radio',
+  'Checkbox',
+  'Slider',
+  'Rate',
+  'NumberPicker',
+  'DatePicker',
+  'RangePicker',
+  'ArrayCards',
+  'Upload',
+  'Switch',
+  'Text',
+  'Display',
+  'Abnormal',
+  'ChooseEq',
+  'CheckIn',
+  'DataTranscription',
 ]
 
 export const OutlineTreeNode: React.FC<IOutlineTreeNodeProps> = observer(
@@ -144,7 +163,7 @@ export const OutlineTreeNode: React.FC<IOutlineTreeNodeProps> = observer(
         className={cls(prefix, className, 'expanded')}
         data-designer-outline-node-id={node.id}
       >
-        {(paintFlag) &&
+        {paintFlag && (
           <div className={prefix + '-header'}>
             <div
               className={prefix + '-header-head'}
@@ -193,7 +212,8 @@ export const OutlineTreeNode: React.FC<IOutlineTreeNodeProps> = observer(
                 )}
               </div>
             </div>
-          </div>}
+          </div>
+        )}
         <div className={prefix + '-children'}>
           {node.children?.map((child) => {
             return (

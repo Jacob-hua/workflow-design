@@ -42,16 +42,8 @@ const AbnormalItem: DnFC<AbnormalItemObj> = (props) => {
   //     sm: { span: 16 },
   //   },
   // }
-  const equipmentList = [
-    { key: '设备1', value: '设备1' },
-    { key: '设备2', value: '设备2' },
-    { key: '设备3', value: '设备3' },
-  ]
-  const abnormalTypeList = [
-    { key: '异常1', value: '异常1' },
-    { key: '异常2', value: '异常2' },
-    { key: '异常3', value: '异常3' },
-  ]
+  const equipmentList = []
+  const abnormalTypeList = []
   const handlerChangeEq = (val: string) => {
     props.handlerChangeDataByType(props.id, 'equipment', val)
   }
