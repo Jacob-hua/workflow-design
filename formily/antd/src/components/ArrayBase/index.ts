@@ -27,7 +27,7 @@ export const createArrayBehavior = (name: string) => {
         allowDrop(parent) {
           return parent.props['x-component'] === name
         },
-        propsSchema: createVoidFieldSchema(AllSchemas[name].Addition),
+        // propsSchema: createVoidFieldSchema(AllSchemas[name].Addition),
       },
       designerLocales: AllLocales.ArrayAddition,
     },
@@ -39,7 +39,7 @@ export const createArrayBehavior = (name: string) => {
         allowDrop(parent) {
           return parent.props['x-component'] === name
         },
-        propsSchema: createVoidFieldSchema(),
+        // propsSchema: createVoidFieldSchema(),
       },
       designerLocales: AllLocales.ArrayRemove,
     },
@@ -51,7 +51,7 @@ export const createArrayBehavior = (name: string) => {
         allowDrop(parent) {
           return parent.props['x-component'] === name
         },
-        propsSchema: createVoidFieldSchema(),
+        // propsSchema: createVoidFieldSchema(),
       },
       designerLocales: AllLocales.ArrayIndex,
     },
@@ -63,7 +63,7 @@ export const createArrayBehavior = (name: string) => {
         allowDrop(parent) {
           return parent.props['x-component'] === name
         },
-        propsSchema: createVoidFieldSchema(),
+        // propsSchema: createVoidFieldSchema(),
       },
       designerLocales: AllLocales.ArrayMoveUp,
     },
@@ -75,7 +75,7 @@ export const createArrayBehavior = (name: string) => {
         allowDrop(parent) {
           return parent.props['x-component'] === 'ArrayCards'
         },
-        propsSchema: createVoidFieldSchema(),
+        // propsSchema: createVoidFieldSchema(),
       },
       designerLocales: AllLocales.ArrayMoveDown,
     }

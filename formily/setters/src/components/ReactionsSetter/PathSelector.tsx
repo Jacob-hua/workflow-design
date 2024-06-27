@@ -69,6 +69,10 @@ const transformDataSource = (node: TreeNode) => {
         node.props['x-component-props']?.title ||
         node.props.name ||
         node.designerProps.title
+      let flag = false
+      if (node?.props?.['x-component'] === 'ArrayCards') {
+        flag = true
+      }
       const value = arrayNode
         ? transformRelativePath(arrayNode, node)
         : currentPath.join('.')
@@ -76,7 +80,7 @@ const transformDataSource = (node: TreeNode) => {
         label,
         value,
         node,
-        children: transformChildren(node.children, currentPath),
+        children: transformChildren(flag ? node.children[0].children : node.children, currentPath),
       })
     }, [])
   }
