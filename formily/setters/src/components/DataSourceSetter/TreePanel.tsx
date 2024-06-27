@@ -93,6 +93,30 @@ export const TreePanel: React.FC<ITreePanelProps> = observer((props) => {
     return expandKeys
   }
 
+  const handleChildrenKeys = (children, childKeys = []) => {
+    for(let child of children) {
+      if(child.children.length) {
+        childKeys.push(child.key)
+        handleChildrenKeys(child.children, childKeys)
+      }else {
+        childKeys.push(child.key)
+      }
+    }
+    return childKeys
+  }
+
+  const onExpand = (expandedKeysValue, {expanded, node}) => {
+    let expandedKeys = expandedKeysValue
+    if(!expanded){
+      const disExpandKeys = handleChildrenKeys(node.children)
+      expandedKeys = expandedKeys.filter(key => {
+        const index = disExpandKeys.findIndex(item => item === key)
+        return index === -1
+      })
+    }
+    setDefaultExpandedKeys(expandedKeys)
+  }
+
   useEffect(() => {
     const dataSource = props.treeDataSource.dataSource;
     const defaultKeys = handleDefaultExpand(dataSource)
@@ -144,11 +168,12 @@ export const TreePanel: React.FC<ITreePanelProps> = observer((props) => {
           defaultExpandAll={true}
           defaultExpandParent={true}
           autoExpandParent={true}
-          defaultExpandedKeys={defaultExpandedKeys}
+          expandedKeys={defaultExpandedKeys}
           showLine={{ showLeafIcon: false }}
           treeData={props.treeDataSource.dataSource}
           onDragEnter={() => { }}
           onDrop={dropHandler}
+          onExpand={onExpand}
           titleRender={(titleProps: INodeItem) => {
             return (
               <Title

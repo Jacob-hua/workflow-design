@@ -4,7 +4,7 @@ import { createSchemaField } from '@formily/react'
 import { Display } from '../../src/components/DisplayFormily'
 import { Abnormal } from '../../src/components/Abnormal'
 import { ChooseEq } from '../../src/components/ChooseEq'
-import { CheckIn } from '../../src/components/CheckIn'
+// import { CheckIn } from '../../src/components/CheckIn'
 import { DataTranscription } from '../../src/components/DataTranscription'
 
 import {
@@ -37,7 +37,7 @@ import {
   // ArrayCards,
 } from '@formily/antd'
 import { ArrayCards, TextArea, Radio, Checkbox, Upload, RangePicker, DatePicker, Select, Cascader } from '../../src/customComponents'
-import { Card, Slider, Rate } from 'antd'
+import { Card, Slider, Rate, Card as CheckIn } from 'antd'
 import { TreeNode } from '@designable/core'
 import { transformToSchema } from '@designable/formily-transformer'
 import { TestComp } from '../../src'
