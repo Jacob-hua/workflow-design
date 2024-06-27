@@ -20,6 +20,7 @@ const limitTreeDrag = ({ dropPosition }) => {
 export interface ITreePanelProps {
   treeDataSource: ITreeDataSource
   allowTree: boolean
+  allowDelete: boolean
   defaultOptionValue: {
     label: string
     value: any
@@ -178,6 +179,7 @@ export const TreePanel: React.FC<ITreePanelProps> = observer((props) => {
             return (
               <Title
                 {...titleProps}
+                allowDelete={props.allowDelete}
                 treeDataSource={props.treeDataSource}
               ></Title>
             )

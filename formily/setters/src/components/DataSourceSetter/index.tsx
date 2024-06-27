@@ -16,6 +16,7 @@ export interface IDataSourceSetterProps {
   onChange: (dataSource: IDataSourceItem[]) => void
   value: IDataSourceItem[]
   allowTree?: boolean
+  allowDelete?: boolean
   allowExtendOption?: boolean
   defaultOptionValue?: {
     label: string
@@ -31,6 +32,7 @@ export const DataSourceSetter: React.FC<IDataSourceSetterProps> = observer(
       value = [],
       onChange,
       allowTree = true,
+      allowDelete = true,
       allowExtendOption = true,
       defaultOptionValue,
       effects = () => {},
@@ -79,6 +81,7 @@ export const DataSourceSetter: React.FC<IDataSourceSetterProps> = observer(
               <TreePanel
                 defaultOptionValue={defaultOptionValue}
                 allowTree={allowTree}
+                allowDelete={allowDelete}
                 treeDataSource={treeDataSource}
               ></TreePanel>
             </div>

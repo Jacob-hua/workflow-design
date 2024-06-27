@@ -47,10 +47,11 @@ export const Title: React.FC<ITitleProps> = observer((props) => {
 
   return (
     <div className={prefix}>
-      <span style={{ marginRight: '5px' }}>
+      <span className={prefix + '-label'} style={{ marginRight: '5px' }}>
         {renderTitle(props?.map || [])}
       </span>
       <span style={{ display: 'flex', gap: '5px' }}>
+        {props.allowDelete &&
         <IconWidget
           className={prefix + '-icon'}
           infer="Add"
@@ -77,7 +78,7 @@ export const Title: React.FC<ITitleProps> = observer((props) => {
             })
             props.treeDataSource.dataSource = newDataSource
           }}
-        />
+        />}
         <IconWidget
           className={prefix + '-icon'}
           infer="Remove"
