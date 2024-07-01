@@ -51,7 +51,20 @@ export const DataSettingPanel: React.FC<IDataSettingPanelProps> = observer(
               }
             })
             props.treeDataSource.dataSource = newDataSource
-          })
+          }),
+            onFieldValueChange('map[1].value', field => {
+              const newDataSource = clone(props?.treeDataSource?.dataSource)
+              traverseTree(newDataSource, (dataItem) => {
+                console.log(dataItem);
+                console.log(field.value);
+
+                if (dataItem.key === props.treeDataSource.selectedKey) {
+                  // dataItem.title = field.value
+                  // dataItem.map[0].value = field.value
+                }
+              })
+              // props.treeDataSource.dataSource = newDataSource
+            })
         },
       })
     }, [

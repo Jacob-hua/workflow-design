@@ -53,6 +53,9 @@ export const Radio: ISchema = {
     enum: {
       'x-decorator': 'FormItem',
       'x-component': DataSourceSetter,
+      'x-component-props': {
+        allowDelete: false
+      }
     },
     'x-reactions': {
       'x-decorator': 'FormItem',
