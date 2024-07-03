@@ -7,11 +7,11 @@ export const CheckIn: ISchema = {
   type: 'void',
   'x-component': 'CollapseItem',
   properties: {
-    title: {
-      type: 'string',
-      'x-decorator': 'FormItem',
-      'x-component': 'Input',
-    },
+    // title: {
+    //   type: 'string',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Input',
+    // },
     'x-display': {
       type: 'string',
       enum: ['visible', 'hidden'],

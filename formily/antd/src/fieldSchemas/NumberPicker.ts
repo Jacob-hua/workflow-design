@@ -50,10 +50,10 @@ export const NumberPicker: ISchema = {
       'x-decorator': 'FormItem',
       'x-component': ReactionsSetter,
     },
-    'x-validator': {
-      type: 'array',
-      'x-component': ValidatorSetter,
-    },
+    // 'x-validator': {
+    //   type: 'array',
+    //   'x-component': ValidatorSetter,
+    // },
     required: {
       type: 'boolean',
       'x-decorator': 'FormItem',

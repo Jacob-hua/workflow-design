@@ -110,5 +110,16 @@ export const Slider: ISchema = {
       },
       'default': 1
     },
+    // marks: {
+    //    type: 'object',
+    //    'x-reactions': {
+    //     dependencies: ['.min', '.max'],
+    //     fulfill: {
+    //       state: {
+    //         value: '{{}}'
+    //       }
+    //     }
+    //    }
+    // }
   },
 }
