@@ -67,7 +67,7 @@ ChooseEq.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'ChooseEq',
   designerProps: {
-    propsSchema: createVoidFieldSchema(AllSchemas.ChooseEq),
+    propsSchema: createVoidFieldSchema(),
   },
   designerLocales: AllLocales.ChooseEq,
 })
@@ -79,7 +79,7 @@ ChooseEq.Resource = createResource({
       componentName: 'Field',
       props: {
         type: 'Array<any>',
-        'x-decorator': 'FormItem',
+        // 'x-decorator': 'FormItem',
         'x-component': 'ChooseEq',
       },
     },

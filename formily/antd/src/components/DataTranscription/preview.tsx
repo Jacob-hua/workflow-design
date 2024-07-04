@@ -53,7 +53,7 @@ DataTranscription.Resource = createResource({
       componentName: 'Field',
       props: {
         type: 'Object',
-        'x-decorator': 'FormItem',
+        // 'x-decorator': 'FormItem',
         'x-component': 'DataTranscription',
       },
     },

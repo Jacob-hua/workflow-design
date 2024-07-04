@@ -219,11 +219,11 @@ export const createVoidFieldSchema = (
             'x-decorator': 'FormItem',
             'x-component': ReactionsSetter,
           },
-          'x-decorator': {
-            type: 'string',
-            'x-decorator': 'FormItem',
-            'x-component': FormItemSwitcher,
-          },
+          // 'x-decorator': {
+          //   type: 'string',
+          //   'x-decorator': 'FormItem',
+          //   'x-component': FormItemSwitcher,
+          // },
         },
       },
       ...createComponentSchema(component, decorator),

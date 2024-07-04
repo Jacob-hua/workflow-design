@@ -193,7 +193,7 @@ Abnormal.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'Abnormal',
   designerProps: {
-    propsSchema: createVoidFieldSchema(AllSchemas.Abnormal),
+    propsSchema: createVoidFieldSchema(),
   },
   designerLocales: AllLocales.Abnormal,
 })
@@ -205,7 +205,7 @@ Abnormal.Resource = createResource({
       componentName: 'Field',
       props: {
         type: 'Array<any>',
-        'x-decorator': 'FormItem',
+        // 'x-decorator': 'FormItem',
         'x-component': 'Abnormal',
       },
     },

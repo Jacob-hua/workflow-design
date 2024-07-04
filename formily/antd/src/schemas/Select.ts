@@ -92,6 +92,7 @@ export const Select: ISchema = {
       type: 'boolean',
       'x-decorator': 'FormItem',
       'x-component': 'Switch',
+      'default': false
     },
     // virtual: {
     //   type: 'boolean',

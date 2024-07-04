@@ -2,9 +2,8 @@ import React from 'react'
 import { DnFC } from '@designable/react'
 import { Card as AntdCard } from 'antd'
 import { createBehavior, createResource } from '@designable/core'
-import { createVoidFieldSchema, createFieldSchema } from '../Field'
+import { createVoidFieldSchema } from '../Field'
 import { AllSchemas } from '../../schemas'
-import { FieldSchemas } from '../../fieldSchemas'
 import { AllLocales } from '../../locales'
 import { observer } from '@formily/reactive-react'
 import { DroppableWidget } from '@designable/react'
@@ -41,7 +40,7 @@ CheckIn.Behavior = createBehavior({
   extends: ['Field'],
   selector: (node) => node.props['x-component'] === 'CheckIn',
   designerProps: {
-    propsSchema: createFieldSchema(null, FieldSchemas.CheckIn),
+    propsSchema: createVoidFieldSchema(),
   },
   designerLocales: AllLocales.CheckIn,
 })
