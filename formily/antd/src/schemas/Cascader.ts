@@ -24,12 +24,15 @@ export const Cascader: ISchema = {
       'x-component-props': {
         defaultChecked: true,
       },
+      default: true
     },
-    changeOnSelect: {
-      type: 'boolean',
-      'x-decorator': 'FormItem',
-      'x-component': 'Switch',
-    },
+    // changeOnSelect: {
+    //   type: 'boolean',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Switch',
+    //   'x-visible': false,
+    //   'x-value': true,
+    // },
     // autoFocus: {
     //   type: 'boolean',
     //   'x-decorator': 'FormItem',
