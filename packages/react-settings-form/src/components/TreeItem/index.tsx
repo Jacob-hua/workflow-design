@@ -64,7 +64,12 @@ export const TreeItem: React.FC<any> = (props) => {
   const [selectData, setSelectData] = useState<Array<any>>(
     props.value?.propertiesList ?? []
   )
-  let treeDataItem = props.value ?? { key: '', title: '', propertiesList: [] }
+  let treeDataItem = props.value ?? {
+    key: '',
+    title: '',
+    code: '',
+    propertiesList: [],
+  }
   const handlerChooseTreeItem = (_, e) => {
     treeDataItem = {
       key: e.node.key,
@@ -111,7 +116,7 @@ export const TreeItem: React.FC<any> = (props) => {
         >
           {equipmentList.map((itm) => {
             return (
-              <Select.Option value={itm.propCode} key={itm.propCode}>
+              <Select.Option value={itm.propCode} key={itm.dataCode}>
                 {itm.propName}
               </Select.Option>
             )
