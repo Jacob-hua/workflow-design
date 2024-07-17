@@ -23,14 +23,24 @@ export const Display: DnFC<any> = (props) => {
       }
     >
       {props.isShowInsCode ? (
-        <div className="form-data">
-          <label>实例:</label>
-          <Input
-            className="input-wrapper"
-            type="text"
-            style={{ width: '500px' }}
-          />
-        </div>
+        <>
+          <div className="form-data">
+            <label>实例:</label>
+            <Input
+              className="input-wrapper"
+              type="text"
+              style={{ width: '500px' }}
+            />
+          </div>
+          <div className="form-data">
+            <label>知识细项类型:</label>
+            <Input
+              className="input-wrapper"
+              type="text"
+              style={{ width: '500px' }}
+            />
+          </div>
+        </>
       ) : (
         <></>
       )}
