@@ -1,9 +1,11 @@
 @import '~antd/lib/style/themes/dark.less';
+
 .model-properties-wrapper {
   margin-left: 0px;
   width: 230px;
   padding: 5px 10px;
   box-sizing: border-box;
+
   .tree-data {
     width: 230px;
     min-height: 50px;
@@ -11,22 +13,155 @@
     overflow: hidden;
     overflow-y: auto;
   }
+
   .properties-item {
     width: 230px;
     margin-top: 20px;
     display: flex;
+
     label {
       width: 50px;
       color: #fff;
       margin-right: 64px;
       margin-left: -45px;
     }
+
     .select-wrapper {
       width: 140px;
       height: 30px;
     }
   }
 }
+
 .ant-tree .ant-tree-node-content-wrapper.ant-tree-node-selected {
   background: #1890ff;
+}
+
+.dn-model-setter {
+  &-content {
+    display: grid;
+    grid-template-columns: 3fr 5fr;
+    grid-column-gap: 10px;
+  }
+
+  &-left {
+    display: grid;
+    grid-row-gap: 10px;
+  }
+
+  &-left-root {
+    border: 1px solid #545454;
+    padding: 10px;
+    border-radius: 4px;
+
+    &-header {
+      display: flex;
+      height: 50px;
+      border-bottom: 1px solid #545454;
+      width: 100%;
+      align-items: center;
+      padding-left: 10px;
+    }
+
+    &-content {
+      border: 1px solid #545454;
+      margin: 10px;
+      display: grid;
+      max-height: 200px;
+      overflow: auto;
+    }
+
+    &-item {
+      padding: 4px 10px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      
+      &:not(:last-child){
+        border-bottom: 1px solid #545454;
+      }
+
+      &-active {
+        background-color: #1890ff;
+      }
+    }
+  }
+
+  &-left-tree {
+    border: 1px solid #545454;
+    padding: 10px;
+    border-radius: 4px;
+
+    &-header {
+      display: flex;
+      height: 50px;
+      border-bottom: 1px solid #545454;
+      width: 100%;
+      align-items: center;
+      padding-left: 10px;
+      justify-content: space-between;
+    }
+
+    &-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 15px;
+      margin: 10px;
+      height: 425px;
+    }
+
+    &-system {
+      grid-row-gap: 10px;
+    }
+
+    &-unit {
+      height: 100%;
+      border: 1px solid #545454;
+      overflow: auto;
+    }
+
+    .publicAuxiliary {
+      height: 100%;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      grid-row-gap: 10px;
+      &-system-tree {
+        border: 1px solid #545454;
+        height: 100%;
+        overflow: auto;
+      }
+    }
+
+    .meteringTopology {
+      height: 100%;
+      &-system-tree {
+        border: 1px solid #545454;
+        height: 100%;
+        overflow: auto;
+      }
+    }
+  }
+
+  &-right {
+    border: 1px solid #545454;
+    padding: 10px;
+
+    &-header {
+      display: flex;
+      height: 50px;
+      border-bottom: 1px solid #545454;
+      width: 100%;
+      align-items: center;
+      padding-left: 10px;
+    }
+
+    &-tab {
+      margin: 20px 10px;
+    }
+
+    &-search {
+      margin: 0 10px 20px
+    }
+  }
 }
