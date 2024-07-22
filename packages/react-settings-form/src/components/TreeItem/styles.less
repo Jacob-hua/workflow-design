@@ -77,8 +77,8 @@
       display: flex;
       align-items: center;
       cursor: pointer;
-      
-      &:not(:last-child){
+
+      &:not(:last-child) {
         border-bottom: 1px solid #545454;
       }
 
@@ -113,12 +113,17 @@
 
     &-system {
       grid-row-gap: 10px;
+      height: 200px;
+      overflow: hidden;
+      overflow-y: auto;
     }
 
     &-unit {
       height: 100%;
       border: 1px solid #545454;
-      overflow: auto;
+      height: 425px;
+      overflow: hidden;
+      overflow-y: auto;
     }
 
     .publicAuxiliary {
@@ -129,7 +134,8 @@
       &-system-tree {
         border: 1px solid #545454;
         height: 100%;
-        overflow: auto;
+        overflow: hidden;
+        overflow-y: auto;
       }
     }
 
@@ -138,7 +144,8 @@
       &-system-tree {
         border: 1px solid #545454;
         height: 100%;
-        overflow: auto;
+        overflow: hidden;
+        overflow-y: auto;
       }
     }
   }
@@ -161,7 +168,7 @@
     }
 
     &-search {
-      margin: 0 10px 20px
+      margin: 0 10px 20px;
     }
   }
 }

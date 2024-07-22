@@ -1,12 +1,27 @@
-import React, { useState, useEffect, Fragment, useMemo } from 'react'
-import { Tree, Button, Modal, Radio, RadioChangeEvent, Form, Input, Table } from 'antd'
+import React, { useState, useEffect, Fragment } from 'react'
+import {
+  Tree,
+  Button,
+  Modal,
+  Radio,
+  RadioChangeEvent,
+  Form,
+  Input,
+  Table,
+} from 'antd'
 import './styles.less'
 import { observable } from '@formily/reactive'
 import { usePrefix } from '@designable/react'
 import { clone } from '@designable/shared'
 
-export const TreeItem: React.FC<any> = observable((props) => {
+// const TreeNodeSt: React.FC<any> = (props) => {
+//   console.log(props)
+//   return (
+//     props ? <Tree.TreeNode>123</Tree.TreeNode> : <></>
+//   )
+// }
 
+export const TreeItem: React.FC<any> = observable((props) => {
   const { value = {}, onChange } = props
   const headers = {
     'Content-Type': 'application/json',
@@ -35,7 +50,10 @@ export const TreeItem: React.FC<any> = observable((props) => {
 
   const [selectedProject, setSelectedProject] = useState(null)
 
-  const [selectedEquip, setSelectedEquip] = useState({ dataCode: value?.dataCode, modelName: value?.modelName })
+  const [selectedEquip, setSelectedEquip] = useState({
+    dataCode: value?.dataCode,
+    modelName: value?.modelName,
+  })
 
   const [selectedProps, setSelectedProps] = useState(value?.propertiesList)
 
@@ -43,15 +61,22 @@ export const TreeItem: React.FC<any> = observable((props) => {
 
   const [displayEquipment, setDisplayEquipment] = useState([])
 
-  const [systemType, setSystemType] = useState(value?.systemType ?? 'publicAuxiliary')
+  const [systemType, setSystemType] = useState(
+    value?.systemType ?? 'publicAuxiliary'
+  )
 
   const [equipmentType, setEquipmentType] = useState('dynamic')
 
   const [page, setPage] = useState(1)
 
+  const [publicAuxiliaryTree0, setPublicAuxiliaryTree0] = useState([])
   const [publicAuxiliaryTree1, setPublicAuxiliaryTree1] = useState([])
   const [publicAuxiliaryTree2, setPublicAuxiliaryTree2] = useState([])
+  const [meteringTopologyTree0, setMeteringTopologyTree0] = useState([])
   const [meteringTopologyTree1, setMeteringTopologyTree1] = useState([])
+
+  const [ctIdx, setCtIdx] = useState(null)
+  const [selectEqType, setSelectEqType] = useState('')
 
   const prefix = usePrefix('model-setter')
 
@@ -61,29 +86,161 @@ export const TreeItem: React.FC<any> = observable((props) => {
     setModalVisible(false)
   }
 
-  const getTreeData = async () => {
+  const getTreeItemByDataCode = (currentData) => {
+    return currentData?.children?.find((item) => {
+      if (item.dataCode === value.dataCode) {
+        return true
+      } else {
+        return getTreeItemByDataCode(item)
+      }
+    })
+  }
+
+  const getInitTreeData = (currentData) => {
+    if (!value.dataCode || value.dataCode === '') return
+    if (!value.ctIdx || value.ctIdx === '') return
+    if (!value.currentEqType || value.currentEqType === '') return
+    // if (value.systemType === 'publicAuxiliary') {
+    setPublicAuxiliaryTree0(() => {
+      const treeData = JSON.parse(JSON.stringify(currentData))
+      treeData.children?.forEach((item) => {
+        item.children = []
+      })
+      return [treeData]
+    })
+    if (value.ctIdx === 1 || value.ctIdx === 2) {
+      const currentTree = currentData.children?.find(
+        (item) => item.dataCode === value.dataCode
+      )
+      setCtIdx(value.ctIdx)
+      setPublicAuxiliaryTree1(() => {
+        const treeData = JSON.parse(JSON.stringify(currentTree ?? {}))
+        treeData?.children?.forEach((item) => {
+          item.children = []
+        })
+        return [treeData]
+      })
+      setPublicAuxiliaryTree2(() => {
+        return currentTree.children ? [currentTree.children[0]] : []
+      })
+    } else if (value.ctIdx === 3) {
+      const treeDataSt = getTreeItemByDataCode(currentData)
+      setCtIdx(value.ctIdx)
+      setPublicAuxiliaryTree1(() => {
+        const treeData = JSON.parse(JSON.stringify(treeDataSt ?? {}))
+        treeData?.children?.forEach((item) => {
+          item.children = []
+        })
+        return [treeData]
+      })
+      setPublicAuxiliaryTree2(() => {
+        return [getTreeItemByDataCode(treeDataSt)]
+      })
+    }
+  }
+
+  const getInitTreeDataSe = (currentData) => {
+    if (!value.dataCode || value.dataCode === '') return
+    if (!value.ctIdx || value.ctIdx === '') return
+    if (!value.currentEqType || value.currentEqType === '') return
+    const currentTree = getTreeItemByDataCode(currentData)
+    setCtIdx(value.ctIdx)
+    setMeteringTopologyTree0(() => {
+      const treeData = JSON.parse(JSON.stringify(currentData ?? {}))
+      treeData.children?.forEach((item) => {
+        item.children = []
+      })
+      return [treeData]
+    })
+    setMeteringTopologyTree1(() => {
+      const treeData = JSON.parse(JSON.stringify(currentTree ?? {}))
+      treeData?.children?.forEach((item) => {
+        item.children = []
+      })
+      return [treeData]
+    })
+  }
+
+  const getTreeData = async (type = null) => {
+    setPublicAuxiliaryTree0([])
+    setPublicAuxiliaryTree1([])
+    setPublicAuxiliaryTree2([])
     const result = await fetch(url1, {
       method: 'GET',
       headers,
     })
     result.json().then((res) => {
-      setPublicAuxiliary([...res.data])
-      if (value?.rootCode) {
-        setSelectedProject(res.data.find(item => item.dataCode === value.rootCode))
-      }
+      setPublicAuxiliary(() => {
+        if (value?.rootCode && !type) {
+          setSelectedProject(() => {
+            const currentData = res.data.find(
+              (item) => item.dataCode === value.rootCode
+            )
+            getInitTreeData(currentData)
+            return currentData
+          })
+        } else {
+          setSelectedProject(res.data[0])
+          setPublicAuxiliaryTree0(() => {
+            const treeData = JSON.parse(JSON.stringify(res.data[0]))
+            treeData.children?.forEach((item) => {
+              item.children = []
+            })
+            return [treeData]
+          })
+          setPublicAuxiliaryTree1(() => {
+            const treeData = JSON.parse(
+              JSON.stringify(res.data[0]?.children[0])
+            )
+            treeData?.children?.forEach((item) => {
+              item.children = []
+            })
+            return [treeData]
+          })
+          setPublicAuxiliaryTree2(() => {
+            return [res.data[0]?.children[0]?.children[0]]
+          })
+        }
+        return [...res.data]
+      })
     })
   }
 
-  const getMeteringTopology = async (projectCode) => {
+  const getMeteringTopology = async (projectCode, type = null) => {
     const url = `${url3}?dataCode=${projectCode}`
+    setMeteringTopologyTree0([])
+    setMeteringTopologyTree1([])
     const result = await fetch(url, {
       method: 'GET',
       headers,
     })
     result.json().then((res) => {
       setMeteringTopology([res.data])
-      if (value?.rootCode) {
-        setSelectedProject([res.data].find(item => item.dataCode === value.rootCode))
+      if (value?.rootCode && !type) {
+        setSelectedProject(() => {
+          const currentData = [res.data].find(
+            (item) => item.dataCode === value.rootCode
+          )
+          getInitTreeDataSe(currentData)
+          return currentData
+        })
+      } else {
+        setMeteringTopologyTree0(() => {
+          const treeData = JSON.parse(JSON.stringify(res.data))
+          treeData.children?.forEach((item) => {
+            item.children = []
+          })
+          return [treeData]
+        })
+        setMeteringTopologyTree1(() => {
+          const treeData = JSON.parse(
+            JSON.stringify(res.data.children ? res.data.children[0] : [])
+          )
+          treeData?.children?.forEach((item) => {
+            item.children = []
+          })
+          return [treeData]
+        })
       }
     })
   }
@@ -115,11 +272,18 @@ export const TreeItem: React.FC<any> = observable((props) => {
     resetTable()
     setSystemType(value)
     if (value === 'meteringTopology') {
-      getMeteringTopology(selectedProject.dataCode ?? props.value.rootCode)
+      getMeteringTopology(
+        selectedProject.dataCode ?? props.value.rootCode,
+        'new'
+      )
+    } else {
+      getTreeData('new')
     }
     setSelectedEquip(null)
     setSelectedProps([])
     getpropertiesData(selectedProject.dataCode)
+    setCtIdx(null)
+    setSelectEqType('')
   }
 
   const changeEquipType = ({ target: { value } }: RadioChangeEvent) => {
@@ -130,18 +294,59 @@ export const TreeItem: React.FC<any> = observable((props) => {
   }
 
   const selectProject = (code) => {
-    if (code.dataCode === selectedProject?.dataCode) return
+    // if (code.dataCode === selectedProject?.dataCode) return
     if (systemType === 'meteringTopology') {
-      getMeteringTopology(code.dataCode)
+      getMeteringTopology(code.dataCode, 'new')
     }
     resetTable()
     setSelectedProject(code)
     setSelectedEquip(null)
     setSelectedProps([])
     setDisplayEquipment([])
+    setMeteringTopologyTree0([])
+    setMeteringTopologyTree1([])
+    setPublicAuxiliaryTree0([])
     setPublicAuxiliaryTree1([])
     setPublicAuxiliaryTree2([])
-    setMeteringTopologyTree1([])
+    setCtIdx(null)
+    setSelectEqType('')
+    setTimeout(() => {
+      setPublicAuxiliaryTree0(() => {
+        const treeData = JSON.parse(JSON.stringify(code))
+        treeData.children?.forEach((item) => {
+          item.children = []
+        })
+        return [treeData]
+      })
+      setPublicAuxiliaryTree1(() => {
+        const treeData = JSON.parse(
+          JSON.stringify(code.children ? code.children[0] : [])
+        )
+        treeData.children?.forEach((item) => {
+          item.children = []
+        })
+        return [treeData]
+      })
+      setPublicAuxiliaryTree2(() => {
+        return code.children ? [code.children[0]?.children[0]] : []
+      })
+      setMeteringTopologyTree0(() => {
+        const treeData = JSON.parse(JSON.stringify(code))
+        treeData.children?.forEach((item) => {
+          item.children = []
+        })
+        return [treeData]
+      })
+      setMeteringTopologyTree1(() => {
+        const treeData = JSON.parse(
+          JSON.stringify(code.children ? code.children[0] : [])
+        )
+        treeData.children?.forEach((item) => {
+          item.children = []
+        })
+        return [treeData]
+      })
+    }, 100)
   }
 
   const tableSelect = (record, selected) => {
@@ -189,6 +394,8 @@ export const TreeItem: React.FC<any> = observable((props) => {
       dataCode: selectedEquip.dataCode,
       modelName: selectedEquip.modelName,
       systemType: systemType,
+      currentEqType: selectEqType,
+      ctIdx: ctIdx,
       propertiesList: selectedProps ? selectedProps.map(item => ({ key: item.dataCode, value: item.propCode ?? item.value, children: item.propName ?? item.children, dataCode: item.dataCode })) : []
     }
     onChange(treeDataItem)
@@ -201,39 +408,47 @@ export const TreeItem: React.FC<any> = observable((props) => {
       return
     }
     setPage(1)
-    const temp = clone(equipmentList).filter(({ propName }) => propName.indexOf(values.propName) !== -1)
+    const temp = clone(equipmentList).filter(
+      ({ propName }) => propName.indexOf(values.propName) !== -1
+    )
     setDisplayEquipment(temp)
   }
 
   const changePublicAuxiliaryTree1 = (selectedKeys, e) => {
-    if (e.node.key === selectedEquip?.dataCode) return
+    // if (e.node.key === selectedEquip?.dataCode) return
     resetTable()
     getpropertiesData(selectedKeys[0], equipmentType)
     setSelectedEquip(e.node)
     setPublicAuxiliaryTree2([])
     setSelectedProps([])
+    setCtIdx(1)
+    setSelectEqType(e.node.nodeType)
     if (e.node.parentDataCode) {
       getPublicAuxiliaryTree(e.node.key)
     }
   }
 
   const changePublicAuxiliaryTree2 = (selectedKeys, e) => {
-    if (e.node.key === selectedEquip?.dataCode) return
+    // if (e.node.key === selectedEquip?.dataCode) return
     resetTable()
     getpropertiesData(selectedKeys[0], equipmentType)
     setSelectedEquip(e.node)
     setSelectedProps([])
+    setCtIdx(2)
+    setSelectEqType(e.node.nodeType)
     if (e.node.parentDataCode) {
       getPublicAuxiliaryUnitTree(e.node.key)
     }
   }
 
   const changeUnitTree = (selectedKeys, e) => {
-    if (e.node.key === selectedEquip?.dataCode) return
+    // if (e.node.key === selectedEquip?.dataCode) return
     resetTable()
     getpropertiesData(selectedKeys[0], equipmentType)
     setSelectedEquip(e.node)
     setSelectedProps([])
+    setCtIdx(3)
+    setSelectEqType(e.node.nodeType)
   }
 
   const changeMeteringTopologyTree1 = (selectedKeys, e) => {
@@ -242,6 +457,8 @@ export const TreeItem: React.FC<any> = observable((props) => {
     getpropertiesData(selectedKeys[0], equipmentType)
     setSelectedEquip(e.node)
     setSelectedProps([])
+    setCtIdx(1)
+    setSelectEqType(e.node.nodeType)
     if (e.node.parentDataCode) {
       getMeteringTopologyTree(e.node.key)
     }
@@ -259,36 +476,55 @@ export const TreeItem: React.FC<any> = observable((props) => {
     return null
   }
 
-  const getPublicAuxiliaryTree = code => {
-
+  const getPublicAuxiliaryTree = (code) => {
     const temp = getChildrenTree(clone(publicAuxiliary), code)
     if (!temp) {
       setPublicAuxiliaryTree1([])
+      setPublicAuxiliaryTree2([])
       return
     }
     if (!temp.children || temp.children.length <= 0) {
       setPublicAuxiliaryTree1([temp])
+      setPublicAuxiliaryTree2([])
       return
     }
-    temp.children = temp?.children?.map(chil => ({ ...chil, children: [] }))
-    setPublicAuxiliaryTree1([temp])
+    setPublicAuxiliaryTree1([])
+    setPublicAuxiliaryTree2([])
+    setTimeout(() => {
+      setPublicAuxiliaryTree1(() => {
+        const treeData = JSON.parse(JSON.stringify(temp))
+        treeData?.children?.forEach((item) => {
+          item.children = []
+        })
+        return [treeData]
+      })
+      setPublicAuxiliaryTree2(() => {
+        return [temp?.children[0]]
+      })
+    }, 100)
   }
 
-
-  const getPublicAuxiliaryUnitTree = code => {
+  const getPublicAuxiliaryUnitTree = (code) => {
     const temp = getChildrenTree(publicAuxiliary, code)
     if (!temp) {
       setPublicAuxiliaryTree2([])
       return
     }
     if (!temp.children || temp.children.length <= 0) {
-      setPublicAuxiliaryTree2([temp])
+      temp.nodeType === 'station'
+        ? setPublicAuxiliaryTree2([temp])
+        : setPublicAuxiliaryTree2([])
       return
     }
-    setPublicAuxiliaryTree2([temp])
+    setPublicAuxiliaryTree2([])
+    setTimeout(() => {
+      temp.nodeType === 'station'
+        ? setPublicAuxiliaryTree2([temp])
+        : setPublicAuxiliaryTree2([temp.children[0]])
+    }, 100)
   }
 
-  const getMeteringTopologyTree = code => {
+  const getMeteringTopologyTree = (code) => {
     const temp = getChildrenTree(meteringTopology, code)
     if (!temp) {
       setMeteringTopologyTree1([])
@@ -298,10 +534,13 @@ export const TreeItem: React.FC<any> = observable((props) => {
       setMeteringTopologyTree1([temp])
       return
     }
-    setMeteringTopologyTree1([temp])
+    setMeteringTopologyTree1([])
+    setTimeout(() => {
+      setMeteringTopologyTree1([temp])
+    }, 100)
   }
 
-  const changePage = page => {
+  const changePage = (page) => {
     setPage(page)
   }
 
@@ -333,7 +572,8 @@ export const TreeItem: React.FC<any> = observable((props) => {
         maskClosable={false}
         visible={modalVisible}
         onCancel={closeModal}
-        onOk={setModel}>
+        onOk={setModel}
+      >
         <div className={`${prefix}-content`}>
           <div className={`${prefix}-left`}>
             <div className={`${prefix}-left-root`}>
@@ -341,120 +581,165 @@ export const TreeItem: React.FC<any> = observable((props) => {
                 <div className={`${prefix}-left-root-header-title`}>项目</div>
               </div>
               <div className={`${prefix}-left-root-content`}>
-                {publicAuxiliary.map(item =>
-                  <div key={item?.dataCode} className={`${prefix}-left-root-item ${selectedProject?.dataCode === item?.dataCode ? `${prefix}-left-root-item-active` : ''}`} onClick={() => selectProject(item)}>{item.modelName}</div>
-                )}
+                {publicAuxiliary.map((item) => (
+                  <div
+                    key={item?.dataCode}
+                    className={`${prefix}-left-root-item ${
+                      selectedProject?.dataCode === item?.dataCode
+                        ? `${prefix}-left-root-item-active`
+                        : ''
+                    }`}
+                    onClick={() => selectProject(item)}
+                  >
+                    {item.modelName}
+                  </div>
+                ))}
               </div>
             </div>
             <div className={`${prefix}-left-tree`}>
               <div className={`${prefix}-left-tree-header`}>
-                <div className={`${prefix}-left-tree-header-title`}>
-                  模型</div>
+                <div className={`${prefix}-left-tree-header-title`}>模型</div>
                 <div className={`${prefix}-left-tree-header-extra`}>
                   <Radio.Group value={systemType} onChange={handoff}>
-                    <Radio.Button defaultChecked value='publicAuxiliary'>公辅系统</Radio.Button>
-                    <Radio.Button value='meteringTopology'>计量拓扑</Radio.Button>
+                    <Radio.Button defaultChecked value="publicAuxiliary">
+                      公辅系统
+                    </Radio.Button>
+                    <Radio.Button value="meteringTopology">
+                      计量拓扑
+                    </Radio.Button>
                   </Radio.Group>
                 </div>
               </div>
               <div className={`${prefix}-left-tree-content`}>
-                {systemType === 'publicAuxiliary' ?
-                  (<Fragment>
-                    <div className={`${prefix}-left-tree-system publicAuxiliary`}>
-                      <div className={`${prefix}-left-tree-system-tree publicAuxiliary-system-tree`}>
-                        <Tree
-                          defaultExpandAll
-                          autoExpandParent
-                          selectedKeys={[selectedEquip?.dataCode]}
-                          treeData={
-                            publicAuxiliary.filter(itm => itm.dataCode === selectedProject?.dataCode).map(el => {
-                              const child = el?.children?.map(chil => ({ ...chil, children: [] })) ?? []
-                              return {
-                                ...el,
-                                children: child
-                              }
-                            })}
-                          fieldNames={{
-                            title: 'modelName',
-                            key: 'dataCode',
-                            children: 'children',
-                          }}
-                          onSelect={changePublicAuxiliaryTree1}>
-                        </Tree>
-                      </div>
-                      <div className={`${prefix}-left-tree-system-tree publicAuxiliary-system-tree`}>
-                        <Tree
-                          defaultExpandAll
-                          autoExpandParent
-                          selectedKeys={[selectedEquip?.dataCode]}
-                          treeData={publicAuxiliaryTree1}
-                          fieldNames={{
-                            title: 'modelName',
-                            key: 'dataCode',
-                            children: 'children',
-                          }}
-                          onSelect={changePublicAuxiliaryTree2}></Tree>
-                      </div>
-                    </div>
-                    <div className={`${prefix}-left-tree-unit`}>
-                      <Tree
-                        defaultExpandAll
-                        autoExpandParent
-                        selectedKeys={[selectedEquip?.dataCode]}
-                        treeData={publicAuxiliaryTree2}
-                        fieldNames={{
-                          title: 'modelName',
-                          key: 'dataCode',
-                          children: 'children',
-                        }}
-                        onSelect={changeUnitTree}></Tree>
-                    </div>
-                  </Fragment>) : (
-                    <Fragment>
-                      <div className={`${prefix}-left-tree-system meteringTopology`}>
-                        <div className={`${prefix}-left-tree-system-tree meteringTopology-system-tree`}>
+                {systemType === 'publicAuxiliary' ? (
+                  <Fragment>
+                    <div
+                      className={`${prefix}-left-tree-system publicAuxiliary`}
+                    >
+                      <div
+                        className={`${prefix}-left-tree-system-tree publicAuxiliary-system-tree`}
+                      >
+                        {publicAuxiliaryTree0.length ? (
                           <Tree
                             defaultExpandAll
                             autoExpandParent
-                            selectedKeys={[selectedEquip?.dataCode]}
-                            treeData={
-                              meteringTopology?.map(el => {
-                                const child = el?.children?.map(chil => ({ ...chil, children: [] })) ?? []
-                                return {
-                                  ...el,
-                                  children: child
-                                }
-                              })}
+                            selectedKeys={
+                              ctIdx === 1 ? [selectedEquip?.dataCode] : []
+                            }
+                            treeData={publicAuxiliaryTree0}
                             fieldNames={{
                               title: 'modelName',
                               key: 'dataCode',
                               children: 'children',
                             }}
-                            onSelect={changeMeteringTopologyTree1}></Tree>
-                        </div>
+                            onSelect={changePublicAuxiliaryTree1}
+                          ></Tree>
+                        ) : (
+                          <></>
+                        )}
                       </div>
-                      <div className={`${prefix}-left-tree-unit`}>
+                      <div
+                        className={`${prefix}-left-tree-system-tree publicAuxiliary-system-tree`}
+                      >
+                        {publicAuxiliaryTree1.length ? (
+                          <Tree
+                            defaultExpandAll
+                            autoExpandParent
+                            selectedKeys={
+                              ctIdx === 2 ? [selectedEquip?.dataCode] : []
+                            }
+                            treeData={publicAuxiliaryTree1}
+                            fieldNames={{
+                              title: 'modelName',
+                              key: 'dataCode',
+                              children: 'children',
+                            }}
+                            onSelect={changePublicAuxiliaryTree2}
+                          ></Tree>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    </div>
+                    <div className={`${prefix}-left-tree-unit`}>
+                      {publicAuxiliaryTree2.length ? (
+                        <Tree
+                          defaultExpandAll
+                          autoExpandParent
+                          selectedKeys={
+                            ctIdx === 3 ? [selectedEquip?.dataCode] : []
+                          }
+                          treeData={publicAuxiliaryTree2}
+                          fieldNames={{
+                            title: 'modelName',
+                            key: 'dataCode',
+                            children: 'children',
+                          }}
+                          onSelect={changeUnitTree}
+                        ></Tree>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                  </Fragment>
+                ) : (
+                  <Fragment>
+                    <div
+                      className={`${prefix}-left-tree-system meteringTopology`}
+                    >
+                      <div
+                        className={`${prefix}-left-tree-system-tree meteringTopology-system-tree`}
+                      >
+                        {meteringTopologyTree0.length ? (
+                          <Tree
+                            defaultExpandAll
+                            autoExpandParent
+                            selectedKeys={
+                              ctIdx === 1 ? [selectedEquip?.dataCode] : []
+                            }
+                            treeData={meteringTopologyTree0}
+                            fieldNames={{
+                              title: 'modelName',
+                              key: 'dataCode',
+                              children: 'children',
+                            }}
+                            onSelect={changeMeteringTopologyTree1}
+                          ></Tree>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    </div>
+                    <div className={`${prefix}-left-tree-unit`}>
+                      {meteringTopologyTree1.length ? (
                         <Tree
                           autoExpandParent
                           defaultExpandAll
-                          selectedKeys={[selectedEquip?.dataCode]}
+                          selectedKeys={
+                            ctIdx === 3 ? [selectedEquip?.dataCode] : []
+                          }
                           treeData={meteringTopologyTree1}
                           fieldNames={{
                             title: 'modelName',
                             key: 'dataCode',
                             children: 'children',
                           }}
-                          onSelect={changeUnitTree}></Tree>
-                      </div>
-                    </Fragment>
-                  )
-                }
+                          onSelect={changeUnitTree}
+                        ></Tree>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                  </Fragment>
+                )}
               </div>
             </div>
           </div>
           <div className={`${prefix}-right`}>
             <div className={`${prefix}-right-header`}>
-              {selectedEquip?.modelName ? selectedEquip?.modelName : (selectedProject?.modelName ?? '属性')}
+              {selectedEquip?.modelName
+                ? selectedEquip?.modelName
+                : selectedProject?.modelName ?? '属性'}
             </div>
             <div className={`${prefix}-right-tab`}>
               <Radio.Group value={equipmentType} onChange={changeEquipType}>
@@ -464,12 +749,14 @@ export const TreeItem: React.FC<any> = observable((props) => {
               </Radio.Group>
             </div>
             <div className={`${prefix}-right-search`}>
-              <Form form={form} layout='inline' onFinish={handleSearch}>
-                <Form.Item label="属性名称" name='propName'>
+              <Form form={form} layout="inline" onFinish={handleSearch}>
+                <Form.Item label="属性名称" name="propName">
                   <Input></Input>
                 </Form.Item>
                 <Form.Item>
-                  <Button type="primary" htmlType="submit">查询</Button>
+                  <Button type="primary" htmlType="submit">
+                    查询
+                  </Button>
                 </Form.Item>
               </Form>
             </div>
@@ -506,9 +793,7 @@ export const TreeItem: React.FC<any> = observable((props) => {
             </div>
           </div>
         </div>
-
       </Modal>
     </Fragment>
   )
 })
-
