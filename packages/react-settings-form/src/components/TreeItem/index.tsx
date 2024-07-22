@@ -182,6 +182,8 @@ export const TreeItem: React.FC<any> = observable((props) => {
         } else {
           setSelectedProject(res.data[0])
           setSelectedEquip(res.data[0])
+          getpropertiesData(res.data[0]?.dataCode, equipmentType)
+          // console.log()
           setCtIdx(1)
           setPublicAuxiliaryTree0(() => {
             const treeData = JSON.parse(JSON.stringify(res.data[0]))
@@ -229,6 +231,7 @@ export const TreeItem: React.FC<any> = observable((props) => {
       } else {
         setCtIdx(1)
         setSelectedEquip(res.data)
+        getpropertiesData(res.data?.dataCode, equipmentType)
         setMeteringTopologyTree0(() => {
           const treeData = JSON.parse(JSON.stringify(res.data))
           treeData.children?.forEach((item) => {
@@ -311,9 +314,11 @@ export const TreeItem: React.FC<any> = observable((props) => {
     setPublicAuxiliaryTree0([])
     setPublicAuxiliaryTree1([])
     setPublicAuxiliaryTree2([])
-    setCtIdx(null)
     setSelectEqType('')
     setTimeout(() => {
+      setCtIdx(1)
+      setSelectedEquip(code)
+      getpropertiesData(code?.dataCode, equipmentType)
       setPublicAuxiliaryTree0(() => {
         const treeData = JSON.parse(JSON.stringify(code))
         treeData.children?.forEach((item) => {
