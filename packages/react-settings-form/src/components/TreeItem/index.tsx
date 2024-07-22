@@ -117,8 +117,9 @@ export const TreeItem: React.FC<any> = observable((props) => {
     if (value === 'meteringTopology') {
       getMeteringTopology(selectedProject.dataCode ?? props.value.rootCode)
     }
-    setSelectedEquip({})
+    setSelectedEquip(null)
     setSelectedProps([])
+    getpropertiesData(selectedProject.dataCode)
   }
 
   const changeEquipType = ({ target: { value } }: RadioChangeEvent) => {
@@ -135,7 +136,7 @@ export const TreeItem: React.FC<any> = observable((props) => {
     }
     resetTable()
     setSelectedProject(code)
-    setSelectedEquip({})
+    setSelectedEquip(null)
     setSelectedProps([])
     setDisplayEquipment([])
     setPublicAuxiliaryTree1([])
@@ -143,16 +144,41 @@ export const TreeItem: React.FC<any> = observable((props) => {
     setMeteringTopologyTree1([])
   }
 
-  const selectInvert = (record, selected, selectedRows) => {
-    const newSelectedRows = selectedRows.filter(item => item)
-    const allSelectedRow = selectedProps ? selectedProps.concat(newSelectedRows) : selectedRows
-    const set = new Set(allSelectedRow)
-    let propsArray = Array.from(set)
-    if (!selected) {
-      propsArray = propsArray.filter(({ dataCode }) => dataCode !== record.dataCode)
+  const tableSelect = (record, selected) => {
+    let selectedProperties = clone(selectedProps) ?? []
+    if (selected) {
+      selectedProperties.push(record)
+    } else {
+      selectedProperties = selectedProperties.filter(({ dataCode }) => dataCode !== record.dataCode)
     }
-    setSelectedProps(propsArray)
+    // const newSelectedRows = selectedRows.filter(item => item)
+    // const allSelectedRow = selectedProps ? selectedProps.concat(newSelectedRows) : selectedRows
+    // const set = new Set(allSelectedRow)
+    // let propsArray = Array.from(set)
+    // if (!selected) {
+    //   propsArray = propsArray.filter(({ dataCode }) => dataCode !== record.dataCode)
+    // }
+    setSelectedProps(selectedProperties)
+  }
 
+  const tableSelectAll = (selected, selectedRows, changeRows) => {
+
+    let selectedProperties = clone(selectedProps) ?? []
+    if (selected) {
+      // selectedProperties = selectedProperties.concat(changeRows)
+      changeRows.forEach(row => {
+        const index = selectedProperties.findIndex(({ dataCoode }) => dataCoode === row.dataCode)
+        if (index === -1) {
+          selectedProperties.push(row)
+        }
+      })
+    } else {
+      selectedProperties = selectedProperties.filter(({ dataCode }) => {
+        const index = changeRows.findIndex(row => row.dataCode === dataCode)
+        return index === -1
+      })
+    }
+    setSelectedProps(selectedProperties)
   }
 
   const setModel = () => {
@@ -163,7 +189,7 @@ export const TreeItem: React.FC<any> = observable((props) => {
       dataCode: selectedEquip.dataCode,
       modelName: selectedEquip.modelName,
       systemType: systemType,
-      propertiesList: selectedProps ? selectedProps.map(({ dataCode, propCode, propName }) => ({ key: dataCode, value: propCode, children: propName, dataCode })) : []
+      propertiesList: selectedProps ? selectedProps.map(item => ({ key: item.dataCode, value: item.propCode ?? item.value, children: item.propName ?? item.children, dataCode: item.dataCode })) : []
     }
     onChange(treeDataItem)
     closeModal()
@@ -292,13 +318,6 @@ export const TreeItem: React.FC<any> = observable((props) => {
     }, [modalVisible]
   )
 
-  useEffect(
-    () => {
-      if (equipmentList.length <= 0) return
-
-    },
-    [equipmentList]
-  )
   return (
     <Fragment>
       <Button block onClick={openModal}>
@@ -439,8 +458,8 @@ export const TreeItem: React.FC<any> = observable((props) => {
             </div>
             <div className={`${prefix}-right-tab`}>
               <Radio.Group value={equipmentType} onChange={changeEquipType}>
-                <Radio.Button value="basic">基础属性</Radio.Button>
-                <Radio.Button value="static">静态属性</Radio.Button>
+                {/* <Radio.Button value="basic">基础属性</Radio.Button>
+                <Radio.Button value="static">静态属性</Radio.Button> */}
                 <Radio.Button value="dynamic">动态属性</Radio.Button>
               </Radio.Group>
             </div>
@@ -459,10 +478,11 @@ export const TreeItem: React.FC<any> = observable((props) => {
                 dataSource={displayEquipment}
                 rowSelection={
                   {
-                    type: 'checkbox',
+                    // type: 'checkbox',
                     // onChange: selectedRow,
                     selectedRowKeys: selectedProps ? selectedProps?.map(item => item.dataCode) : value?.propertiesList?.map(itm => itm.key),
-                    onSelect: selectInvert
+                    onSelect: tableSelect,
+                    onSelectAll: tableSelectAll
                   }
                 }
                 pagination={
