@@ -75,8 +75,8 @@ export const TreeItem: React.FC<any> = observable((props) => {
   const [meteringTopologyTree0, setMeteringTopologyTree0] = useState([])
   const [meteringTopologyTree1, setMeteringTopologyTree1] = useState([])
 
-  const [ctIdx, setCtIdx] = useState(null)
-  const [selectEqType, setSelectEqType] = useState('')
+  const [ctIdx, setCtIdx] = useState(value?.ctIdx)
+  const [selectEqType, setSelectEqType] = useState(value?.currentEqType)
 
   const prefix = usePrefix('model-setter')
 
@@ -180,11 +180,13 @@ export const TreeItem: React.FC<any> = observable((props) => {
             return currentData
           })
         } else {
-          setSelectedProject(res.data[0])
-          setSelectedEquip(res.data[0])
+          let initTree = res.data.find((itm) => itm.dataCode === value?.rootCode) || res.data[0]
+          
+          setSelectedProject(initTree)
+          setSelectedEquip(initTree)
           setCtIdx(1)
           setPublicAuxiliaryTree0(() => {
-            const treeData = JSON.parse(JSON.stringify(res.data[0]))
+            const treeData = JSON.parse(JSON.stringify(initTree))
             treeData.children?.forEach((item) => {
               item.children = []
             })
@@ -192,7 +194,7 @@ export const TreeItem: React.FC<any> = observable((props) => {
           })
           setPublicAuxiliaryTree1(() => {
             const treeData = JSON.parse(
-              JSON.stringify(res.data[0]?.children[0])
+              JSON.stringify(initTree?.children[0])
             )
             treeData?.children?.forEach((item) => {
               item.children = []
@@ -200,7 +202,7 @@ export const TreeItem: React.FC<any> = observable((props) => {
             return [treeData]
           })
           setPublicAuxiliaryTree2(() => {
-            return [res.data[0]?.children[0]?.children[0]]
+            return [initTree?.children[0]?.children[0]]
           })
         }
         return [...res.data]
@@ -313,7 +315,7 @@ export const TreeItem: React.FC<any> = observable((props) => {
     setPublicAuxiliaryTree1([])
     setPublicAuxiliaryTree2([])
     setCtIdx(null)
-    setSelectEqType('')
+    setSelectEqType(code?.nodeType)
     setTimeout(() => {
       setPublicAuxiliaryTree0(() => {
         const treeData = JSON.parse(JSON.stringify(code))
@@ -392,11 +394,11 @@ export const TreeItem: React.FC<any> = observable((props) => {
 
   const setModel = () => {
     const treeDataItem = {
-      rootCode: selectedProject.dataCode,
-      key: selectedEquip.dataCode,
-      title: selectedEquip.modelName,
-      dataCode: selectedEquip.dataCode,
-      modelName: selectedEquip.modelName,
+      rootCode: selectedProject?.dataCode,
+      key: selectedEquip?.dataCode || selectedProject?.dataCode,
+      title: selectedEquip?.modelName || selectedProject?.modelName,
+      dataCode: selectedEquip?.dataCode || selectedProject?.dataCode,
+      modelName: selectedEquip?.modelName || selectedProject?.modelName,
       systemType: systemType,
       currentEqType: selectEqType,
       ctIdx: ctIdx,
@@ -588,11 +590,10 @@ export const TreeItem: React.FC<any> = observable((props) => {
                 {publicAuxiliary.map((item) => (
                   <div
                     key={item?.dataCode}
-                    className={`${prefix}-left-root-item ${
-                      selectedProject?.dataCode === item?.dataCode
+                    className={`${prefix}-left-root-item ${selectedProject?.dataCode === item?.dataCode
                         ? `${prefix}-left-root-item-active`
                         : ''
-                    }`}
+                      }`}
                     onClick={() => selectProject(item)}
                   >
                     {item.modelName}
