@@ -180,8 +180,10 @@ export const TreeItem: React.FC<any> = observable((props) => {
             return currentData
           })
         } else {
-          let initTree = res.data.find((itm) => itm.dataCode === value?.rootCode) || res.data[0]
-          
+          let initTree =
+            res.data.find((itm) => itm.dataCode === value?.rootCode) ||
+            res.data[0]
+
           setSelectedProject(initTree)
           setSelectedEquip(initTree)
           // setSelectedProject(res.data[0])
@@ -197,9 +199,7 @@ export const TreeItem: React.FC<any> = observable((props) => {
             return [treeData]
           })
           setPublicAuxiliaryTree1(() => {
-            const treeData = JSON.parse(
-              JSON.stringify(initTree?.children[0])
-            )
+            const treeData = JSON.parse(JSON.stringify(initTree?.children[0]))
             treeData?.children?.forEach((item) => {
               item.children = []
             })
@@ -368,7 +368,9 @@ export const TreeItem: React.FC<any> = observable((props) => {
     if (selected) {
       selectedProperties.push(record)
     } else {
-      selectedProperties = selectedProperties.filter(({ dataCode }) => dataCode !== record.dataCode)
+      selectedProperties = selectedProperties.filter(
+        ({ dataCode }) => dataCode !== record.dataCode
+      )
     }
     // const newSelectedRows = selectedRows.filter(item => item)
     // const allSelectedRow = selectedProps ? selectedProps.concat(newSelectedRows) : selectedRows
@@ -381,19 +383,20 @@ export const TreeItem: React.FC<any> = observable((props) => {
   }
 
   const tableSelectAll = (selected, selectedRows, changeRows) => {
-
     let selectedProperties = clone(selectedProps) ?? []
     if (selected) {
       // selectedProperties = selectedProperties.concat(changeRows)
-      changeRows.forEach(row => {
-        const index = selectedProperties.findIndex(({ dataCoode }) => dataCoode === row.dataCode)
+      changeRows.forEach((row) => {
+        const index = selectedProperties.findIndex(
+          ({ dataCoode }) => dataCoode === row.dataCode
+        )
         if (index === -1) {
           selectedProperties.push(row)
         }
       })
     } else {
       selectedProperties = selectedProperties.filter(({ dataCode }) => {
-        const index = changeRows.findIndex(row => row.dataCode === dataCode)
+        const index = changeRows.findIndex((row) => row.dataCode === dataCode)
         return index === -1
       })
     }
@@ -410,7 +413,14 @@ export const TreeItem: React.FC<any> = observable((props) => {
       systemType: systemType,
       currentEqType: selectEqType,
       ctIdx: ctIdx,
-      propertiesList: selectedProps ? selectedProps.map(item => ({ key: item.dataCode, value: item.propCode ?? item.value, children: item.propName ?? item.children, dataCode: item.dataCode })) : []
+      propertiesList: selectedProps
+        ? selectedProps.map((item) => ({
+            key: item.dataCode,
+            value: item.propCode ?? item.value,
+            children: item.propName ?? item.children,
+            dataCode: item.dataCode,
+          }))
+        : [],
     }
     onChange(treeDataItem)
     closeModal()
@@ -558,18 +568,16 @@ export const TreeItem: React.FC<any> = observable((props) => {
     setPage(page)
   }
 
-  useEffect(
-    () => {
-      if (!modalVisible) return
-      getTreeData()
-      if (value.rootCode && value.systemType === 'meteringTopology') {
-        getMeteringTopology(value.rootCode)
-      }
-      if (value?.key) {
-        getpropertiesData(value.key)
-      }
-    }, [modalVisible]
-  )
+  useEffect(() => {
+    if (!modalVisible) return
+    getTreeData()
+    if (value.rootCode && value.systemType === 'meteringTopology') {
+      getMeteringTopology(value.rootCode)
+    }
+    if (value?.key) {
+      getpropertiesData(value.key)
+    }
+  }, [modalVisible])
 
   return (
     <Fragment>
@@ -598,10 +606,11 @@ export const TreeItem: React.FC<any> = observable((props) => {
                 {publicAuxiliary.map((item) => (
                   <div
                     key={item?.dataCode}
-                    className={`${prefix}-left-root-item ${selectedProject?.dataCode === item?.dataCode
+                    className={`${prefix}-left-root-item ${
+                      selectedProject?.dataCode === item?.dataCode
                         ? `${prefix}-left-root-item-active`
                         : ''
-                      }`}
+                    }`}
                     onClick={() => selectProject(item)}
                   >
                     {item.modelName}
@@ -776,32 +785,69 @@ export const TreeItem: React.FC<any> = observable((props) => {
             <div className={`${prefix}-right-table`}>
               <Table
                 dataSource={displayEquipment}
-                rowSelection={
-                  {
-                    // type: 'checkbox',
-                    // onChange: selectedRow,
-                    selectedRowKeys: selectedProps ? selectedProps?.map(item => item.dataCode) : value?.propertiesList?.map(itm => itm.key),
-                    onSelect: tableSelect,
-                    onSelectAll: tableSelectAll
-                  }
-                }
-                pagination={
-                  {
-                    total: displayEquipment.length,
-                    pageSize: 10,
-                    current: page,
-                    onChange: changePage
-                  }
-                }
-                rowKey={(record) => record.dataCode}>
-                <Table.Column title="序号" render={(text, record, index) => `${index + 1}`}></Table.Column>
-                <Table.Column title="属性名称" dataIndex="propName" key="propName" ellipsis></Table.Column>
-                <Table.Column title="属性编码" dataIndex="propCode" key="propCode" ellipsis></Table.Column>
-                <Table.Column title="英文名称" dataIndex="rw" key="rw" ellipsis></Table.Column>
-                <Table.Column title="属性类型" dataIndex="propType" key="propType" ellipsis></Table.Column>
-                <Table.Column title="数据类型" dataIndex="dataType" key="dataType" ellipsis></Table.Column>
-                <Table.Column title="单位" dataIndex="unit" key="unit" ellipsis></Table.Column>
-                <Table.Column title="采集类型" dataIndex="otherType" key="otherType" ellipsis></Table.Column>
+                rowSelection={{
+                  // type: 'checkbox',
+                  // onChange: selectedRow,
+                  selectedRowKeys: selectedProps
+                    ? selectedProps?.map((item) => item.dataCode)
+                    : value?.propertiesList?.map((itm) => itm.key),
+                  onSelect: tableSelect,
+                  onSelectAll: tableSelectAll,
+                }}
+                pagination={{
+                  total: displayEquipment.length,
+                  pageSize: 8,
+                  current: page,
+                  onChange: changePage,
+                }}
+                rowKey={(record) => record.dataCode}
+              >
+                <Table.Column
+                  title="序号"
+                  render={(text, record, index) => `${index + 1}`}
+                ></Table.Column>
+                <Table.Column
+                  title="属性名称"
+                  dataIndex="propName"
+                  key="propName"
+                  ellipsis
+                ></Table.Column>
+                <Table.Column
+                  title="属性编码"
+                  dataIndex="propCode"
+                  key="propCode"
+                  ellipsis
+                ></Table.Column>
+                <Table.Column
+                  title="英文名称"
+                  dataIndex="rw"
+                  key="rw"
+                  ellipsis
+                ></Table.Column>
+                <Table.Column
+                  title="属性类型"
+                  dataIndex="propType"
+                  key="propType"
+                  ellipsis
+                ></Table.Column>
+                <Table.Column
+                  title="数据类型"
+                  dataIndex="dataType"
+                  key="dataType"
+                  ellipsis
+                ></Table.Column>
+                <Table.Column
+                  title="单位"
+                  dataIndex="unit"
+                  key="unit"
+                  ellipsis
+                ></Table.Column>
+                <Table.Column
+                  title="采集类型"
+                  dataIndex="otherType"
+                  key="otherType"
+                  ellipsis
+                ></Table.Column>
               </Table>
             </div>
           </div>
