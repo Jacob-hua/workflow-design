@@ -30,7 +30,13 @@ Select.Resource = createResource({
         'x-decorator': 'FormItem',
         'x-component': 'Select',
         'x-component-props': {
-          // getPopupContainer: (triggerNode) => triggerNode.parentNode,
+          'x-component-props': {
+            mode: '',
+            placeholder: '请选择',
+            showSearch: false,
+            listHeight: 256,
+            notFoundContent: '空数据',
+          },
         },
       },
     },

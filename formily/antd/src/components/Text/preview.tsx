@@ -47,6 +47,9 @@ Text.Resource = createResource({
       props: {
         type: 'string',
         'x-component': 'Text',
+        'x-component-props': {
+          content: '文本标题',
+        },
       },
     },
   ],

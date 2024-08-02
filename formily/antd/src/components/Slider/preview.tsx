@@ -29,6 +29,11 @@ Slider.Resource = createResource({
         title: '滑动条',
         'x-decorator': 'FormItem',
         'x-component': 'Slider',
+        'x-component-props': {
+          max: 100,
+          min: 0,
+          step: 1,
+        },
       },
     },
   ],

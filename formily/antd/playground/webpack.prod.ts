@@ -24,8 +24,8 @@ export default {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      chunkFilename: '[id].[hash].css',
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
     ...createPages([
       {
