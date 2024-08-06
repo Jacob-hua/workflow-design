@@ -40,6 +40,7 @@ CheckIn.Behavior = createBehavior({
   designerProps(node) {
     return {
       propsSchema: createFieldSchema(null, FieldSchemas.CheckIn),
+      cloneable: false,
     }
   },
   designerLocales: AllLocales.CheckIn,

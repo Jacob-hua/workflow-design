@@ -25,10 +25,10 @@ const isCheckIn = (componentNode) => {
   }
 }
 
-const hasCheckIn = (treeNodes) => {
+const hasCheckIn = (treeNodes, dragNode) => {
   let flag = false
   treeNodes.eachTree((node) => {
-    if (node.props?.['x-component'] === 'CheckIn') {
+    if (node.props?.['x-component'] === 'CheckIn' && node.id !== dragNode.id) {
       flag = true
     }
   })
@@ -155,9 +155,39 @@ export const useDragDropEffect = (engine: Engine) => {
       const selection = operation.selection
       if (!dragNodes.length) return
       // console.log(hasCheckIn(operation.tree));
+      // const dragNode = dragNodes.find()
+      let checkIn = false
+      let dragNode = null
+      dragNodes.forEach((node) => {
+        if (node.props['x-component'] === 'CheckIn') {
+          checkIn = true
+          dragNode = node
+        }
+      })
 
-      if (dragNodes[0].props['x-component'] === 'CheckIn') {
-        if (hasCheckIn(operation.tree)) return
+      if (checkIn) {
+        if (hasCheckIn(operation.tree, dragNode)) return
+        let parent = null
+        if (
+          closestNode?.props?.['x-component'] === 'ArrayCards' &&
+          dragNodes[0].depth !== closestNode.depth
+        ) {
+          parent = closestNode
+          parent.props['x-component-props'].addable = false
+          dragNodes[0].resetNodesParent(dragNodes, parent)
+        } else if (
+          closestNode?.parent?.props?.['x-component'] === 'ArrayCards'
+        ) {
+          parent = closestNode?.parent
+          parent.props['x-component-props'].addable = false
+          closestNode.resetNodesParent([closestNode], parent)
+        } else if (
+          closestNode?.parent?.parent?.props?.['x-component'] === 'ArrayCards'
+        ) {
+          parent = closestNode?.parent?.parent
+          parent.props['x-component-props'].addable = false
+          closestNode.parent.resetNodesParent([closestNode.parent], parent)
+        }
       }
       if (dragNodes.length && closestNode && closestDirection) {
         if (

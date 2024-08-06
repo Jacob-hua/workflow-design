@@ -36,7 +36,7 @@ export const createArrayBehavior = (name: string) => {
         //   return parent.props['x-component'] === name
         // },
         // propsSchema: createVoidFieldSchema(AllSchemas[name].Addition),
-        deletable: false,
+        // deletable: false,
         cloneable: false,
         draggable: false,
       },
@@ -51,7 +51,7 @@ export const createArrayBehavior = (name: string) => {
         //   return parent.props['x-component'] === name
         // },
         // propsSchema: createVoidFieldSchema(),
-        deletable: false,
+        // deletable: false,
         cloneable: false,
         draggable: false,
       },
@@ -80,7 +80,7 @@ export const createArrayBehavior = (name: string) => {
         //   return parent.props['x-component'] === name
         // },
         // propsSchema: createVoidFieldSchema(),
-        deletable: false,
+        // deletable: false,
         cloneable: false,
         draggable: false,
       },
@@ -95,7 +95,7 @@ export const createArrayBehavior = (name: string) => {
         //   return parent.props['x-component'] === 'ArrayCards'
         // },
         // propsSchema: createVoidFieldSchema(),
-        deletable: false,
+        // deletable: false,
         cloneable: false,
         draggable: false,
       },
