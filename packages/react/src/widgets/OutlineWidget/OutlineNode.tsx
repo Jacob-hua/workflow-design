@@ -48,6 +48,7 @@ const componentList = [
   'ChooseEq',
   'CheckIn',
   'DataTranscription',
+  'cardItems',
 ]
 
 export const OutlineTreeNode: React.FC<IOutlineTreeNodeProps> = observer(

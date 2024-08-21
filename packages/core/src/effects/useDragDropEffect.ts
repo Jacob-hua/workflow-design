@@ -153,7 +153,14 @@ export const useDragDropEffect = (engine: Engine) => {
       const closestNode = moveHelper.closestNode
       const closestDirection = moveHelper.closestDirection
       const selection = operation.selection
-      if (!dragNodes.length) return
+      if (!dragNodes.length) {
+        moveHelper.dragEnd()
+        return
+      }
+      if (dragNodes[0].props?.['x-component'] === 'cardItems') {
+        moveHelper.dragEnd()
+        return
+      }
       // console.log(hasCheckIn(operation.tree));
       // const dragNode = dragNodes.find()
       let checkIn = false
@@ -166,11 +173,16 @@ export const useDragDropEffect = (engine: Engine) => {
       })
 
       if (checkIn) {
-        if (hasCheckIn(operation.tree, dragNode)) return
+        if (hasCheckIn(operation.tree, dragNode)) {
+          selection.batchSafeSelect([operation?.tree])
+          moveHelper.dragEnd()
+          return
+        }
         let parent = null
         if (
           closestNode?.props?.['x-component'] === 'ArrayCards' &&
-          dragNodes[0].depth !== closestNode.depth
+          (closestDirection === ClosestPosition.Inner ||
+            closestDirection === ClosestPosition.InnerAfter)
         ) {
           parent = closestNode
           parent.props['x-component-props'].addable = false
@@ -194,6 +206,8 @@ export const useDragDropEffect = (engine: Engine) => {
           closestDirection === ClosestPosition.After ||
           closestDirection === ClosestPosition.Under
         ) {
+          if (closestNode?.parent.props?.['x-component'] === 'ArrayCards')
+            return
           if (closestNode.allowSibling(dragNodes)) {
             selection.batchSafeSelect(
               closestNode.insertAfter(
@@ -205,6 +219,8 @@ export const useDragDropEffect = (engine: Engine) => {
           closestDirection === ClosestPosition.Before ||
           closestDirection === ClosestPosition.Upper
         ) {
+          if (closestNode?.parent.props?.['x-component'] === 'ArrayCards')
+            return
           if (closestNode.allowSibling(dragNodes)) {
             selection.batchSafeSelect(
               closestNode.insertBefore(

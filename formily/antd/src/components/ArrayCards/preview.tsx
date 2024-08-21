@@ -24,15 +24,14 @@ import cls from 'classnames'
 import './styles.less'
 
 interface CardExtendProps extends CardProps {
-  foldable?: boolean,
-  addable?: boolean,
+  foldable?: boolean
+  addable?: boolean
 }
 
 const ensureObjectItemsNode = createEnsureTypeItemsNode('object')
 
 const isArrayCardsOperation = (name: string) =>
-  name === 'ArrayCards.Remove' ||
-  name === 'ArrayCards.MoveDown'
+  name === 'ArrayCards.Remove' || name === 'ArrayCards.MoveDown'
 
 export const ArrayCards: DnFC<CardExtendProps> = observer((props) => {
   const node = useTreeNode()
@@ -90,6 +89,7 @@ export const ArrayCards: DnFC<CardExtendProps> = observer((props) => {
       componentName: node.componentName,
       props: {
         type: 'object',
+        'x-component': 'cardItems',
       },
       children: [indexNode, ...source, removeNode, foldNode],
     })
@@ -116,9 +116,9 @@ export const ArrayCards: DnFC<CardExtendProps> = observer((props) => {
       '*',
       (name) => name.indexOf('ArrayCards.') === -1,
     ])
-    const propKeys = Object.keys(props);
-    let properties = JSON.parse(JSON.stringify(props));
-    propKeys.forEach(item => {
+    const propKeys = Object.keys(props)
+    let properties = JSON.parse(JSON.stringify(props))
+    propKeys.forEach((item) => {
       if (item === 'addable' || item === 'foldable') {
         delete properties[item]
       }
@@ -144,14 +144,10 @@ export const ArrayCards: DnFC<CardExtendProps> = observer((props) => {
                 {operations.map((node) => {
                   if (node.props.title === 'fold') {
                     if (props.foldable) {
-                      return (
-                        <TreeNodeWidget key={node.id} node={node} />
-                      )
+                      return <TreeNodeWidget key={node.id} node={node} />
                     }
                   } else {
-                    return (
-                      <TreeNodeWidget key={node.id} node={node} />
-                    )
+                    return <TreeNodeWidget key={node.id} node={node} />
                   }
                 })}
               </Fragment>
@@ -169,12 +165,11 @@ export const ArrayCards: DnFC<CardExtendProps> = observer((props) => {
           </Card>
         </ArrayBase.Item>
         {props.addable ? (
-          additions.map((node) => (
-            <TreeNodeWidget key={node.id} node={node} />
-          ))
-        ) : (<></>)
-        }
-      </ArrayBase >
+          additions.map((node) => <TreeNodeWidget key={node.id} node={node} />)
+        ) : (
+          <></>
+        )}
+      </ArrayBase>
     )
   }
 
@@ -283,7 +278,7 @@ ArrayCards.Resource = createResource({
         'x-component-props': {
           title: '标题',
           addable: false,
-          foldable: false
+          foldable: false,
         },
       },
     },

@@ -29,14 +29,16 @@ Select.Resource = createResource({
         title: '选择',
         'x-decorator': 'FormItem',
         'x-component': 'Select',
+        enum: [
+          { label: '选项1', value: '选项1' },
+          { label: '选项2', value: '选项2' },
+        ],
         'x-component-props': {
-          'x-component-props': {
-            mode: '',
-            placeholder: '请选择',
-            showSearch: false,
-            listHeight: 256,
-            notFoundContent: '空数据',
-          },
+          mode: '',
+          placeholder: '请选择',
+          showSearch: false,
+          listHeight: 256,
+          notFoundContent: '空数据',
         },
       },
     },
