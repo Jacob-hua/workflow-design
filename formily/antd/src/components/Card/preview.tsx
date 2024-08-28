@@ -18,7 +18,6 @@ export const Card: DnFC<React.ComponentProps<typeof AntdCard>> = (props) => {
       }
     >
       {props.children}
-      {/* 1231231231313123123 */}
     </AntdCard>
   )
 }

@@ -29,6 +29,10 @@ Cascader.Resource = createResource({
         title: '级联',
         'x-decorator': 'FormItem',
         'x-component': 'Cascader',
+        'x-component-props': {
+          allowClear: true,
+          placeholder: '请选择',
+        },
       },
     },
   ],

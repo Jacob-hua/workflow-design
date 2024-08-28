@@ -121,7 +121,7 @@ export const TreeItem: React.FC<any> = observable((props) => {
         return [treeData]
       })
       setPublicAuxiliaryTree2(() => {
-        return currentTree.children ? [currentTree.children[0]] : []
+        return currentTree?.children ? [currentTree.children[0]] : []
       })
     } else if (value.ctIdx === 3) {
       const treeDataSt = getTreeItemByDataCode(currentData)
@@ -316,7 +316,7 @@ export const TreeItem: React.FC<any> = observable((props) => {
     setPublicAuxiliaryTree0([])
     setPublicAuxiliaryTree1([])
     setPublicAuxiliaryTree2([])
-    setCtIdx(null)
+    // setCtIdx(null)
     setSelectEqType(code?.nodeType)
     setTimeout(() => {
       setCtIdx(1)
@@ -567,9 +567,15 @@ export const TreeItem: React.FC<any> = observable((props) => {
 
   useEffect(() => {
     if (!modalVisible) return
-    getTreeData()
+    if (value?.currentEqType && value?.currentEqType === 'project') {
+      getTreeData('new')
+    } else {
+      getTreeData()
+    }
     if (value.rootCode && value.systemType === 'meteringTopology') {
-      getMeteringTopology(value.rootCode)
+      value?.currentEqType && value?.currentEqType === 'project'
+        ? getMeteringTopology(value.rootCode, 'new')
+        : getMeteringTopology(value.rootCode)
     }
     if (value?.key) {
       getpropertiesData(value.key)

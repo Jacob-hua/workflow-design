@@ -45,6 +45,7 @@ Upload.Resource = createResource(
           'x-component-props': {
             textContent: '上传',
             showUploadList: true,
+            accept: ['.jpeg, .jpg, .png, .gif'],
           },
         },
       },

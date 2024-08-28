@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { createForm } from '@formily/core'
 import { Form } from '@formily/antd'
 import { observer } from '@formily/react'
@@ -40,7 +40,27 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
       node.designerProps?.propsSchema &&
       selected.length === 1
     )
+
     const form = useMemo(() => {
+      if (node?.props?.['x-component'] === 'ArrayCards') {
+        let flag = false
+        node.eachChildren((treeNode) => {
+          if (treeNode.props?.['x-component'] === 'CheckIn') {
+            flag = true
+          }
+        })
+        if (flag) {
+          node.designerProps.cloneable = false
+          schema.properties['component-group'].properties[
+            'x-component-props'
+          ].properties.addable['x-display'] = 'hidden'
+        } else {
+          node.designerProps.cloneable = true
+          schema.properties['component-group'].properties[
+            'x-component-props'
+          ].properties.addable['x-display'] = 'visible'
+        }
+      }
       return createForm({
         initialValues: node?.designerProps?.defaultProps,
         values: node?.props,
@@ -50,7 +70,14 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
           props.effects?.(form)
         },
       })
-    }, [node, node?.props, schema, operation, isEmpty])
+    }, [
+      node,
+      node?.props,
+      schema,
+      operation,
+      isEmpty,
+      node?.designerProps?.cloneable,
+    ])
 
     const render = () => {
       if (!isEmpty) {

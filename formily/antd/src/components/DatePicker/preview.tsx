@@ -45,6 +45,10 @@ DatePicker.Resource = createResource(
           title: '日期',
           'x-decorator': 'FormItem',
           'x-component': 'DatePicker',
+          'x-component-props': {
+            picker: 'date',
+            allowClear: true,
+          },
         },
       },
     ],

@@ -35,6 +35,10 @@ RangePicker.Resource = createResource({
         title: '日期范围',
         'x-decorator': 'FormItem',
         'x-component': 'RangePicker',
+        'x-component-props': {
+          picker: 'date',
+          allowClear: true,
+        },
       },
     },
   ],

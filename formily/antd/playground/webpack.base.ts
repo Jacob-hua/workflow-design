@@ -36,8 +36,8 @@ export default {
   },
   output: {
     // publicPath: `/designable/`,
-    path: path.resolve(__dirname, '../dist'),
-    filename: '[name].[hash].bundle.js',
+    path: path.resolve(__dirname, '../../../dist'),
+    filename: '[name].bundle.js',
     library: `formDesigner-[name]`,
     libraryTarget: 'umd',
     jsonpFunction: `webpackJsonp_formDesigner`,

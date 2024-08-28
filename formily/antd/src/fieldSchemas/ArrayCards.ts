@@ -50,10 +50,10 @@ export const ArrayCards: ISchema = {
     //   type: 'array',
     //   'x-component': ValidatorSetter,
     // },
-    // required: {
-    //   type: 'boolean',
-    //   'x-decorator': 'FormItem',
-    //   'x-component': 'Switch',
-    // },
+    required: {
+      type: 'boolean',
+      'x-decorator': 'FormItem',
+      'x-component': 'Switch',
+    },
   },
 }

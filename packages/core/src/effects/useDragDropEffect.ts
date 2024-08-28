@@ -13,6 +13,28 @@ import {
 } from '../events'
 import { Point } from '@designable/shared'
 
+const isCheckIn = (componentNode) => {
+  if (componentNode?.props?.['x-component'] === 'CheckIn') {
+    return true
+  } else {
+    if (!componentNode?.parent) {
+      return false
+    } else {
+      return isCheckIn(componentNode.parent)
+    }
+  }
+}
+
+const hasCheckIn = (treeNodes, dragNode) => {
+  let flag = false
+  treeNodes.eachTree((node) => {
+    if (node.props?.['x-component'] === 'CheckIn' && node.id !== dragNode.id) {
+      flag = true
+    }
+  })
+  return flag
+}
+
 export const useDragDropEffect = (engine: Engine) => {
   engine.subscribeTo(DragStartEvent, (event) => {
     if (engine.cursor.type !== CursorType.Normal) return
@@ -131,12 +153,61 @@ export const useDragDropEffect = (engine: Engine) => {
       const closestNode = moveHelper.closestNode
       const closestDirection = moveHelper.closestDirection
       const selection = operation.selection
-      if (!dragNodes.length) return
+      if (!dragNodes.length) {
+        moveHelper.dragEnd()
+        return
+      }
+      if (dragNodes[0].props?.['x-component'] === 'cardItems') {
+        moveHelper.dragEnd()
+        return
+      }
+      // console.log(hasCheckIn(operation.tree));
+      // const dragNode = dragNodes.find()
+      let checkIn = false
+      let dragNode = null
+      dragNodes.forEach((node) => {
+        if (node.props['x-component'] === 'CheckIn') {
+          checkIn = true
+          dragNode = node
+        }
+      })
+
+      if (checkIn) {
+        if (hasCheckIn(operation.tree, dragNode)) {
+          selection.batchSafeSelect([operation?.tree])
+          moveHelper.dragEnd()
+          return
+        }
+        let parent = null
+        if (
+          closestNode?.props?.['x-component'] === 'ArrayCards' &&
+          (closestDirection === ClosestPosition.Inner ||
+            closestDirection === ClosestPosition.InnerAfter)
+        ) {
+          parent = closestNode
+          parent.props['x-component-props'].addable = false
+          dragNodes[0].resetNodesParent(dragNodes, parent)
+        } else if (
+          closestNode?.parent?.props?.['x-component'] === 'ArrayCards'
+        ) {
+          parent = closestNode?.parent
+          parent.props['x-component-props'].addable = false
+          closestNode.resetNodesParent([closestNode], parent)
+        } else if (
+          closestNode?.parent?.parent?.props?.['x-component'] === 'ArrayCards'
+        ) {
+          parent = closestNode?.parent?.parent
+          parent.props['x-component-props'].addable = false
+          closestNode.parent.resetNodesParent([closestNode.parent], parent)
+        }
+      }
       if (dragNodes.length && closestNode && closestDirection) {
         if (
           closestDirection === ClosestPosition.After ||
           closestDirection === ClosestPosition.Under
         ) {
+          if (closestNode?.parent.props?.['x-component'] === 'ArrayCards')
+            return
           if (closestNode.allowSibling(dragNodes)) {
             selection.batchSafeSelect(
               closestNode.insertAfter(
@@ -148,6 +219,8 @@ export const useDragDropEffect = (engine: Engine) => {
           closestDirection === ClosestPosition.Before ||
           closestDirection === ClosestPosition.Upper
         ) {
+          if (closestNode?.parent.props?.['x-component'] === 'ArrayCards')
+            return
           if (closestNode.allowSibling(dragNodes)) {
             selection.batchSafeSelect(
               closestNode.insertBefore(
@@ -159,6 +232,11 @@ export const useDragDropEffect = (engine: Engine) => {
           closestDirection === ClosestPosition.Inner ||
           closestDirection === ClosestPosition.InnerAfter
         ) {
+          if (
+            closestNode.props['x-component'] === 'ArrayCards' &&
+            closestNode.children.length
+          )
+            return
           if (closestNode.allowAppend(dragNodes)) {
             selection.batchSafeSelect(
               closestNode.append(

@@ -29,6 +29,10 @@ Rate.Resource = createResource({
         title: '评分',
         'x-decorator': 'FormItem',
         'x-component': 'Rate',
+        'x-component-props': {
+          count: 5,
+          allowClear: true,
+        },
       },
     },
   ],
