@@ -78,7 +78,7 @@ ChooseEq.Resource = createResource({
     {
       componentName: 'Field',
       props: {
-        type: 'Array<any>',
+        type: 'Array<{[key: string]: string}>',
         // 'x-decorator': 'FormItem',
         'x-component': 'ChooseEq',
       },

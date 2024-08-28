@@ -186,10 +186,7 @@ export const TreeItem: React.FC<any> = observable((props) => {
 
           setSelectedProject(initTree)
           setSelectedEquip(initTree)
-          // setSelectedProject(res.data[0])
-          // setSelectedEquip(res.data[0])
           getpropertiesData(initTree?.dataCode, equipmentType)
-          // console.log()
           setCtIdx(1)
           setPublicAuxiliaryTree0(() => {
             const treeData = JSON.parse(JSON.stringify(initTree))
