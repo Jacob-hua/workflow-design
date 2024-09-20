@@ -37,7 +37,7 @@
     "@designable/core": "1.0.0-beta.45",
     "@designable/react": "1.0.0-beta.45",
     "@designable/shared": "1.0.0-beta.45",
-    "@monaco-editor/react": "^4.2.1",
+    "@monaco-editor/react": "4.2.1",
     "monaco-editor": "^0.30.1",
     "prettier": "^2.3.2",
     "react-color": "^2.19.3",
