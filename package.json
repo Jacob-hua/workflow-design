@@ -15,7 +15,7 @@
     "build:docs": "dumi build",
     "start": "dumi dev",
     "start:playground": "yarn workspace @designable/formily-antd start",
-    "build": "yarn workspace @designable/formily-antd build:playground",
+    "build": "rimraf -rf dist && yarn workspace @designable/formily-antd build:playground",
     "preversion": "npm run build && npm run lint",
     "version": "ts-node scripts/release changelog && git add -A",
     "version:alpha": "lerna version prerelease --preid alpha",
