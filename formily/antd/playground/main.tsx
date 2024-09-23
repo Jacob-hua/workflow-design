@@ -2,7 +2,7 @@ import '../public-path'
 import 'antd/dist/antd.dark.less'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, HashRouter } from 'react-router-dom'
 import App from './App'
 import actions from './service/actions'
 import { ConfigProvider } from 'antd'
@@ -22,22 +22,20 @@ function createDOM(flag: boolean) {
   if (flag) {
     return (
       <ConfigProvider locale={locale}>
-        <BrowserRouter
+        <HashRouter
           // 对两种不同的环境分别给出不同的基础路径
-          basename={
-            (window as any).__POWERED_BY_QIANKUN__ ? '/Form' : '/'
-          }
+          basename={(window as any).__POWERED_BY_QIANKUN__ ? '/Form' : '/'}
         >
           <App />
-        </BrowserRouter>
+        </HashRouter>
       </ConfigProvider>
     )
   } else {
     return (
       // <ConfigProvider locale={locale}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
       // </ConfigProvider>
     )
   }
@@ -57,7 +55,7 @@ export async function bootstrap(props: Record<string, any>) {
 export async function mount(props: Record<string, any>) {
   // eslint-disable-next-line no-console
   // console.log(props,'mount');
-  actions.setActions(props.actions);
+  actions.setActions(props.actions)
   // actions.setGlobalState({test: 'aaa'})
   render(props, createDOM(true))
 }
